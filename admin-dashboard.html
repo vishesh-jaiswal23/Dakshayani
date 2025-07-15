@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Dakshayani Enterprises</title>
+    <meta name="description" content="Admin dashboard for managing users, projects, and operations at Dakshayani Enterprises.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons (Social Media, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* A slightly lighter gray */
+        }
+        .solar-gold { color: #FBBF24; }
+        .bg-solar-gold { background-color: #FBBF24; }
+        .border-solar-gold { border-color: #FBBF24; }
+        .hover\:bg-solar-gold-dark:hover { background-color: #F59E0B; }
+        .transition-all-smooth { transition: all 0.3s ease-in-out; }
+        .dashboard-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        /* Message box styles */
+        .message-box {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .message-box.success {
+            background-color: #d1fae5; /* green-100 */
+            color: #065f46; /* green-800 */
+        }
+        .message-box.error {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-800 */
+        }
+        .message-box.info {
+            background-color: #dbeafe; /* blue-100 */
+            color: #1e40af; /* blue-800 */
+        }
+        /* Tab styles */
+        .tab-button.active {
+            border-bottom: 2px solid #FBBF24;
+            color: #FBBF24;
+            font-weight: 600;
+        }
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+        /* Logo container styles for header */
+        .logo-container {
+            background-color: #FBBF24; /* Solar Gold background */
+            padding: 0.5rem 1rem; /* px-4 py-2 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+        }
+        .logo-container:hover {
+            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.1); /* Subtle dark shadow on hover */
+        }
+        /* Fixed Contact Buttons Container */
+        .fixed-contact-buttons {
+            position: fixed;
+            bottom: 1.5rem; /* Adjust as needed */
+            right: 1.5rem; /* Adjust as needed */
+            z-index: 100; /* Ensure it's above other content */
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            gap: 0.75rem; /* Space between buttons */
+        }
+        .fixed-contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem; /* Fixed width for circular button */
+            height: 3.5rem; /* Fixed height for circular button */
+            border-radius: 9999px; /* Make it circular */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease-in-out;
+            color: white; /* Default icon color */
+            font-size: 0.75rem; /* Smaller text for icon labels */
+            text-align: center;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .fixed-contact-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Specific button colors */
+        .fixed-contact-button.call { background-color: #34D399; /* green-400 */ }
+        .fixed-contact-button.whatsapp { background-color: #25D366; /* WhatsApp green */ }
+        .fixed-contact-button.email { background-color: #EF4444; /* red-500 */ }
+        .fixed-contact-button.pmsgy { background-color: #6366F1; /* indigo-500 */ }
+
+        .fixed-contact-button i { /* Targeting Font Awesome icons */
+            font-size: 1.5rem; /* Icon size */
+        }
+
+        /* Responsive adjustments for fixed contact buttons */
+        @media (max-width: 768px) {
+            .fixed-contact-buttons {
+                bottom: 1rem;
+                right: 1rem;
+                flex-direction: row; /* Arrange horizontally on small screens */
+                flex-wrap: wrap; /* Allow wrapping if too many buttons */
+                justify-content: flex-end; /* Align to the right */
+                gap: 0.5rem;
+            }
+            .fixed-contact-button {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50" id="main-header">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <!-- Logo and company name wrapped in a gold pill background -->
+                <div class="flex items-center space-x-2 bg-solar-gold px-4 py-2 rounded-lg shadow-md logo-container">
+                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
+                    <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <span class="font-semibold">Admin Portal</span>
+                <a href="admin-dashboard.html" class="text-solar-gold font-bold">Dashboard</a>
+                <a href="#" class="hover:text-solar-gold transition-all-smooth">Users</a>
+                <a href="#" class="hover:text-solar-gold transition-all-smooth">Projects</a>
+                <a href="#" class="hover:text-solar-gold transition-all-smooth">Reports</a>
+                <button id="logout-button" class="bg-red-500 text-white px-4 py-2 rounded-md font-bold hover:bg-red-600 transition-all-smooth">Logout</button>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <a href="admin-dashboard.html" class="block py-2 px-6 text-solar-gold font-bold">Dashboard</a>
+            <a href="#" class="block py-2 px-6 hover:bg-gray-800 rounded">Users</a>
+            <a href="#" class="block py-2 px-6 hover:bg-gray-800 rounded">Projects</a>
+            <a href="#" class="block py-2 px-6 hover:bg-gray-800 rounded">Reports</a>
+            <button id="mobile-logout-button" class="block mt-2 mx-4 mb-4 text-center bg-red-500 text-white px-4 py-2 rounded-md font-bold hover:bg-red-600 transition-all-smooth w-auto">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+        <p class="text-gray-600 mb-6">Welcome, Admin! Your User ID: <span id="admin-uid" class="font-mono text-sm text-gray-500">Loading...</span></p>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="dashboard-card p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Total Projects</p>
+                    <p class="text-3xl font-bold text-gray-900" id="total-projects">...</p>
+                </div>
+                <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.125 1.125 0 011.591 0L21.75 12M2.25 12a8.96 8.96 0 01-1.591-5.036L21.75 12m0 0a8.96 8.96 0 01-5.036 1.591L2.25 12m11.25-8.864a8.963 8.963 0 015.036-1.591l-1.591 1.591M13.5 3.364a8.963 8.963 0 00-5.036 1.591l1.591-1.591" /></svg>
+                </div>
+            </div>
+            <div class="dashboard-card p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Pending Approvals</p>
+                    <p class="text-3xl font-bold text-gray-900" id="pending-approvals-count">...</p>
+                </div>
+                <div class="bg-yellow-100 text-yellow-600 p-3 rounded-full">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+            </div>
+            <div class="dashboard-card p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Revenue (This Month)</p>
+                    <p class="text-3xl font-bold text-gray-900" id="revenue-this-month">...</p>
+                </div>
+                <div class="bg-green-100 text-green-600 p-3 rounded-full">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0a.75.75 0 00.75.75h3.75a.75.75 0 000-1.5H3.75a.75.75 0 00-.75.75z" /></svg>
+                </div>
+            </div>
+            <div class="dashboard-card p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Active Users</p>
+                    <p class="text-3xl font-bold text-gray-900" id="active-users-count">...</p>
+                </div>
+                <div class="bg-indigo-100 text-indigo-600 p-3 rounded-full">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-4.663M3.75 5.25c0-1.036.84-1.875 1.875-1.875h.375a3.375 3.375 0 013.375 3.375v.375" /></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation for User Management -->
+        <div class="bg-white rounded-lg shadow-md mt-8">
+            <div class="flex border-b border-gray-200">
+                <button class="tab-button px-6 py-3 text-gray-600 hover:text-gray-900 transition-all-smooth active" data-tab="pending-approvals">Pending Approvals</button>
+                <button class="tab-button px-6 py-3 text-gray-600 hover:text-gray-900 transition-all-smooth" data-tab="customers">Customers</button>
+                <button class="tab-button px-6 py-3 text-gray-600 hover:text-gray-900 transition-all-smooth" data-tab="installers">Installers</button>
+                <button class="tab-button px-6 py-3 text-gray-600 hover:text-gray-900 transition-all-smooth" data-tab="referrers">Referrers</button>
+            </div>
+
+            <div class="p-6">
+                <!-- Tab Content: Pending Approvals -->
+                <div id="pending-approvals-tab" class="tab-content">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Pending User Approvals</h2>
+                    <div id="pending-approvals-list" class="space-y-4">
+                        <p class="text-center text-gray-500 py-3">Loading pending users...</p>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Customers -->
+                <div id="customers-tab" class="tab-content hidden">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Customer Management</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Signup Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-table-body" class="bg-white divide-y divide-gray-200">
+                                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading customers...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Installers -->
+                <div id="installers-tab" class="tab-content hidden">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Installer Management</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned Projects</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="installers-table-body" class="bg-white divide-y divide-gray-200">
+                                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading installers...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Referrers -->
+                <div id="referrers-tab" class="tab-content hidden">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Referrer Management</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referrals</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="referrers-table-body" class="bg-white divide-y divide-gray-200">
+                                <tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading referrers...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Recent Projects Table -->
+        <div class="dashboard-card p-6 mt-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Projects</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full">
+                    <thead class="border-b-2 border-gray-200">
+                        <tr>
+                            <th class="py-2 text-left text-sm font-semibold text-gray-600">Customer</th>
+                            <th class="py-2 text-left text-sm font-semibold text-gray-600">Size</th>
+                            <th class="py-2 text-left text-sm font-semibold text-gray-600">Status</th>
+                            <th class="py-2 text-left text-sm font-semibold text-gray-600">Installer</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-projects-table-body">
+                       <!-- Dynamic content will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+    
+    <!-- Customer Details Modal -->
+    <div id="customer-details-modal" class="modal-overlay">
+        <div class="modal-content w-full md:w-3/4 lg:w-1/2">
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="text-2xl font-bold text-gray-900" id="customer-modal-name">Customer Details</h3>
+                <button class="text-gray-500 hover:text-gray-800 text-2xl" onclick="closeCustomerDetailsModal()">&times;</button>
+            </div>
+            <div id="customer-modal-body" class="space-y-4 text-gray-700">
+                <p><strong>Email:</strong> <span id="customer-modal-email"></span></p>
+                <p><strong>Role:</strong> <span id="customer-modal-role"></span></p>
+                <p><strong>Signup Date:</strong> <span id="customer-modal-signup-date"></span></p>
+                <p><strong>UID:</strong> <span id="customer-modal-uid" class="font-mono text-sm"></span></p>
+                
+                <h4 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Project History</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Project ID</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Size</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customer-modal-projects-body" class="bg-white divide-y divide-gray-200">
+                            <tr><td colspan="4" class="px-3 py-2 text-center text-gray-500">No projects found.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="text-xl font-semibold text-gray-900 mt-6 mb-3">Complaints History</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Issue Type</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                <th class="px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customer-modal-complaints-body" class="bg-white divide-y divide-gray-200">
+                            <tr><td colspan="3" class="px-3 py-2 text-center text-gray-500">No complaints found.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-6 text-right">
+                <button class="bg-gray-300 text-gray-800 px-5 py-2 rounded-md hover:bg-gray-400" onclick="closeCustomerDetailsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Contact Buttons -->
+    <div class="fixed-contact-buttons">
+        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
+            <i class="fas fa-solar-panel"></i>
+        </a>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            doc, 
+            getDoc, 
+            updateDoc, 
+            collection, 
+            query, 
+            where, 
+            getDocs,
+            deleteDoc,
+            Timestamp // Import Timestamp for date queries
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgYPNJNCte7vEjqlFdcoa62arKhEuCwXI",
+            authDomain: "dakshayani-enterprises.firebaseapp.com",
+            projectId: "dakshayani-enterprises",
+            storageBucket: "dakshayani-enterprises.firebasestorage.app",
+            messagingSenderId: "129241224273",
+            appId: "1:129241224273:web:23b484f6645f4e27afd470",
+            measurementId: "G-VFEY23QHE8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Define appId for Firestore paths
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // --- Helper Functions ---
+        const getUserProfileDocRef = (uid) => doc(db, `artifacts/${appId}/users/${uid}/user_data`, 'profile');
+        const getUsersCollectionRef = () => collection(db, `artifacts/${appId}/users`);
+        const getProjectsCollectionRef = () => collection(db, 'projects'); // Top-level 'projects' collection
+        const getComplaintsCollectionRef = () => collection(db, 'complaints'); // Top-level 'complaints' collection
+
+        function showMessage(type, message) {
+            const existingMessage = document.querySelector('.message-box');
+            if (existingMessage) existingMessage.remove();
+
+            const messageBox = document.createElement('div');
+            messageBox.className = `message-box ${type}`;
+            messageBox.innerHTML = `
+                <p>${message}</p>
+                <button class="ml-auto text-current opacity-75 hover:opacity-100" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            document.body.appendChild(messageBox);
+
+            setTimeout(() => messageBox.remove(), 5000);
+        }
+
+        // --- Core Authentication and Page Load Logic ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userDocRef = getUserProfileDocRef(user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    const userData = userDocSnap.data();
+                    if (userData.role === 'admin' && userData.isApproved) {
+                        document.getElementById('admin-uid').textContent = user.uid;
+                        loadDashboardData();
+                        activateTab('pending-approvals'); // Activate default tab on load
+                    } else {
+                        showMessage('error', 'Access Denied. You must be an approved administrator.');
+                        setTimeout(async () => { 
+                            await signOut(auth); 
+                            window.location.href = 'login.html?loggedOut=true'; // Redirect to login with logout flag
+                        }, 2000);
+                    }
+                } else {
+                    showMessage('error', 'User profile not found. Please log in again.');
+                    setTimeout(async () => { 
+                        await signOut(auth); 
+                        window.location.href = 'login.html?loggedOut=true'; // Redirect to login with logout flag
+                    }, 2000);
+                }
+            } else {
+                showMessage('info', 'Please log in to access the Admin Dashboard.');
+                setTimeout(() => { 
+                    window.location.href = 'login.html?loggedOut=true'; // Redirect to login with logout flag
+                }, 1000);
+            }
+        });
+
+        // --- Logout Functionality ---
+        const setupLogout = (buttonId) => {
+            document.getElementById(buttonId).addEventListener('click', async () => {
+                try {
+                    await signOut(auth);
+                    showMessage('success', 'Logged out successfully!');
+                    setTimeout(() => { 
+                        window.location.href = 'index.html?loggedOut=true'; // Redirect to index with logout flag
+                    }, 1000);
+                } catch (error) {
+                    console.error("Logout Error:", error);
+                    showMessage('error', 'Failed to log out. Please try again.');
+                }
+            });
+        };
+        // Ensure buttons exist before attaching listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('logout-button')) {
+                setupLogout('logout-button');
+            }
+            if (document.getElementById('mobile-logout-button')) {
+                setupLogout('mobile-logout-button');
+            }
+        });
+
+
+        // --- Tab Switching Logic ---
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+                button.classList.add('active');
+                document.getElementById(`${targetTab}-tab`).classList.remove('hidden');
+
+                // Load data for the activated tab
+                switch (targetTab) {
+                    case 'pending-approvals': loadPendingApprovals(); break;
+                    case 'customers': loadCustomers(); break;
+                    case 'installers': loadInstallers(); break;
+                    case 'referrers': loadReferrers(); break;
+                }
+            });
+        });
+        function activateTab(tabName) {
+            const button = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+            if (button) button.click();
+        }
+
+        // --- Central Dashboard Data Loading ---
+        async function loadDashboardData() {
+            // Run all data loading operations in parallel for speed
+            await Promise.all([
+                loadDashboardStats(),
+                loadRecentProjects(),
+            ]);
+        }
+
+        // --- Function to load KPI card statistics ---
+        async function loadDashboardStats() {
+            const totalProjectsEl = document.getElementById('total-projects');
+            const activeUsersEl = document.getElementById('active-users-count');
+            const revenueEl = document.getElementById('revenue-this-month');
+            
+            try {
+                // 1. Get Total Projects Count
+                const projectsSnapshot = await getDocs(query(getProjectsCollectionRef()));
+                totalProjectsEl.textContent = projectsSnapshot.size;
+
+                // 2. Get Active (Approved) Users Count
+                const activeUsersQuery = query(getUsersCollectionRef(), where('user_data.profile.isApproved', '==', true));
+                const activeUsersSnapshot = await getDocs(activeUsersQuery);
+                activeUsersEl.textContent = activeUsersSnapshot.size;
+
+                // 3. Get Revenue This Month
+                // IMPORTANT: For this query to work correctly, 'installationDate' in your 'projects' collection
+                // MUST be stored as a Firestore Timestamp type, not a string.
+                const now = new Date();
+                const startOfMonth = Timestamp.fromDate(new Date(now.getFullYear(), now.getMonth(), 1));
+                const endOfMonth = Timestamp.fromDate(new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59)); // End of month, end of day
+                
+                const revenueQuery = query(
+                    getProjectsCollectionRef(),
+                    where('installationDate', '>=', startOfMonth),
+                    where('installationDate', '<=', endOfMonth)
+                );
+                const revenueSnapshot = await getDocs(revenueQuery);
+                let monthlyRevenue = 0;
+                revenueSnapshot.forEach(doc => {
+                    // Ensure 'cost' is a number in Firestore, or parse it if it's a string
+                    monthlyRevenue += Number(doc.data().cost) || 0; 
+                });
+                revenueEl.textContent = `₹${monthlyRevenue.toLocaleString('en-IN')}`;
+
+            } catch (error) {
+                console.error("Error loading dashboard stats:", error);
+                showMessage('error', 'Could not load dashboard stats. Check Firestore indexes and data types.');
+                totalProjectsEl.textContent = 'Error';
+                activeUsersEl.textContent = 'Error';
+                revenueEl.textContent = 'Error';
+            }
+        }
+
+        // --- Data Loading Functions for User Management Tabs ---
+        async function loadPendingApprovals() {
+            const listEl = document.getElementById('pending-approvals-list');
+            const countEl = document.getElementById('pending-approvals-count');
+            listEl.innerHTML = '<p class="text-center text-gray-500 py-3">Loading...</p>';
+            let count = 0;
+
+            try {
+                const q = query(getUsersCollectionRef(), where('user_data.profile.isApproved', '==', false));
+                const querySnapshot = await getDocs(q);
+
+                listEl.innerHTML = ''; // Clear loading
+                querySnapshot.forEach((userDoc) => {
+                    const userData = userDoc.data().user_data.profile;
+                    const userId = userDoc.id;
+                    if (['installer', 'referrer', 'admin'].includes(userData.role)) {
+                        count++;
+                        const userElement = document.createElement('li');
+                        userElement.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-md';
+                        userElement.innerHTML = `
+                            <div>
+                                <p class="font-semibold">${userData.name || userData.email}</p>
+                                <p class="text-sm text-gray-500">${userData.role} (UID: ${userId.substring(0, 8)}...)</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="bg-green-500 text-white px-3 py-1 rounded-md text-sm hover:bg-green-600" data-uid="${userId}" data-action="approve">Approve</button>
+                                <button class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600" data-uid="${userId}" data-action="deny">Deny</button>
+                            </div>`;
+                        listEl.appendChild(userElement);
+                    }
+                });
+                
+                if (count === 0) {
+                    listEl.innerHTML = '<p class="text-center text-gray-500 py-3">No pending approvals.</p>';
+                }
+
+                countEl.textContent = count.toString();
+                listEl.querySelectorAll('button').forEach(button => button.addEventListener('click', handleApprovalAction));
+
+            } catch (error) {
+                console.error("Error loading pending approvals:", error);
+                showMessage('error', 'Error loading pending approvals.');
+                listEl.innerHTML = '<p class="text-red-500 text-center py-3">Error loading data.</p>';
+                countEl.textContent = 'Error';
+            }
+        }
+
+        async function handleApprovalAction(event) {
+            const button = event.target;
+            const { uid, action } = button.dataset; // Destructure uid and action directly
+            if (!uid) return;
+
+            const userProfileRef = getUserProfileDocRef(uid);
+            if (action === 'approve') {
+                try {
+                    await updateDoc(userProfileRef, { isApproved: true });
+                    showMessage('success', `User approved successfully!`);
+                    loadPendingApprovals(); // Reload list
+                    loadDashboardStats(); // Refresh KPI cards
+                } catch (error) {
+                    console.error("Error approving user:", error);
+                    showMessage('error', 'Failed to approve user. Check Firestore rules.');
+                }
+            } else if (action === 'deny') {
+                try {
+                    await deleteDoc(userProfileRef);
+                    showMessage('info', `User profile denied and removed.`);
+                    loadPendingApprovals(); // Reload list
+                } catch (error) {
+                    console.error("Error denying user:", error);
+                    showMessage('error', 'Failed to deny user. Check Firestore rules.');
+                }
+            }
+        }
+
+        // Generic function to load users into a table
+        async function loadUserTable(role, tableBodyId) {
+            const tableBody = document.getElementById(tableBodyId);
+            tableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">Loading ${role}s...</td></tr>`;
+
+            try {
+                const q = query(getUsersCollectionRef(), where('user_data.profile.role', '==', role));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-gray-500">No ${role} accounts found.</td></tr>`;
+                    return;
+                }
+
+                tableBody.innerHTML = '';
+                querySnapshot.forEach((userDoc) => {
+                    const userData = userDoc.data().user_data.profile;
+                    const userId = userDoc.id;
+                    const signupDate = userData.createdAt ? new Date(userData.createdAt.toDate()).toLocaleDateString() : 'N/A';
+                    const statusText = userData.isApproved ? 'Approved' : 'Pending';
+                    const statusClass = userData.isApproved ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">${userData.name || 'N/A'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${userData.email || 'N/A'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${role === 'customer' ? signupDate : `<span class="${statusClass} text-xs font-medium px-2.5 py-0.5 rounded-full">${statusText}</span>`}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${role === 'customer' ? `<span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Active</span>` : '0'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="text-indigo-600 hover:text-indigo-900 text-sm" data-uid="${userId}" data-role="${role}" data-action="view-details">View Details</button>
+                        </td>`;
+                    tableBody.appendChild(row);
+                });
+
+                tableBody.querySelectorAll('button[data-action="view-details"]').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const uid = e.target.dataset.uid;
+                        const role = e.target.dataset.role;
+                        if (role === 'customer') {
+                            showCustomerDetailsModal(uid);
+                        } else {
+                            showMessage('info', `Viewing details for ${role} UID: ${uid}. (Functionality to be implemented)`);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error(`Error loading ${role}s:`, error);
+                showMessage('error', `Error loading ${role} data.`);
+                tableBody.innerHTML = `<tr><td colspan="5" class="px-6 py-4 text-center text-red-500">Error loading data.</td></tr>`;
+            }
+        }
+        const loadCustomers = () => loadUserTable('customer', 'customers-table-body');
+        const loadInstallers = () => loadUserTable('installer', 'installers-table-body');
+        const loadReferrers = () => loadUserTable('referrer', 'referrers-table-body');
+
+
+        // --- Function to load recent projects list ---
+        async function loadRecentProjects() {
+            const tableBody = document.getElementById('recent-projects-table-body');
+            tableBody.innerHTML = '<tr><td colspan="4" class="py-3 text-center text-gray-500">Loading projects...</td></tr>';
+
+            try {
+                const q = query(getProjectsCollectionRef()); // In future, add orderBy and limit
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    tableBody.innerHTML = '<tr><td colspan="4" class="py-3 text-center text-gray-500">No recent projects found.</td></tr>';
+                    return;
+                }
+
+                tableBody.innerHTML = '';
+                querySnapshot.forEach((doc) => {
+                    const project = doc.data();
+                    const row = document.createElement('tr');
+                    let statusClass = 'bg-gray-200 text-gray-800';
+                    if (project.status === 'Completed') statusClass = 'bg-green-100 text-green-800';
+                    else if (project.status === 'Installation') statusClass = 'bg-yellow-100 text-yellow-800';
+                    else if (project.status === 'Site Survey') statusClass = 'bg-blue-100 text-blue-800';
+                    
+                    row.innerHTML = `
+                        <td class="py-3">${project.customerName || 'N/A'}</td>
+                        <td class="py-3">${project.systemSize || 'N/A'}</td>
+                        <td class="py-3"><span class="${statusClass} text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">${project.status || 'N/A'}</span></td>
+                        <td class="py-3">${project.assignedTo || 'N/A'}</td>`;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error loading recent projects:", error);
+                showMessage('error', 'Error loading project data.');
+                tableBody.innerHTML = '<tr><td colspan="4" class="py-3 text-center text-red-500">Error loading projects.</td></tr>';
+            }
+        }
+
+        // --- Customer Details Modal Functions ---
+        const customerDetailsModal = document.getElementById('customer-details-modal');
+        const customerModalName = document.getElementById('customer-modal-name');
+        const customerModalEmail = document.getElementById('customer-modal-email');
+        const customerModalRole = document.getElementById('customer-modal-role');
+        const customerModalSignupDate = document.getElementById('customer-modal-signup-date');
+        const customerModalUid = document.getElementById('customer-modal-uid');
+        const customerModalProjectsBody = document.getElementById('customer-modal-projects-body');
+        const customerModalComplaintsBody = document.getElementById('customer-modal-complaints-body');
+
+
+        async function showCustomerDetailsModal(customerUid) {
+            customerDetailsModal.classList.add('show');
+            // Clear previous data
+            customerModalName.textContent = 'Loading...';
+            customerModalEmail.textContent = 'Loading...';
+            customerModalRole.textContent = 'Loading...';
+            customerModalSignupDate.textContent = 'Loading...';
+            customerModalUid.textContent = 'Loading...';
+            customerModalProjectsBody.innerHTML = '<tr><td colspan="4" class="px-3 py-2 text-center text-gray-500">Loading projects...</td></tr>';
+            customerModalComplaintsBody.innerHTML = '<tr><td colspan="3" class="px-3 py-2 text-center text-gray-500">Loading complaints...</td></tr>';
+
+            try {
+                // Fetch customer profile
+                const customerProfileRef = getUserProfileDocRef(customerUid);
+                const customerDocSnap = await getDoc(customerProfileRef);
+
+                if (customerDocSnap.exists()) {
+                    const customerData = customerDocSnap.data();
+                    customerModalName.textContent = customerData.name || 'N/A';
+                    customerModalEmail.textContent = customerData.email || 'N/A';
+                    customerModalRole.textContent = customerData.role || 'N/A';
+                    customerModalSignupDate.textContent = customerData.createdAt ? new Date(customerData.createdAt.toDate()).toLocaleDateString() : 'N/A';
+                    customerModalUid.textContent = customerUid;
+
+                    // Fetch customer's projects
+                    const projectsQuery = query(getProjectsCollectionRef(), where('customerUid', '==', customerUid));
+                    const projectsSnapshot = await getDocs(projectsQuery);
+                    customerModalProjectsBody.innerHTML = ''; // Clear loading
+                    if (projectsSnapshot.empty) {
+                        customerModalProjectsBody.innerHTML = '<tr><td colspan="4" class="px-3 py-2 text-center text-gray-500">No projects found for this customer.</td></tr>';
+                    } else {
+                        projectsSnapshot.forEach(projectDoc => {
+                            const project = projectDoc.data();
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td class="px-3 py-2">${projectDoc.id.substring(0, 6)}...</td>
+                                <td class="px-3 py-2">${project.systemSize || 'N/A'}</td>
+                                <td class="px-3 py-2">${project.status || 'N/A'}</td>
+                                <td class="px-3 py-2">₹${(project.cost || 0).toLocaleString('en-IN')}</td>
+                            `;
+                            customerModalProjectsBody.appendChild(row);
+                        });
+                    }
+
+                    // Fetch customer's complaints
+                    const complaintsQuery = query(getComplaintsCollectionRef(), where('customerUid', '==', customerUid));
+                    const complaintsSnapshot = await getDocs(complaintsQuery);
+                    customerModalComplaintsBody.innerHTML = ''; // Clear loading
+                    if (complaintsSnapshot.empty) {
+                        customerModalComplaintsBody.innerHTML = '<tr><td colspan="3" class="px-3 py-2 text-center text-gray-500">No complaints found for this customer.</td></tr>';
+                    } else {
+                        complaintsSnapshot.forEach(complaintDoc => {
+                            const complaint = complaintDoc.data();
+                            const row = document.createElement('tr');
+                            const complaintDate = complaint.createdAt ? new Date(complaint.createdAt.toDate()).toLocaleDateString() : 'N/A';
+                            row.innerHTML = `
+                                <td class="px-3 py-2">${complaint.issueType || 'N/A'}</td>
+                                <td class="px-3 py-2">${complaint.status || 'N/A'}</td>
+                                <td class="px-3 py-2">${complaintDate}</td>
+                            `;
+                            customerModalComplaintsBody.appendChild(row);
+                        });
+                    }
+
+                } else {
+                    showMessage('error', 'Customer profile not found for details.');
+                    closeCustomerDetailsModal();
+                }
+
+            } catch (error) {
+                console.error("Error loading customer details:", error);
+                showMessage('error', 'Failed to load customer details. Check Firestore rules/data.');
+                customerModalName.textContent = 'Error';
+                customerModalEmail.textContent = 'Error';
+                customerModalProjectsBody.innerHTML = '<tr><td colspan="4" class="px-3 py-2 text-center text-red-500">Error loading projects.</td></tr>';
+                customerModalComplaintsBody.innerHTML = '<tr><td colspan="3" class="px-3 py-2 text-center text-red-500">Error loading complaints.</td></tr>';
+            }
+        }
+
+        function closeCustomerDetailsModal() {
+            customerDetailsModal.classList.remove('show');
+        }
+        
+    </script>
+</body>
+</html>

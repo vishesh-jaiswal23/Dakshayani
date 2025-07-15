@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard | Dakshayani Enterprises</title>
+    <meta name="description" content="Employee dashboard for viewing assigned tasks and project schedules at Dakshayani Enterprises.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons (Social Media, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .solar-gold { color: #FBBF24; }
+        .bg-solar-gold { background-color: #FBBF24; }
+        .border-solar-gold { border-color: #FBBF24; }
+        .hover\:bg-solar-gold-dark:hover { background-color: #F59E0B; }
+        .transition-all-smooth { transition: all 0.3s ease-in-out; }
+        .dashboard-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        /* Logo container styles for header */
+        .logo-container {
+            background-color: #FBBF24; /* Solar Gold background */
+            padding: 0.5rem 1rem; /* px-4 py-2 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+        }
+        .logo-container:hover {
+            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgb(0 0 0 / 0.1); /* Subtle dark shadow on hover */
+        }
+        /* Fixed Contact Buttons Container */
+        .fixed-contact-buttons {
+            position: fixed;
+            bottom: 1.5rem; /* Adjust as needed */
+            right: 1.5rem; /* Adjust as needed */
+            z-index: 100; /* Ensure it's above other content */
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            gap: 0.75rem; /* Space between buttons */
+        }
+        .fixed-contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem; /* Fixed width for circular button */
+            height: 3.5rem; /* Fixed height for circular button */
+            border-radius: 9999px; /* Make it circular */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease-in-out;
+            color: white; /* Default icon color */
+            font-size: 0.75rem; /* Smaller text for icon labels */
+            text-align: center;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .fixed-contact-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Specific button colors */
+        .fixed-contact-button.call { background-color: #34D399; /* green-400 */ }
+        .fixed-contact-button.whatsapp { background-color: #25D366; /* WhatsApp green */ }
+        .fixed-contact-button.email { background-color: #EF4444; /* red-500 */ }
+        .fixed-contact-button.pmsgy { background-color: #6366F1; /* indigo-500 */ }
+
+        .fixed-contact-button i { /* Targeting Font Awesome icons */
+            font-size: 1.5rem; /* Icon size */
+        }
+
+        /* Responsive adjustments for fixed contact buttons */
+        @media (max-width: 768px) {
+            .fixed-contact-buttons {
+                bottom: 1rem;
+                right: 1rem;
+                flex-direction: row; /* Arrange horizontally on small screens */
+                flex-wrap: wrap; /* Allow wrapping if too many buttons */
+                justify-content: flex-end; /* Align to the right */
+                gap: 0.5rem;
+            }
+            .fixed-contact-button {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50" id="main-header">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <!-- Logo and company name wrapped in a gold pill background -->
+                <div class="flex items-center space-x-2 bg-solar-gold px-4 py-2 rounded-lg shadow-md logo-container">
+                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
+                    <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <span class="font-semibold">Employee Portal</span>
+                <a href="employee-dashboard.html" class="text-solar-gold font-bold">My Tasks</a>
+                <a href="#" class="hover:text-solar-gold transition-all-smooth">Calendar</a>
+                <a href="index.html" class="bg-red-500 text-white px-4 py-2 rounded-md font-bold hover:bg-red-600 transition-all-smooth">Logout</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <a href="employee-dashboard.html" class="block py-2 px-6 text-solar-gold font-bold">My Tasks</a>
+            <a href="#" class="block py-2 px-6 hover:bg-gray-800 rounded">Calendar</a>
+            <a href="index.html" class="block mt-2 mx-4 mb-4 text-center bg-red-500 text-white px-4 py-2 rounded-md font-bold hover:bg-red-600 transition-all-smooth">Logout</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome, Anjali!</h1>
+        <p class="text-gray-600 mb-6">Here are your tasks and schedule for the week.</p>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Assigned Tasks -->
+            <div class="lg:col-span-2 dashboard-card p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Your Assigned Tasks</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b text-sm text-gray-500">
+                                <th class="py-2">Project/Customer</th>
+                                <th class="py-2">Task</th>
+                                <th class="py-2">Due Date</th>
+                                <th class="py-2">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y">
+                            <tr>
+                                <td class="py-3 font-semibold">M. Devi (3kW)</td>
+                                <td class="py-3">Conduct Site Survey</td>
+                                <td class="py-3">July 8, 2025</td>
+                                <td class="py-3"><span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">To Do</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 font-semibold">S. Singh (5kW)</td>
+                                <td class="py-3">Prepare BOM</td>
+                                <td class="py-3">July 9, 2025</td>
+                                <td class="py-3"><span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">To Do</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 font-semibold">R. Sharma (10kW)</td>
+                                <td class="py-3">Follow up on JREDA approval</td>
+                                <td class="py-3">July 10, 2025</td>
+                                <td class="py-3"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">In Progress</span></td>
+                            </tr>
+                             <tr>
+                                <td class="py-3 font-semibold">Internal</td>
+                                <td class="py-3">Monthly Sales Report</td>
+                                <td class="py-3">July 15, 2025</td>
+                                <td class="py-3"><span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">To Do</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Weekly Schedule -->
+            <div class="dashboard-card p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">This Week's Schedule</h2>
+                <ul class="space-y-4">
+                    <li class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-bold">Monday, July 7</p>
+                        <p class="text-sm text-gray-600">Team Meeting @ 10 AM</p>
+                    </li>
+                    <li class="p-4 bg-blue-50 border-l-4 border-blue-400 rounded-lg">
+                        <p class="font-bold">Tuesday, July 8</p>
+                        <p class="text-sm text-gray-600">Site Survey for M. Devi @ 11 AM</p>
+                    </li>
+                    <li class="p-4 bg-gray-50 rounded-lg">
+                        <p class="font-bold">Wednesday, July 9</p>
+                        <p class="text-sm text-gray-600">Project Planning Session @ 2 PM</p>
+                    </li>
+                    <li class="p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-lg">
+                        <p class="font-bold">Friday, July 11</p>
+                        <p class="text-sm text-gray-600">Vendor Call with Luminous @ 4 PM</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Fixed Contact Buttons -->
+    <div class="fixed-contact-buttons">
+        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
+            <i class="fas fa-solar-panel"></i>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

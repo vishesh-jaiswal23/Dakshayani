@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Savings Calculator | Dakshayani Enterprises</title>
+    <meta name="description" content="Calculate your potential savings with a rooftop solar system in Ranchi, Jharkhand. Estimate system size, government subsidy, and annual savings with our free tool.">
+    <meta name="keywords" content="solar calculator, solar savings india, pm surya ghar subsidy calculator, electricity bill calculator, dakshayani enterprises">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons (Social Media, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles & Configuration -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .solar-gold { color: #FBBF24; }
+        .bg-solar-gold { background-color: #FBBF24; }
+        .border-solar-gold { border-color: #FBBF24; }
+        .hover\:bg-solar-gold-dark:hover { background-color: #F59E0B; }
+        .group:hover .group-hover\:text-solar-gold { color: #FBBF24; }
+        .transition-all-smooth { transition: all 0.3s ease-in-out; }
+        .page-header-bg {
+            background-color: #111827;
+            background-image: radial-gradient(circle at top right, rgba(251, 191, 36, 0.08), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.08), transparent 50%);
+        }
+        .calculator-card {
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        .results-card {
+            transition: all 0.5s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        .results-card.show {
+            max-height: 1000px; /* Adjust as needed */
+            opacity: 1;
+        }
+         /* Modal styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-container {
+            transition: transform 0.3s ease;
+            display: flex; /* Added for flexbox layout */
+            flex-direction: column; /* Stack children vertically */
+            max-height: 90vh; /* Ensure container has a max-height to enable scrolling */
+        }
+        /* Logo container styles for header */
+        .logo-container {
+            background-color: #FBBF24; /* Solar Gold background */
+            padding: 0.5rem 1rem; /* px-4 py-2 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+        }
+        .logo-container:hover {
+            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Subtle dark shadow on hover */
+        }
+        /* Fixed Contact Buttons Container */
+        .fixed-contact-buttons {
+            position: fixed;
+            bottom: 1.5rem; /* Adjust as needed */
+            right: 1.5rem; /* Adjust as needed */
+            z-index: 100; /* Ensure it's above other content */
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            gap: 0.75rem; /* Space between buttons */
+        }
+        .fixed-contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem; /* Fixed width for circular button */
+            height: 3.5rem; /* Fixed height for circular button */
+            border-radius: 9999px; /* Make it circular */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease-in-out;
+            color: white; /* Default icon color */
+            font-size: 0.75rem; /* Smaller text for icon labels */
+            text-align: center;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .fixed-contact-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Specific button colors */
+        .fixed-contact-button.call { background-color: #34D399; /* green-400 */ }
+        .fixed-contact-button.whatsapp { background-color: #25D366; /* WhatsApp green */ }
+        .fixed-contact-button.email { background-color: #EF4444; /* red-500 */ }
+        .fixed-contact-button.pmsgy { background-color: #6366F1; /* indigo-500 */ }
+
+        .fixed-contact-button i { /* Targeting Font Awesome icons */
+            font-size: 1.5rem; /* Icon size */
+        }
+
+        /* Responsive adjustments for fixed contact buttons */
+        @media (max-width: 768px) {
+            .fixed-contact-buttons {
+                bottom: 1rem;
+                right: 1rem;
+                flex-direction: row; /* Arrange horizontally on small screens */
+                flex-wrap: wrap; /* Allow wrapping if too many buttons */
+                justify-content: flex-end; /* Align to the right */
+                gap: 0.5rem;
+            }
+            .fixed-contact-button {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+        /* Ensure prose content within modal is scrollable */
+        #modal-text-content.prose {
+            max-width: none !important; /* Override default max-width of prose class */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+
+    <!-- Header -->
+    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50" id="main-header">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <!-- Logo and company name wrapped in a gold pill background -->
+                <div class="flex items-center space-x-2 bg-solar-gold px-4 py-2 rounded-lg shadow-md logo-container">
+                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
+                    <span class="text-2xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="hover:text-solar-gold transition-all-smooth">Home</a>
+                <a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a>
+                <a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Solutions</a>
+                
+                <div class="relative group">
+                    <button class="text-solar-gold font-semibold flex items-center">
+                        <span>More</span>
+                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+                    </button>
+                    <div class="absolute -left-8 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all-smooth">
+                        <a href="calculator.html" class="block px-4 py-2 bg-gray-100 font-bold rounded-t-md">Calculator</a>
+                        <a href="financing.html" class="block px-4 py-2 hover:bg-gray-100">Financing</a>
+                        <a href="rewards.html" class="block px-4 py-2 hover:bg-gray-100">Rewards</a>
+                        <a href="ai-expert.html" class="block px-4 py-2 hover:bg-gray-100">AI Expert</a>
+                        <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100 rounded-b-md">Blog</a>
+                    </div>
+                </div>
+                
+                <a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a>
+                <a href="login.html" class="bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <a href="index.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Home</a>
+            <a href="about.html" class="block py-2 px-6 hover:bg-gray-800 rounded">About Us</a>
+            <a href="projects.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Solutions</a>
+            <a href="calculator.html" class="block py-2 px-6 text-solar-gold font-semibold">Calculator</a>
+            <a href="financing.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Financing</a>
+            <a href="rewards.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Rewards</a>
+            <a href="ai-expert.html" class="block py-2 px-6 hover:bg-gray-800 rounded">AI Expert</a>
+            <a href="blog.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Blog</a>
+            <a href="contact.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Contact</a>
+            <a href="login.html" class="block mt-2 mx-4 mb-4 text-center bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="page-header-bg text-white">
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Solar Savings Calculator</h1>
+                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">Discover how much you can save by switching to solar. Get an instant, personalized estimate.</p>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    
+                    <!-- Input Card -->
+                    <div class="bg-white p-8 rounded-lg calculator-card">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Estimate Your Savings</h2>
+                        <form id="solar-calculator-form" class="space-y-6">
+                            <div>
+                                <label for="monthly-bill" class="block text-sm font-medium text-gray-700">Average Monthly Bill (₹)</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                                        <span class="text-gray-500 sm:text-sm">₹</span>
+                                    </div>
+                                    <input type="number" id="monthly-bill" class="block w-full pl-7 pr-12 py-3 border-gray-300 rounded-md focus:ring-solar-gold focus:border-solar-gold" placeholder="e.g., 2500" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="unit-rate" class="block text-sm font-medium text-gray-700">Rate per Unit (₹/kWh)</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                     <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                                        <span class="text-gray-500 sm:text-sm">₹</span>
+                                    </div>
+                                    <input type="number" step="0.01" id="unit-rate" class="block w-full pl-7 pr-12 py-3 border-gray-300 rounded-md focus:ring-solar-gold focus:border-solar-gold" placeholder="e.g., 6.50" required>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-solar-gold text-gray-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-solar-gold-dark transition-all-smooth flex items-center justify-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                                    Calculate Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="results-card" class="bg-white p-8 rounded-lg calculator-card results-card">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Solar Estimate</h2>
+                        <div class="space-y-5">
+                            <div>
+                                <p class="text-sm text-gray-500">Recommended System Size</p>
+                                <p id="system-size" class="text-3xl font-bold text-solar-gold">0 kW</p>
+                            </div>
+                            <div class="border-t pt-4">
+                                <p class="text-sm text-gray-500">Estimated Subsidy (PM Surya Ghar)</p>
+                                <p id="subsidy-amount" class="text-2xl font-bold text-gray-800">₹ 0</p>
+                            </div>
+                            <div class="border-t pt-4">
+                                <p class="text-sm text-gray-500">Potential Annual Savings</p>
+                                <p id="annual-savings" class="text-2xl font-bold text-green-600">₹ 0</p>
+                            </div>
+                        </div>
+                        <button id="generate-report-btn" class="mt-8 w-full bg-gray-800 text-white px-4 py-3 rounded-md font-bold hover:bg-gray-900 transition-all-smooth flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1V3a1 1 0 112 0v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H6a1 1 0 110-2h1V3a1 1 0 01-1-1zM3 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 3a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>
+                            Get AI-Powered Savings Report
+                        </button>
+                        <div class="mt-4 text-xs text-gray-500 italic">
+                            Please note: All calculations presented in this report are estimates based on the data you provided and standard assumptions. Actual savings, system size, and subsidy amounts may vary depending on factors such as your actual electricity consumption, site conditions, specific equipment chosen, and prevailing government policies.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="report-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div class="modal-container bg-white rounded-lg shadow-2xl w-full max-w-2xl transform scale-95">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h2 class="text-2xl font-bold text-gray-900">Your Personalized Savings Report</h2>
+                <button id="close-modal-btn" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div id="modal-content" class="p-6 flex-grow overflow-y-auto">
+                <div id="modal-loader" class="text-center py-10">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-solar-gold mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Our AI expert, Viaan, is analyzing your data...</p>
+                </div>
+                <div id="modal-text-content" class="prose max-w-none"></div>
+            </div>
+            <div class="p-4 bg-gray-50 border-t rounded-b-lg text-right">
+                <button id="close-modal-btn-footer" class="bg-gray-800 text-white px-5 py-2 rounded-md font-semibold hover:bg-gray-900">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-contact-buttons">
+        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
+            <i class="fas fa-solar-panel"></i>
+        </a>
+    </div>
+
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <div class="flex items-center space-x-2 bg-solar-gold px-3 py-1 rounded-lg shadow-md">
+                            <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-6 w-auto">
+                            <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-400">Your trusted partner for a sustainable future. Based in Ranchi, serving all of Jharkhand.</p>
+                </div>
+                <div><h4 class="text-lg font-semibold mb-4">Quick Links</h4><ul class="space-y-2"><li><a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a></li><li><a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Our Work</a></li><li><a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a></li><li><a href="blog.html" class="hover:text-solar-gold transition-all-smooth">Blog</a></li></ul></div>
+                <div><h4 class="text-lg font-semibold mb-4">Solutions</h4><ul class="space-y-2"><li><a href="projects.html#residential" class="hover:text-solar-gold transition-all-smooth">Residential Solar</a></li><li><a href="projects.html#commercial" class="hover:text-solar-gold transition-all-smooth">Commercial Solar</a></li><li><a href="calculator.html" class="hover:text-solar-gold transition-all-smooth">Solar Calculator</a></li><li><a href="financing.html" class="hover:text-solar-gold transition-all-smooth">Financing Options</a></li></ul></div>
+                <div><h4 class="text-lg font-semibold mb-4">Policies</h4><ul class="space-y-2"><li><a href="policies.html#privacy" class="hover:text-solar-gold transition-all-smooth">Privacy Policy</a></li><li><a href="policies.html#terms" class="hover:text-solar-gold transition-all-smooth">Terms & Conditions</a></li><li><a href="policies.html#warranty" class="hover:text-solar-gold transition-all-smooth">Warranty Information</a></li><li><a href="policies.html#refund" class="hover:text-solar-gold transition-all-smooth">Return & Refund Policy</a></li></ul></div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"><p class="text-gray-400 text-sm">© 2025 Dakshayani Enterprises. All Rights Reserved.</p><div class="flex space-x-4 mt-4 md:mt-0"><a href="https://facebook.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-facebook-f"></i></a><a href="https://instagram.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-instagram"></i></a></div></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // --- Calculator Logic ---
+            const form = document.getElementById('solar-calculator-form');
+            const resultsCard = document.getElementById('results-card');
+
+            if (form && resultsCard) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const monthlyBill = parseFloat(document.getElementById('monthly-bill').value);
+                    const unitRate = parseFloat(document.getElementById('unit-rate').value);
+
+                    if (isNaN(monthlyBill) || isNaN(unitRate) || monthlyBill <= 0 || unitRate <= 0) {
+                        console.error("Please enter valid positive numbers for bill and rate.");
+                        return;
+                    }
+
+                    // Calculations
+                    const monthlyUnits = monthlyBill / unitRate;
+                    // Calculate required system size based on 150 units/kWp/month
+                    const requiredKWp = monthlyUnits / 150; 
+
+                    // For display, round to one decimal place
+                    const systemSizeForDisplay = requiredKWp.toFixed(1); 
+
+                    let subsidy = 0;
+                    // Use the 'requiredKWp' for subsidy calculation (could be rounded or not, depending on strict policy interpretation)
+                    // For simplicity and matching previous behavior, let's use Math.ceil for subsidy slab determination
+                    const systemSizeForSubsidy = Math.ceil(requiredKWp); 
+
+                    if (systemSizeForSubsidy <= 2) {
+                        subsidy = systemSizeForSubsidy * 30000;
+                    } else if (systemSizeForSubsidy <= 3) {
+                        subsidy = (2 * 30000) + ((systemSizeForSubsidy - 2) * 18000);
+                    } else {
+                        subsidy = 78000; // Max subsidy
+                    }
+
+                    const annualSavings = monthlyBill * 12;
+
+                    // Display results
+                    document.getElementById('system-size').textContent = `${systemSizeForDisplay} kW`;
+                    document.getElementById('subsidy-amount').textContent = `₹ ${subsidy.toLocaleString('en-IN')}`;
+                    document.getElementById('annual-savings').textContent = `₹ ${annualSavings.toLocaleString('en-IN')}`;
+
+                    resultsCard.classList.add('show');
+                    resultsCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+
+            // --- AI Report Modal Logic ---
+            const reportModal = document.getElementById('report-modal');
+            const reportModalLoader = document.getElementById('modal-loader');
+            const reportModalTextContent = document.getElementById('modal-text-content');
+            const closeReportModalBtns = [document.getElementById('close-modal-btn'), document.getElementById('close-modal-btn-footer')];
+            const generateReportBtn = document.getElementById('generate-report-btn');
+
+            if (reportModal && generateReportBtn) {
+                const openReportModal = () => {
+                    reportModal.classList.remove('hidden', 'opacity-0');
+                    document.body.style.overflow = 'hidden';
+                    setTimeout(() => {
+                        reportModal.classList.add('opacity-100');
+                        const container = reportModal.querySelector('.modal-container');
+                        if (container) {
+                            container.classList.remove('scale-95');
+                            container.classList.add('scale-100');
+                        }
+                    }, 10);
+                };
+
+                const closeReportModal = () => {
+                    reportModal.classList.remove('opacity-100');
+                    reportModal.classList.add('opacity-0');
+                     const container = reportModal.querySelector('.modal-container');
+                    if (container) {
+                        container.classList.remove('scale-100');
+                        container.classList.add('scale-95');
+                    }
+                    setTimeout(() => {
+                        reportModal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }, 300);
+                };
+
+                closeReportModalBtns.forEach(btn => {
+                    if (btn) btn.addEventListener('click', closeReportModal);
+                });
+
+                generateReportBtn.addEventListener('click', async () => {
+                    openReportModal();
+                    if(reportModalLoader) reportModalLoader.style.display = 'block';
+                    if(reportModalTextContent) reportModalTextContent.innerHTML = '';
+
+                    const monthlyBill = document.getElementById('monthly-bill').value;
+                    const unitRate = document.getElementById('unit-rate').value;
+                    const systemSize = document.getElementById('system-size').textContent; // This is already formatted as "X.X kW"
+                    const subsidy = document.getElementById('subsidy-amount').textContent; // This is already formatted as "₹ X,XXX"
+                    const savings = document.getElementById('annual-savings').textContent; // This is already formatted as "₹ X,XXX"
+
+                    // Corrected prompt to explicitly ask for no markdown code block delimiters
+                    const prompt = `
+                        As an AI solar energy expert for Dakshayani Enterprises in Ranchi, Jharkhand, India, generate a personalized savings report for a potential customer with the following details. The report should be informative, professional, and encouraging. Use Markdown for formatting.
+                        Your entire response MUST be the report content itself, formatted in Markdown, without any introductory or concluding conversational text, and critically, WITHOUT any markdown code block delimiters (e.g., \`\`\`markdown or \`\`\`). Do NOT include any \`\`\` or \`\`\`markdown in your output.
+
+                        **Customer's Data:**
+                        - Average Monthly Bill: ₹${monthlyBill}
+                        - Electricity Rate: ₹${unitRate}/kWh
+                        
+                        **Our Calculation Results (Note: These are indicative and not final):**
+                        - Recommended Solar System Size: ${systemSize} (calculated based on an average production of 150 units per kWp per month)
+                        - Estimated Government Subsidy (under PM Surya Ghar): ${subsidy}
+                        - Potential Annual Savings: ${savings}
+
+                        **Structure the report as follows:**
+
+                        ### Your Personalized Solar Savings Analysis
+
+                        Start with a positive opening acknowledging their inputs and our indicative calculations.
+
+                        ### 1. Understanding Your Energy Needs
+                        Explain that based on their monthly bill of ₹${monthlyBill}, we've estimated their consumption and calculated the ideal system size for their home is **${systemSize}**. Mention that this calculation assumes an average production of 150 units per kWp per month, and all figures are indicative.
+
+                        ### 2. Leveraging the PM Surya Ghar Yojana
+                        Detail the financial benefits. Explain that for a ${systemSize} system, they are eligible for a substantial government subsidy of approximately **${subsidy}**. Emphasize that this significantly reduces the initial investment. Reiterate that this subsidy amount is indicative.
+
+                        ### 3. Your Path to Zero Bills
+                        Highlight the main benefit. With this system, they can generate their own electricity, leading to potential annual savings of **${savings}**. Explain this means their investment pays for itself over time. Remind them that these savings are indicative.
+
+                        ### 4. Environmental Impact
+                        Briefly mention the positive environmental impact, like reducing their carbon footprint.
+
+                        ### Next Steps
+                        Conclude with a clear call to action: "Ready to take the next step? Contact Dakshayani Enterprises today for a free, no-obligation site survey."
+                    `;
+                    
+                    try {
+                        let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                        const payload = { contents: chatHistory };
+                        const apiKey = "AIzaSyDF2y0RRVZfINmEYYZqTmhRH50te6RZ57A"; // API key managed by environment
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                        
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.text(); // Get raw text for better debugging
+                            console.error("API Error Response (raw):", errorData);
+                            let errorMessage = `API Error: ${response.status} - ${response.statusText}`;
+                            try {
+                                const parsedError = JSON.parse(errorData);
+                                if (parsedError.error && parsedError.error.message) {
+                                    errorMessage = `API Error: ${response.status} - ${parsedError.error.message}`;
+                                }
+                            } catch (e) {
+                                // Not a JSON error, use raw text
+                            }
+                            throw new Error(errorMessage);
+                        }
+
+                        // Always try to parse as JSON first, but if it fails, treat as plain text
+                        let result;
+                        const responseText = await response.text();
+                        try {
+                            result = JSON.parse(responseText);
+                        } catch (e) {
+                            // If parsing fails, it means the API returned raw text (hopefully the report itself)
+                            console.warn("API response was not valid JSON, treating as plain text response.");
+                            const reportText = responseText; // Use the raw text as the report
+                            let htmlContent = reportText
+                                .replace(/### (.*)/g, '<h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">$1</h3>')
+                                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                .replace(/\n/g, '<br>');
+                            if(reportModalTextContent) reportModalTextContent.innerHTML = htmlContent;
+                            if(reportModalLoader) reportModalLoader.style.display = 'none';
+                            return; // Exit here if we handled it as plain text
+                        }
+                        
+                        if (result.candidates && result.candidates.length > 0 && 
+                            result.candidates[0].content && result.candidates[0].content.parts && 
+                            result.candidates[0].content.parts.length > 0 && result.candidates[0].content.parts[0].text) {
+                            
+                            let reportText = result.candidates[0].content.parts[0].text;
+                            
+                            // Aggressively remove any leading/trailing markdown code block delimiters
+                            reportText = reportText.replace(/^```(?:markdown)?\s*|\s*```$/g, '').trim();
+
+                            // Basic markdown to HTML conversion
+                            let htmlContent = reportText
+                                .replace(/### (.*)/g, '<h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">$1</h3>')
+                                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                .replace(/\n/g, '<br>'); // Simple newline to <br> for basic formatting
+                            
+                            if(reportModalTextContent) reportModalTextContent.innerHTML = htmlContent;
+                        } else {
+                            throw new Error("No content or unexpected content structure received from API. Raw response: " + JSON.stringify(result));
+                        }
+
+                    } catch (error) {
+                        console.error("Error generating report:", error);
+                        if(reportModalTextContent) reportModalTextContent.innerHTML = '<p class="text-red-600">We are sorry, but we could not generate the report at this time. Please try again later. Error: ' + error.message + '</p>';
+                    } finally {
+                        if(reportModalLoader) reportModalLoader.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
