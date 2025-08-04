@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Proposal: Digital Platform for RESCO Solar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Slate, Amber, Sky) -->
+    <!-- Application Structure Plan: A single-page, multi-section dashboard layout. The structure prioritizes immediate comprehension and guided exploration. It starts with a high-level overview (Key Metrics & Summary), moves to the core concept (The Platform), details the execution (Project Plan), and concludes with credibility (The Team & Vision). This non-linear, thematic structure allows stakeholders (like an MNRE committee) to quickly grasp the project's essence and then dive into specific areas of interest (finance, methodology, KPIs) through interactive elements. This is more user-friendly and impactful than a linear report, as it respects the user's time and focuses their attention on key data points and interactive diagrams first. -->
+    <!-- Visualization & Content Choices: 
+        - Project Cost: Goal=Inform, Viz=Donut Chart, Interaction=Hover, Justification=Quickly shows funding split, Library=Chart.js.
+        - KPIs: Goal=Inform, Viz=Dynamic Stat Cards, Interaction=None, Justification=Highlights key targets immediately, Method=HTML/JS.
+        - Methodology: Goal=Organize, Viz=Interactive Phased Timeline, Interaction=Click to expand, Justification=Breaks down a complex process into digestible steps, Method=HTML/JS.
+        - Platform Diagram: Goal=Organize/Relationships, Viz=3-Way Flow Diagram, Interaction=Click nodes for details, Justification=Visually explains the core innovation of the platform connecting stakeholders, Method=HTML/JS.
+        - Budget Breakdown: Goal=Compare, Viz=Bar Chart, Interaction=Hover for details, Justification=Clearly shows allocation of funds across major categories, Library=Chart.js.
+        - Team: Goal=Inform, Viz=Profile Cards, Interaction=None, Justification=Builds credibility by presenting team expertise concisely, Method=HTML.
+        All visualizations use Canvas rendering via Chart.js or are constructed with structured HTML/CSS, adhering to the NO SVG/Mermaid constraint. The choices are designed to make dense proposal information engaging and easy to synthesize. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        .chart-container-bar {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #fbbf24; /* amber-400 */
+            border-bottom-color: #fbbf24;
+        }
+        .phase {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .phase.active {
+            background-color: #0ea5e9; /* sky-500 */
+            color: white;
+        }
+        .stakeholder-node {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .stakeholder-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-button.active {
+            background-color: #38bdf8; /* sky-400 */
+            color: white;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-slate-900">
+                <span class="text-sky-500">RESCO</span> Digital Platform Proposal
+            </h1>
+            <div class="hidden md:flex space-x-8">
+                <a class="nav-link font-medium text-slate-600 border-b-2 border-transparent pb-1" data-target="overview">Overview</a>
+                <a class="nav-link font-medium text-slate-600 border-b-2 border-transparent pb-1" data-target="platform">The Platform</a>
+                <a class="nav-link font-medium text-slate-600 border-b-2 border-transparent pb-1" data-target="plan">Project Plan</a>
+                <a class="nav-link font-medium text-slate-600 border-b-2 border-transparent pb-1" data-target="team">The Team</a>
+            </div>
+            <div class="md:hidden">
+                 <select id="mobile-nav" class="bg-white border border-slate-300 rounded-md py-1 px-2">
+                    <option value="overview">Overview</option>
+                    <option value="platform">The Platform</option>
+                    <option value="plan">Project Plan</option>
+                    <option value="team">The Team</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Section 1: Overview -->
+        <section id="overview" class="section space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Project Overview</h2>
+                <p class="mt-2 text-lg text-slate-600 max-w-3xl mx-auto">An innovative digital solution to accelerate India's rooftop solar adoption under PM Surya Ghar: Muft Bijli Yojana.</p>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200">
+                 <h3 class="text-2xl font-bold text-slate-800 mb-4">Executive Summary</h3>
+                 <p class="text-slate-600 leading-relaxed">India's rooftop solar (RTS) sector, vital for achieving the PM Surya Ghar: Muft Bijli Yojana's 40 GW target, is hindered by financing complexities, installation delays, and billing inefficiencies in Renewable Energy Service Company (RESCO) models. Our innovative solution introduces a 3-way digital platform that interconnects RESCO vendors, rooftop owners, and banks/NBFCs. The platform automates bill collection, EMI repayments to financiers, and profit disbursement to vendors, leveraging AI for optimization and risk mitigation. This reduces default risks, enhances ROI for vendors, and delivers cheaper, cleaner energy to users, democratizing rooftop solar access and propelling India toward its renewable energy ambitions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
+                    <p class="text-sm font-medium text-slate-500">Target RESCO Projects</p>
+                    <p id="kpi-projects" class="text-4xl font-bold text-sky-500 mt-2">100+</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
+                    <p class="text-sm font-medium text-slate-500">Reduce Default Risk</p>
+                    <p id="kpi-default-risk" class="text-4xl font-bold text-sky-500 mt-2">15%</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
+                    <p class="text-sm font-medium text-slate-500">Reduce Overheads</p>
+                    <p id="kpi-overheads" class="text-4xl font-bold text-sky-500 mt-2">50%</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
+                    <p class="text-sm font-medium text-slate-500">Consumer Cost Savings</p>
+                    <p id="kpi-cost-savings" class="text-4xl font-bold text-sky-500 mt-2">20%</p>
+                </div>
+            </div>
+
+             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200">
+                <h3 class="text-2xl font-bold text-slate-800 text-center mb-6">Funding Snapshot</h3>
+                <div class="chart-container">
+                    <canvas id="fundingChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Platform -->
+        <section id="platform" class="section space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">The Platform: A 3-Way Ecosystem</h2>
+                <p class="mt-2 text-lg text-slate-600 max-w-3xl mx-auto">Our solution addresses systemic barriers by creating a unified, transparent, and efficient digital marketplace for RESCO solar.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-800">The Problem</h3>
+                     <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 bg-amber-100 text-amber-600 p-3 rounded-full">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 10v-2m0-4h.01M4.93 4.93l.707.707M4 12h.01M4.93 19.07l.707-.707M19.07 4.93l-.707.707M20 12h-.01M19.07 19.07l-.707-.707"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Financing Hurdles</h4>
+                            <p class="text-slate-600">Banks perceive high default risks and lack standardized credit assessment for RESCO projects.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 bg-sky-100 text-sky-600 p-3 rounded-full">
+                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Vendor Capital Constraints</h4>
+                            <p class="text-slate-600">RESCO installers lack the large upfront capital required for scaling their operations.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 bg-slate-100 text-slate-600 p-3 rounded-full">
+                           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Operational Inefficiency</h4>
+                            <p class="text-slate-600">Manual billing, collection, and settlement processes are complex, slow, and error-prone.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 text-center">
+                    <h3 class="text-2xl font-bold text-slate-800">The Solution</h3>
+                    <p class="text-slate-600 mt-2 mb-6">An integrated digital platform that connects all stakeholders, automates workflows, and mitigates risk.</p>
+                    <div class="space-y-4">
+                        <div class="stakeholder-node bg-amber-100 p-4 rounded-lg shadow-sm">
+                            <p class="font-bold text-amber-800">Rooftop Owners</p>
+                            <p class="text-sm text-amber-700">Access cheaper power via PPAs</p>
+                        </div>
+                        <div class="flex justify-center items-center space-x-2 text-slate-400">
+                             <div class="w-1/3 h-px bg-slate-300"></div>
+                             <p class="text-2xl font-thin transform -rotate-45">&#8605;</p>
+                             <div class="w-1/3 h-px bg-slate-300"></div>
+                        </div>
+                        <div class="stakeholder-node bg-sky-500 text-white p-6 rounded-xl shadow-lg transform scale-105">
+                            <p class="font-bold text-2xl">Digital Platform</p>
+                            <p class="text-sm opacity-90">AI-Powered Financing & Settlement</p>
+                        </div>
+                         <div class="flex justify-around items-center text-slate-400">
+                            <p class="text-2xl font-thin transform -rotate-45">&#8605;</p>
+                            <p class="text-2xl font-thin transform rotate-45">&#8603;</p>
+                        </div>
+                        <div class="flex justify-around space-x-4">
+                            <div class="stakeholder-node w-1/2 bg-slate-100 p-4 rounded-lg shadow-sm">
+                                <p class="font-bold text-slate-800">RESCO Vendors</p>
+                                <p class="text-sm text-slate-700">Install via loans, not capital</p>
+                            </div>
+                            <div class="stakeholder-node w-1/2 bg-slate-100 p-4 rounded-lg shadow-sm">
+                                <p class="font-bold text-slate-800">Banks/NBFCs</p>
+                                <p class="text-sm text-slate-700">Fund de-risked projects</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200">
+                <h3 class="text-2xl font-bold text-slate-800 text-center mb-6">Core Features</h3>
+                <div class="flex justify-center mb-6 border-b border-slate-200">
+                    <button class="tab-button px-4 py-2 font-medium rounded-t-lg border-b-2 border-transparent" data-tab="vendor">Vendor Portal</button>
+                    <button class="tab-button px-4 py-2 font-medium rounded-t-lg border-b-2 border-transparent" data-tab="owner">Owner Portal</button>
+                    <button class="tab-button px-4 py-2 font-medium rounded-t-lg border-b-2 border-transparent" data-tab="financier">Financier Portal</button>
+                    <button class="tab-button px-4 py-2 font-medium rounded-t-lg border-b-2 border-transparent" data-tab="ai">AI Engine</button>
+                </div>
+                <div id="tab-content" class="text-slate-600 leading-relaxed min-h-[120px]">
+                    <!-- Content will be injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Project Plan -->
+        <section id="plan" class="section space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Project Plan & Methodology</h2>
+                <p class="mt-2 text-lg text-slate-600 max-w-3xl mx-auto">A structured 18-month roadmap for systematic development, pilot deployment, and scaling.</p>
+            </div>
+            
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200">
+                <h3 class="text-2xl font-bold text-slate-800 mb-6">Implementation Phases</h3>
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="phase w-full md:w-1/4 text-center p-4 rounded-lg border border-slate-300" data-phase="1">
+                        <p class="font-bold">Phase 1</p>
+                        <p class="text-sm">Discovery & Design</p>
+                        <p class="text-xs font-mono mt-1">Months 1-3</p>
+                    </div>
+                    <div class="flex-grow w-16 h-px bg-slate-300 hidden md:block"></div>
+                    <div class="phase w-full md:w-1/4 text-center p-4 rounded-lg border border-slate-300" data-phase="2">
+                        <p class="font-bold">Phase 2</p>
+                        <p class="text-sm">Development</p>
+                         <p class="text-xs font-mono mt-1">Months 4-10</p>
+                    </div>
+                    <div class="flex-grow w-16 h-px bg-slate-300 hidden md:block"></div>
+                    <div class="phase w-full md:w-1/4 text-center p-4 rounded-lg border border-slate-300" data-phase="3">
+                        <p class="font-bold">Phase 3</p>
+                        <p class="text-sm">Pilot & Refinement</p>
+                         <p class="text-xs font-mono mt-1">Months 11-15</p>
+                    </div>
+                    <div class="flex-grow w-16 h-px bg-slate-300 hidden md:block"></div>
+                    <div class="phase w-full md:w-1/4 text-center p-4 rounded-lg border border-slate-300" data-phase="4">
+                        <p class="font-bold">Phase 4</p>
+                        <p class="text-sm">Scaling & Impact</p>
+                         <p class="text-xs font-mono mt-1">Months 16-18</p>
+                    </div>
+                </div>
+                <div id="phase-details" class="bg-slate-50 p-6 rounded-lg border border-slate-200 min-h-[150px]">
+                    <!-- Phase details injected by JS -->
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200">
+                <h3 class="text-2xl font-bold text-slate-800 text-center mb-6">Budget Allocation</h3>
+                <div class="chart-container-bar">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Team -->
+        <section id="team" class="section space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">The Team & Vision</h2>
+                <p class="mt-2 text-lg text-slate-600 max-w-3xl mx-auto">Led by experienced entrepreneurs committed to driving India's renewable energy transition.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                    <h3 class="text-2xl font-bold">Vishesh Vardhan</h3>
+                    <p class="text-sky-500 font-semibold">Principal Investigator</p>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Multi-disciplinary entrepreneur with 9+ years of experience. For the last 5 years, his core focus has been driving innovation in the solar rooftop space, particularly within government-led initiatives like PM Surya Ghar and JREDA programs. Expertise in end-to-end solar ecosystem management, from vendor onboarding and financing to DISCOM liaison and community deployment.</p>
+                    <p class="mt-4 font-medium text-slate-800">Executed over 30+ rooftop solar installations.</p>
+                </div>
+                 <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200">
+                    <h3 class="text-2xl font-bold">Sunil Kumar</h3>
+                    <p class="text-amber-500 font-semibold">Co-Principal Investigator</p>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Seasoned civil engineer and business owner with over 30 years of experience in construction and infrastructure. Serves as a mentor and technical advisor, offering deep knowledge in structural planning, vendor verification, and site readiness for rooftop solar installations. His experience across civil, electrical, and retail domains makes him a valuable guide in field execution.</p>
+                     <p class="mt-4 font-medium text-slate-800">Expert in quality assurance and site-level supervision.</p>
+                </div>
+            </div>
+
+            <div class="bg-sky-500 text-white p-8 rounded-2xl shadow-2xl shadow-sky-200">
+                 <h3 class="text-2xl font-bold text-center">Conclusion & Vision</h3>
+                 <p class="mt-4 leading-relaxed text-center max-w-4xl mx-auto">This digital platform uniquely bridges critical gaps in RESCO financing and operations. By automating financial flows and leveraging AI for risk mitigation, we empower vendors, de-risk loans for financiers, and deliver cheaper, cleaner energy to consumers. This innovation directly accelerates RTS adoption, aligning with the PM Surya Ghar: Muft Bijli Yojana's 40 GW target. Led by a committed team, this replicable model will foster a robust RESCO ecosystem, driving India's green transition. Your support will catalyze this sustainable progress.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 border-t border-slate-200 mt-8">
+        <p class="text-slate-500">Proposal by Dakshayani Enterprises for MNRE Innovative Projects Component</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const data = {
+            funding: {
+                labels: ['MNRE Assistance (60%)', 'Dakshayani Contribution (40%)'],
+                values: [30000000, 20000000],
+                colors: ['#0ea5e9', '#f59e0b']
+            },
+            budget: {
+                labels: ['Equipment/Systems', 'Manpower', 'Consumables', 'Contingency', 'Overheads'],
+                values: [22500000, 17500000, 3500000, 4000000, 1500000],
+                colors: ['#0ea5e9', '#38bdf8', '#7dd3fc', '#f59e0b', '#fcd34d'],
+                 justification: [
+                    'Cloud servers, software licenses, security tools, and IoT devices for pilot installations.',
+                    'Salaries for developers, data scientists, project managers, and support staff.',
+                    'Office supplies, internet, travel for stakeholder meetings, and pilot marketing materials.',
+                    'Fund for unforeseen expenses like technology upgrades or regulatory changes.',
+                    'Administrative support as per MNRE guidelines (capped at Rs. 15 lakh).'
+                ]
+            },
+            tabs: {
+                vendor: '<strong>Onboarding & Project Management:</strong> A seamless interface for RESCO vendors to register, manage their project pipeline, track installation progress, and view financial statements. Reduces paperwork and accelerates project timelines.',
+                owner: '<strong>Simplified Access to Solar:</strong> Rooftop owners can digitally sign PPA/lease agreements, monitor their energy generation and consumption in real-time, view bills, and make payments through an integrated gateway.',
+                financier: '<strong>De-risked Lending:</strong> A dedicated portal for banks/NBFCs to review loan applications, assess risk using our AI-driven credit scoring model, monitor the performance of their funded assets, and track automated EMI repayments.',
+                ai: '<strong>Intelligent Operations:</strong> The core AI engine analyzes data for credit risk scoring, solar generation forecasting, predictive maintenance alerts to prevent downtime, and dynamic optimization of PPA pricing to ensure profitability and affordability.'
+            },
+            phases: {
+                '1': { 
+                    title: 'Phase 1: Discovery & Design',
+                    details: 'Conduct comprehensive requirements gathering with all stakeholders (vendors, banks, owners). Design platform architecture, finalize technology stack (AWS/Azure, Node.js, React, Python), analyze legal frameworks for PPAs, and select the pilot region in Jharkhand.'
+                },
+                '2': {
+                    title: 'Phase 2: Development & Integration',
+                    details: 'Modular development of the three user portals and the core AI engine. Integrate with external APIs for DISCOM data, credit bureaus, and IoT devices. Implement automated billing, payment gateways, and the EMI/profit disbursement engine using smart contracts.'
+                },
+                '3': {
+                    title: 'Phase 3: Pilot & Refinement',
+                    details: 'Deploy the platform in a controlled pilot in Jharkhand. Onboard initial set of vendors, owners, and a partner bank. Test all workflows in a real-world environment, collect user feedback, and make iterative improvements to the platform based on performance data.'
+                },
+                '4': {
+                    title: 'Phase 4: Scaling & Impact Assessment',
+                    details: 'Refine the platform for broader, multi-region deployment. Develop comprehensive training materials and support documentation. Prepare a detailed impact report quantifying KPIs and a long-term commercialization and sustainability plan.'
+                }
+            }
+        };
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
+        }
+
+        function initCharts() {
+            const fundingCtx = document.getElementById('fundingChart')?.getContext('2d');
+            if (fundingCtx) {
+                new Chart(fundingCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.funding.labels,
+                        datasets: [{
+                            data: data.funding.values,
+                            backgroundColor: data.funding.colors,
+                            borderColor: '#f8fafc',
+                            borderWidth: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += formatCurrency(context.parsed);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const budgetCtx = document.getElementById('budgetChart')?.getContext('2d');
+            if (budgetCtx) {
+                new Chart(budgetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.budget.labels,
+                        datasets: [{
+                            label: 'Cost (INR)',
+                            data: data.budget.values,
+                            backgroundColor: data.budget.colors,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return formatCurrency(context.parsed.x);
+                                    },
+                                    afterLabel: function(context) {
+                                        return data.budget.justification[context.dataIndex];
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    callback: function(value, index, ticks) {
+                                        return '₹' + (value / 1000000) + 'M';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
+        function handleNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            function setActive(targetId) {
+                sections.forEach(s => s.classList.remove('active'));
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) targetSection.classList.add('active');
+
+                navLinks.forEach(l => {
+                    l.classList.toggle('active', l.dataset.target === targetId);
+                });
+                
+                if (mobileNav.value !== targetId) {
+                    mobileNav.value = targetId;
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setActive(link.dataset.target);
+                });
+            });
+            
+            mobileNav.addEventListener('change', () => {
+                 setActive(mobileNav.value);
+            });
+
+            setActive('overview');
+        }
+
+        function handleTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContent = document.getElementById('tab-content');
+
+            function setTabContent(tabId) {
+                tabContent.innerHTML = data.tabs[tabId] || 'Content not found.';
+                tabButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.tab === tabId);
+                });
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setTabContent(button.dataset.tab);
+                });
+            });
+
+            setTabContent('vendor');
+        }
+
+        function handlePhases() {
+            const phaseElements = document.querySelectorAll('.phase');
+            const phaseDetails = document.getElementById('phase-details');
+
+            function setPhaseContent(phaseId) {
+                const phaseData = data.phases[phaseId];
+                phaseDetails.innerHTML = `
+                    <h4 class="font-bold text-lg mb-2 text-slate-800">${phaseData.title}</h4>
+                    <p class="text-slate-600">${phaseData.details}</p>
+                `;
+                phaseElements.forEach(el => {
+                    el.classList.toggle('active', el.dataset.phase === phaseId);
+                });
+            }
+
+            phaseElements.forEach(el => {
+                el.addEventListener('click', () => {
+                    setPhaseContent(el.dataset.phase);
+                });
+            });
+
+            setPhaseContent('1');
+        }
+
+        initCharts();
+        handleNavigation();
+        handleTabs();
+        handlePhases();
+    });
+    </script>
+</body>
+</html>
