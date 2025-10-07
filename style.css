@@ -1,11 +1,11 @@
-/* Universal Styles for Dakshayani Enterprises Website */
+/* Universal Styles for Dakshayani Enterprises Website - REDESIGN */
 
-/* --- Typography and Body (Overriding Tailwind Defaults) --- */
+/* --- Typography and Body --- */
 body {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
-    background-color: #f7f9fb; /* Very light, off-white background */
-    color: #1f2937; /* Dark gray for primary text readability */
+    background-color: #f7f9fb; /* Primary light background */
+    color: #1f2937; /* Primary dark text color */
 }
 
 /* --- Brand Colors and Helpers --- */
@@ -16,46 +16,84 @@ body {
 .transition-all-smooth { transition: all 0.3s ease-in-out; }
 
 /* --- Global Section Styles --- */
-/* Header Background - Dark Navy for high contrast */
 .header-bg {
-    background-color: #111827; /* Near black / Dark Navy */
+    background-color: #0d121c; /* Deep Charcoal/Navy for Header/Footer */
 }
-/* Section Headers (e.g., About, Policies, PM Surya Ghar intro) */
 .page-header-bg {
-    background-color: #1f2937;
+    background-color: #1f2937; /* Dark background for page headers */
     background-image: radial-gradient(circle at top right, rgba(251, 191, 36, 0.15), transparent 40%),
                       radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.15), transparent 50%);
 }
-/* Background pattern for sections (light gray pattern on white) */
 .section-bg-pattern {
     background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f3f4f6' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* --- Component Styles --- */
-/* Logo Container - Ensures consistent styling/hover on all logos */
+/* --- Component Overrides (Bolder Shadows, More Rounded) --- */
 .logo-container {
     background-color: #FBBF24;
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    border-radius: 0.75rem; /* Increased rounding */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease-in-out;
 }
 .logo-container:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Project Card / Dashboard Card - Modern, rounded card style */
+/* Project Card / Dashboard Card - High contrast lift effect */
 .project-card, .dashboard-card {
-    border-radius: 1rem; /* More rounded corners */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 1rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* More pronounced shadow */
     transition: all 0.3s ease-in-out;
 }
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+.project-card:hover, .dashboard-card:hover {
+    transform: translateY(-8px); /* Deeper lift */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
+
+/* --- Specific Section Styles for Redesign --- */
+/* Hero Section Custom Styling */
+.hero-bg-custom {
+    /* Uses inline background-image to set the hero.jpg */
+    background-color: #111827;
+    position: relative;
+    overflow: hidden;
+}
+
+/* PM Surya Ghar Section - Vibrant Green Accent */
+.pmsgy-section {
+    background-color: #ecfdf5; /* Light mint/green background */
+    border-color: #a7f3d0; /* Green border */
+}
+.pmsgy-icon-container {
+    background-color: #059669; /* Darker green background */
+    color: white;
+    box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+}
+
+/* 4-Step Process - Custom Step Design */
+.step-item {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+.step-circle {
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    border: 4px solid #FBBF24;
+    font-weight: 700;
+    color: #1f2937;
+    background-color: #fff;
+    box-shadow: 0 0 0 6px #f7f9fb; /* Ring effect against light background */
+}
+/* This custom class will be used on the dark background for a shadow effect */
+.dark-section .step-circle {
+    box-shadow: 0 0 0 6px #0d121c; /* Ring effect against dark background */
+}
+
 
 /* --- Utility / Animation --- */
 @keyframes fadeInUp {
@@ -66,49 +104,21 @@ body {
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* --- Fixed Contact Buttons (Universal) --- */
+/* --- Fixed Contact Buttons (Preserved) --- */
 .fixed-contact-buttons {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 100; display: flex; flex-direction: column; gap: 0.75rem;
 }
 .fixed-contact-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 9999px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    transition: all 0.2s ease-in-out;
-    color: white;
-    font-size: 1.5rem;
-    text-align: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; width: 3.5rem; height: 3.5rem; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); transition: all 0.2s ease-in-out; color: white; font-size: 1.5rem; text-align: center; flex-shrink: 0;
 }
 .fixed-contact-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(1.1); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-/* Specific button colors */
 .fixed-contact-button.call { background-color: #34D399; }
 .fixed-contact-button.whatsapp { background-color: #25D366; }
 .fixed-contact-button.email { background-color: #EF4444; }
 .fixed-contact-button.pmsgy { background-color: #6366F1; }
 @media (max-width: 768px) {
-    .fixed-contact-buttons {
-        bottom: 1rem;
-        right: 1rem;
-        flex-direction: row;
-        gap: 0.5rem;
-    }
-    .fixed-contact-button {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1.25rem;
-    }
+    .fixed-contact-buttons { bottom: 1rem; right: 1rem; flex-direction: row; gap: 0.5rem; }
+    .fixed-contact-button { width: 3rem; height: 3rem; font-size: 1.25rem; }
 }
