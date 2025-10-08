@@ -1,20 +1,25 @@
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="brand">
-      <img src="images/logo/logocenteredsmall.png" alt="Dakshayani Enterprises" class="brand-logo-em">
-      <span class="brand-text">Dakshayani Enterprises</span>
-    </a>
+<!-- no <html>/<head> here; this is only the header markup -->
+<div class="container">
+  <!-- Brand -->
+  <a href="index.html" class="brand">
+    <!-- If you use an image logo -->
+    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises" class="brand-logo-em" />
+    <span class="brand-text">Dakshayani Enterprises</span>
+  </a>
 
-    <button id="menuToggle" class="menu-btn" aria-label="Toggle menu">
-      <span class="menu-bar"></span><span class="menu-bar"></span><span class="menu-bar"></span>
-    </button>
+  <!-- Desktop nav -->
+  <nav class="nav">
+    <a href="index.html" data-nav>Home</a>
+    <a href="about.html" data-nav>About Us</a>
+    <a href="projects.html" data-nav>Solutions</a>
+    <a href="blog.html" data-nav>Blog</a>
+    <a href="contact.html" data-nav>Contact</a>
+  </nav>
 
-    <nav id="navLinks" class="nav">
-      <a href="projects.html">Solutions</a>
-      <a href="about.html">About Us</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-      <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
-    </nav>
-  </div>
-</header>
+  <!-- Mobile menu button -->
+  <button class="menu-btn" aria-label="Menu">
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+  </button>
+</div>
