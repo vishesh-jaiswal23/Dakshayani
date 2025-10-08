@@ -1,39 +1,37 @@
-// Inject shared header & footer, then wire up the menu.
-(function(){
-  // where to load from
-  const headerURL = "partials/header.html";
-  const footerURL = "partials/footer.html";
+<!-- place this as /script.js (root) -->
+<script>
+// Inject a partial into a target element
+async function injectPartial(targetSelector, url) {
+  const host = document.querySelector(targetSelector);
+  if (!host) return;
 
-  // placeholders that exist on every page
-  const headerPlaceholder = document.querySelector("header");
-  const footerPlaceholder = document.querySelector("footer");
+  try {
+    const res = await fetch(url, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const html = await res.text();
+    host.innerHTML = html;
 
-  // fetch and inject header
-  if (headerPlaceholder) {
-    fetch(headerURL)
-      .then(r => r.text())
-      .then(html => {
-        headerPlaceholder.outerHTML = html;
-        setupMenu(); // wire up after DOM fragment is in
-      })
-      .catch(console.error);
-  }
-
-  // fetch and inject footer
-  if (footerPlaceholder) {
-    fetch(footerURL)
-      .then(r => r.text())
-      .then(html => { footerPlaceholder.outerHTML = html; })
-      .catch(console.error);
-  }
-
-  function setupMenu(){
-    const btn = document.getElementById("menuToggle");
-    const nav = document.getElementById("navLinks");
-    if (btn && nav) {
-      btn.addEventListener("click", () => {
-        nav.classList.toggle("show");
+    // After injection, wire up behaviors if header
+    if (targetSelector === "header.site-header") {
+      // Active nav highlight
+      const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+      document.querySelectorAll('header a[data-nav]').forEach(a => {
+        const href = (a.getAttribute("href") || "").toLowerCase();
+        if (href === current) a.classList.add("active");
       });
+
+      // Mobile menu toggle
+      const btn = document.querySelector(".menu-btn");
+      const nav = document.querySelector(".nav");
+      if (btn && nav) btn.addEventListener("click", () => nav.classList.toggle("show"));
     }
+  } catch (err) {
+    console.error("Partial load failed:", url, err);
   }
-})();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  injectPartial("header.site-header", "partials/header.html");
+  injectPartial("footer.site-footer", "partials/footer.html");
+});
+</script>

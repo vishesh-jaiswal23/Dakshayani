@@ -162,3 +162,9 @@ img{max-width:100%; height:auto}
   .icon-only, .card img{ transition:none; }
   .icon-only:hover, .card:hover img{ transform:none; box-shadow:0 4px 20px rgba(0,0,0,.03); filter:none; }
 }
+
+/* Active nav link */
+.nav a.active{ color:var(--primary-600); font-weight:800; }
+
+/* active page highlight */
+.nav a.active{ color: var(--primary-600); }

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birsa Arogya Doot | Dakshayani Enterprises</title>
+  <meta name="description" content="Birsa Arogya Doot – an integrated, phased healthcare model for Jharkhand DMFT: mobile diagnostics, drone-enabled emergency response, and prosthetics & rehab hub." />
+  <style>
+    :root {
+      --brand-green: #1d7a4e; /* deep forest */
+      --brand-amber: #e5a100; /* solar amber */
+      --brand-ink: #112018;  /* text */
+      --brand-sand: #f7f4ec; /* warm background */
+      --muted: #6b7a74;
+      --card: #ffffff;
+      --ring: rgba(29,122,78,.25);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; color: var(--brand-ink); background: var(--sand, #faf9f5); }
+    a { color: var(--brand-green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Header */
+    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(6px); background: rgba(247,244,236, .9); border-bottom: 1px solid #e8e3d7; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: .75rem 1rem; }
+    .brand { display: flex; align-items: center; gap: .75rem; }
+    .brand h1 { font-size: 1rem; margin: 0; letter-spacing: .4px; font-weight: 700; }
+    .brand small { display: block; color: var(--muted); font-weight: 500; letter-spacing: .2px; }
+    .logo { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; background: radial-gradient(120% 120% at 20% 10%, #ffd36a 0%, #ffb800 35%, #f8b401 36%, #f0a000 60%, #e09000 100%); box-shadow: 0 4px 18px rgba(229,161,0,.25); position: relative; overflow: hidden; }
+    .logo svg { width: 26px; height: 26px; }
+    .logo .cross { position: absolute; inset: 8px; border-radius: 6px; background: linear-gradient(180deg, #fff 0%, #fef0c8 100%); clip-path: polygon(42% 0, 58% 0, 58% 42%, 100% 42%, 100% 58%, 58% 58%, 58% 100%, 42% 100%, 42% 58%, 0 58%, 0 42%, 42% 42%); box-shadow: 0 2px 10px rgba(255,255,255,.45) inset;
+    }
+
+    .menu { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .menu a { padding: .4rem .75rem; border-radius: 999px; font-weight: 600; }
+    .menu a:hover { background: #efe9da; text-decoration: none; }
+
+    /* Hero */
+    .hero { max-width: 1200px; margin: 0 auto; padding: 3.5rem 1rem 2.5rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
+    .hero h2 { margin: 0 0 .75rem; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.12; }
+    .hero p.lead { color: #2a3a33; font-size: 1.075rem; margin: .25rem 0 1.25rem; }
+    .cta { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1rem; border-radius: 12px; font-weight: 700; border: 1px solid transparent; transition: box-shadow .2s ease, transform .05s ease; }
+    .btn:hover { box-shadow: 0 8px 24px var(--ring); transform: translateY(-1px); text-decoration: none; }
+    .btn-primary { background: var(--brand-green); color: #fff; }
+    .btn-outline { background: #fff; border-color: #d8d0be; color: var(--brand-ink); }
+
+    .card { background: var(--card); border: 1px solid #ebe4d7; border-radius: 16px; padding: 1.25rem; box-shadow: 0 6px 22px rgba(17,32,24,.06); }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+    .kpis .card { text-align: center; }
+    .kpis .num { font-size: 1.6rem; font-weight: 800; color: var(--brand-green); }
+    .kpis .lbl { color: var(--muted); font-size: .9rem; }
+
+    /* Section base */
+    section { padding: 2.5rem 1rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h3.section-title { font-size: 1.6rem; margin: 0 0 1rem; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+    /* Phase cards */
+    .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .phase .hd { font-weight: 800; letter-spacing: .3px; color: var(--brand-green); margin-bottom: .5rem; }
+    .list { padding-left: 1rem; }
+    .list li { margin: .25rem 0; }
+
+    /* Governance */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .pill { display: inline-block; padding: .25rem .6rem; border: 1px solid #e4dccb; border-radius: 999px; font-size: .85rem; color: #47534e; background: #fff; }
+
+    /* Budget */
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .7rem .6rem; border-bottom: 1px dashed #e7dfcf; text-align: left; }
+    th { background: #f4efe3; font-weight: 800; }
+    .total { font-weight: 800; }
+
+    /* Accordions */
+    .accordion { border: 1px solid #eadfcb; border-radius: 12px; overflow: hidden; background: #fff; }
+    .acc-item + .acc-item { border-top: 1px solid #eadfcb; }
+    .acc-btn { width: 100%; text-align: left; background: #fff; border: 0; padding: 1rem; font-weight: 700; cursor: pointer; }
+    .acc-panel { display: none; padding: 0 1rem 1rem; color: #3a4742; }
+
+    /* Footer */
+    footer { background: #0f1a15; color: #cfe1d9; padding: 2rem 1rem; }
+    footer a { color: #e9f6f1; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .kpis { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .phases { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .menu { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <div class="cross"></div>
+        </div>
+        <div>
+          <h1>Dakshayani Enterprises</h1>
+          <small>Birsa Arogya Doot · Health‑Tech | Solar</small>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#phases">Phases</a>
+        <a href="#governance">Governance</a>
+        <a href="#budget">Budget</a>
+        <a href="#annexures">Annexures</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h2>Birsa Arogya Doot — an integrated, phased health mission for Jharkhand’s mining districts</h2>
+      <p class="lead">A modular DMFT project delivering: <strong>mobile diagnostics</strong>, <strong>drone‑enabled emergency response</strong>, and a <strong>prosthetics & rehabilitation hub</strong>. Each phase under ₹2 crore, total under ₹5 crore.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#phases">View Phases</a>
+        <a class="btn btn-outline" href="#download">Download DPR & Annexures</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kpis">
+        <div class="card"><div class="num">10,000+</div><div class="lbl">Villagers screened (Year 1)</div></div>
+        <div class="card"><div class="num">500+</div><div class="lbl">CFR volunteers trained</div></div>
+        <div class="card"><div class="num">50+</div><div class="lbl">Prosthetics fitted</div></div>
+        <div class="card"><div class="num">₹4.95 cr</div><div class="lbl">Total project cost</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container">
+    <h3 class="section-title">Why this project</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>Problem in mining blocks</h4>
+        <ul class="list">
+          <li>High burden of respiratory disease and trauma.</li>
+          <li>Diagnostics are distant and costly for rural families.</li>
+          <li>No time‑bound emergency logistics to villages.</li>
+          <li>Rehabilitation options are scarce and unaffordable.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Direct, practical solution</h4>
+        <ul class="list">
+          <li>Mobile Diagnostics Van with ABDM‑ready records.</li>
+          <li>Drone medicine delivery + Community First Responders (AEDs).</li>
+          <li>3D‑printed prosthetics and physiotherapy hub.</li>
+          <li>Real‑time dashboards for Civil Surgeon & DC.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="phases" class="container">
+    <h3 class="section-title">Phased rollout (upgrade‑ready)</h3>
+    <div class="phases">
+      <article class="card phase">
+        <div class="hd">Phase 1 · 0–6 months</div>
+        <h4>Diagnostics + Digital Backbone</h4>
+        <ul class="list">
+          <li>Van with portable X‑ray, USG, ECG, spirometry, lab analyzers.</li>
+          <li>Cold chain; telemedicine kit; ABDM‑compliant software.</li>
+          <li>Team: Nurse, Lab Technician, Driver.</li>
+        </ul>
+        <p><strong>Outcome:</strong> Early detection at the doorstep. Digital records for continuity of care.</p>
+      </article>
+      <article class="card phase">
+        <div class="hd">Phase 2 · 6–15 months</div>
+        <h4>Emergency Response · Drones + CFR</h4>
+        <ul class="list">
+          <li>Two DGCA‑approved medical drones; lockers; trained pilots.</li>
+          <li>500+ CFRs trained in CPR; 10 AEDs installed in public spaces.</li>
+          <li>VLOS to start; BVLOS on approval; insurance and safety SOPs.</li>
+        </ul>
+        <p><strong>Outcome:</strong> Faster golden‑hour response; assured last‑mile delivery.</p>
+      </article>
+      <article class="card phase">
+        <div class="hd">Phase 3 · 15–21 months</div>
+        <h4>Rehabilitation & Ortho Hub</h4>
+        <ul class="list">
+          <li>3D printers (FDM + resin), scanner, CAD; clinic + physio unit.</li>
+          <li>Tele‑ortho consults; follow‑up care.</li>
+          <li>Team: Prosthetist, Physiotherapist, Technicians.</li>
+        </ul>
+        <p><strong>Outcome:</strong> Mobility restored; livelihoods protected.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="governance" class="container">
+    <h3 class="section-title">Governance & management</h3>
+    <div class="grid-3">
+      <div class="card">
+        <h4>Advisory Mentors</h4>
+        <p class="pill">Retd. Civil Surgeon · Retd. Divisional Commissioner</p>
+        <p>Strategic guidance, government alignment, credibility.</p>
+      </div>
+      <div class="card">
+        <h4>Clinical Governance Board</h4>
+        <p class="pill">Orthopedics · Pulmonology · Anesthesiology</p>
+        <p>Protocols, tele‑support, quality assurance (≈5 hrs/week each).</p>
+      </div>
+      <div class="card">
+        <h4>PMU & Field Teams</h4>
+        <p class="pill">M&E · IT · Finance</p>
+        <p>Van Team · Drone & CFR Team · Rehab Hub Team</p>
+      </div>
+    </div>
+    <div class="accordion" style="margin-top:1rem">
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false">Reporting & transparency</button>
+        <div class="acc-panel">
+          <ul class="list">
+            <li>Monthly: PMU → Civil Surgeon & Deputy Commissioner.</li>
+            <li>Quarterly: Review with DMFT Governing Council.</li>
+            <li>Real‑time: Dashboard access for designated officials.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="budget" class="container">
+    <h3 class="section-title">Budget snapshot</h3>
+    <div class="two-col">
+      <div class="card">
+        <table aria-label="Budget by phase">
+          <thead><tr><th>Phase</th><th>Description</th><th>₹ crore</th></tr></thead>
+          <tbody>
+            <tr><td>Phase 1</td><td>Diagnostics + Digital</td><td>1.90</td></tr>
+            <tr><td>Phase 2</td><td>Drones + CFR + AEDs</td><td>1.75</td></tr>
+            <tr><td>Phase 3</td><td>Rehab & Ortho Hub</td><td>1.30</td></tr>
+            <tr class="total"><td colspan="2">Grand Total</td><td>4.95</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Why this works</h4>
+        <ul class="list">
+          <li>Each phase <strong>< ₹2.0 crore</strong>; total <strong>< ₹5.0 crore</strong>.</li>
+          <li>Modular · no duplication · transparent dashboards.</li>
+          <li>Clear room to upgrade: add vans, drones, or expand rehab.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="annexures" class="container">
+    <h3 class="section-title">Annexures (ready‑to‑attach)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>Clinical & Governance</h4>
+        <ul class="list">
+          <li>Annexure A: Doctor undertakings (5 hrs/week) + abbreviated CVs.</li>
+          <li>Annexure B: Advisory mentors – abbreviated CVs.</li>
+          <li>Annexure E: SOPs (Van, Drone, Prosthetics, CFR).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Compliance & BoM</h4>
+        <ul class="list">
+          <li>Annexure C: Drone pilot affidavit (DGCA compliance).</li>
+          <li>Annexure D: OEM authorizations.</li>
+          <li>Annexure F: BoM (Excel‑ready) · Annexure G: Infographics.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="container">
+    <h3 class="section-title">Downloads</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>DPR</h4>
+        <p>Detailed Project Report (lean main paper with annexures list)</p>
+        <a class="btn btn-primary" href="birsa-arogya-doot-dpr.pdf" target="_blank">Download DPR (PDF)</a>
+
+      </div>
+      <div class="card">
+        <h4>Annexures</h4>
+        <p>Templates: Undertakings, Affidavit, OEM letters, SOPs, BoM, Infographics</p>
+        <a class="btn btn-outline" href="birsa-arogya-doot-annexures.zip" target="_blank">Download Annexures (ZIP)</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="container">
+    <h3 class="section-title">Contact</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>Dakshayani Enterprises</h4>
+        <p>Maa Tara, Kilburn Colony, Hinoo, Ranchi, Jharkhand – 834002</p>
+        <p><strong>Email:</strong> info@dakshayani.co.in &nbsp; | &nbsp; <strong>Phone:</strong> +91‑70702 78178</p>
+        <p><strong>Entity:</strong> Proprietorship · Health‑Tech | Solar</p>
+      </div>
+      <div class="card">
+        <h4>For Civil Surgeon / DC (DMFT)</h4>
+        <p>Request a 10‑minute concept presentation and site demo.</p>
+        <a class="btn btn-primary" href="#" onclick="document.getElementById('req').showModal(); return false;">Request a meeting</a>
+      </div>
+    </div>
+  </section>
+
+  <dialog id="req" style="border:none; border-radius:16px; padding:0; max-width:560px; width:92vw;">
+    <form method="dialog">
+      <div style="padding:1.25rem; border-bottom:1px solid #eee; font-weight:800">Request a meeting</div>
+      <div style="padding:1.25rem; display:grid; gap:.75rem;">
+        <label> Your Name<br/><input required style="width:100%; padding:.6rem .7rem; border:1px solid #ddd; border-radius:10px" /></label>
+        <label> Organisation<br/><input style="width:100%; padding:.6rem .7rem; border:1px solid #ddd; border-radius:10px" /></label>
+        <label> Email<br/><input type="email" required style="width:100%; padding:.6rem .7rem; border:1px solid #ddd; border-radius:10px" /></label>
+        <label> Message<br/><textarea rows="4" style="width:100%; padding:.6rem .7rem; border:1px solid #ddd; border-radius:10px"></textarea></label>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:.5rem; padding:1rem; border-top:1px solid #eee;">
+        <button class="btn btn-outline" value="cancel">Close</button>
+        <button class="btn btn-primary" value="default">Send</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer>
+    <div class="container" style="display:grid; gap:1rem;">
+      <div><strong>Dakshayani Enterprises</strong> · Health‑Tech | Solar</div>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; color:#a9b7b1;">
+        <span>Advisory Mentors: Retd. Civil Surgeon · Retd. Divisional Commissioner</span>
+        <span>Clinical Governance Board: Orthopedics · Pulmonology · Anesthesiology</span>
+      </div>
+      <div style="color:#96a49e;">© <span id="yr"></span> Dakshayani Enterprises. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    // simple accordion
+    Array.from(document.querySelectorAll('.acc-btn')).forEach(btn => {
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        const panel = btn.nextElementSibling;
+        panel.style.display = open ? 'none' : 'block';
+      });
+    });
+  </script>
+</body>
+</html>

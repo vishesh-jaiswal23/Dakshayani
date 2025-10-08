@@ -1,272 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Dakshayani Enterprises</title>
-    <meta name="description" content="Learn about Dakshayani Enterprises, our mission, values, and the expert team dedicated to making solar energy accessible in Ranchi and Jharkhand.">
-    <meta name="keywords" content="about dakshayani enterprises, solar company mission, solar team ranchi, jharkhand solar experts">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | Dakshayani Enterprises</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    .avatar { width: 96px; height: 96px; border-radius: 999px; object-fit: cover; }
+    .about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: .75rem; }
+    .split { display: grid; gap: 20px; grid-template-columns: 1.2fr .8fr; }
+    @media (max-width: 920px){ .split { grid-template-columns: 1fr; } }
+    .partners { display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:center }
+    .partners img { height: 36px; width:auto; filter: grayscale(100%); opacity:.85 }
+    .partners img:hover { filter:none; opacity:1 }
+  </style>
 </head>
-<body class="text-gray-700">
+<body>
 
-    <header class="header-bg text-white shadow-md sticky top-0 z-50" id="main-header">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <div class="flex items-center space-x-2 logo-container">
-                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
-                    <span class="text-2xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
-                </div>
-            </a>
+  <!-- Shared header via partial -->
+  <header class="site-header"></header>
 
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="hover:text-solar-gold transition-all-smooth">Home</a>
-                <a href="about.html" class="text-solar-gold font-semibold transition-all-smooth">About Us</a>
-                <a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Solutions</a>
-                
-                <div class="relative group">
-                    <button class="hover:text-solar-gold transition-all-smooth flex items-center">
-                        <span>More</span>
-                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </button>
-                    <div class="absolute -left-8 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all-smooth">
-                        <a href="calculator.html" class="block px-4 py-2 hover:bg-gray-100 rounded-t-lg">Calculator</a>
-                        <a href="financing.html" class="block px-4 py-2 hover:bg-gray-100">Financing</a>
-                        <a href="rewards.html" class="block px-4 py-2 hover:bg-gray-100">Rewards</a>
-                        <a href="ai-expert.html" class="block px-4 py-2 hover:bg-gray-100">AI Expert</a>
-                        <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100 rounded-b-lg">Blog</a>
-                    </div>
-                </div>
-                
-                <a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a>
-                <a href="login.html" class="bg-solar-gold text-gray-900 px-4 py-2 rounded-lg font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
-            </nav>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <img src="images/about-hero.jpg" alt="Team planning a rooftop solar layout">
+      <div class="overlay container">
+        <h1>Powering Jharkhand with Care & Craft</h1>
+        <p>We’re an EPC partner focused on neat execution, premium components, and lifetime support.</p>
+        <div style="margin-top:16px">
+          <a class="btn btn-primary" href="contact.html">Talk to an Expert</a>
+        </div>
+      </div>
+    </section>
 
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                </button>
+    <!-- Our Story -->
+    <section class="section alt">
+      <div class="head container">
+        <h2 class="title">Our Story</h2>
+        <p class="sub">Born in Ranchi, built for Jharkhand — disciplined engineering and honest pricing.</p>
+      </div>
+
+      <div class="container split">
+        <div>
+          <div class="card" style="padding:22px">
+            <div class="title">From Survey to Savings</div>
+            <div class="copy">
+              We started with a simple promise: deliver solar the way we’d want it at our own homes and businesses —
+              tidy installs, Tier-1 components, and paperwork handled end-to-end. Today, our projects span residential rooftops,
+              petrol pumps, and commercial/industrial plants across the state.
             </div>
+            <div class="copy" style="margin-top:.75rem">
+              Our team blends local know-how with strict safety practices: earthing checks, string planning, shadow analysis,
+              and app-enabled monitoring so you always see your savings.
+            </div>
+          </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden header-bg">
-            <a href="index.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Home</a>
-            <a href="about.html" class="block py-2 px-6 text-solar-gold font-semibold">About Us</a>
-            <a href="projects.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Solutions</a>
-            <a href="calculator.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Calculator</a>
-            <a href="financing.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Financing</a>
-            <a href="rewards.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Rewards</a>
-            <a href="ai-expert.html" class="block py-2 px-6 hover:bg-gray-800 rounded">AI Expert</a>
-            <a href="blog.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Blog</a>
-            <a href="contact.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Contact</a>
-            <a href="login.html" class="block mt-2 mx-4 mb-4 text-center bg-solar-gold text-gray-900 px-4 py-2 rounded-lg font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
+        <div>
+          <img class="about-img" src="images/about-story.jpg" alt="On-site survey and design discussion">
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main>
-        <section class="page-header-bg text-white">
-            <div class="container mx-auto px-6 py-16 text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">About Dakshayani Enterprises</h1>
-                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">Pioneering Jharkhand's transition to a sustainable, solar-powered future.</p>
-            </div>
-        </section>
+    <!-- Why Choose Us (icon-only) -->
+    <section class="section">
+      <div class="head container">
+        <h2 class="title">Why Choose Us</h2>
+        <p class="sub">Local expertise, premium components, and transparent pricing.</p>
+      </div>
 
-        <section class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="pr-0 md:pr-12">
-                        <span class="text-solar-gold font-bold">OUR STORY</span>
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Empowering Ranchi, One Rooftop at a Time</h2>
-                        <p class="mt-4 text-lg text-gray-600">Founded in Ranchi with a vision to make clean energy affordable and accessible, Dakshayani Enterprises has grown into one of Jharkhand's most respected solar EPC firms. We believe that solar power is not just an alternative, but the future of energy for our homes, businesses, and communities.</p>
-                        <p class="mt-4 text-gray-600">Our commitment is to provide our clients with the highest quality solar solutions, backed by transparent processes, engineering excellence, and dedicated customer support. We handle every aspect of your solar journey, from the initial consultation and subsidy paperwork to the final installation and commissioning.</p>
-                    </div>
-                    <div>
-                        <img src="images/team.jpg" 
-                             alt="Dakshayani Enterprises Team Collaboration" 
-                             class="rounded-xl shadow-2xl w-full h-auto object-cover">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 md:py-24 section-bg-pattern">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our Core Principles</h2>
-                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">These values guide every project we undertake and every customer we serve.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 project-card text-center">
-                        <div class="mx-auto bg-amber-100 text-solar-gold rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Our Mission</h3>
-                        <p class="text-gray-600">To accelerate the adoption of solar energy in Jharkhand by delivering reliable, high-performance, and cost-effective solar power systems for all.</p>
-                    </div>
-                    <div class="bg-white p-8 project-card text-center">
-                        <div class="mx-auto bg-amber-100 text-solar-gold rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Quality & Safety</h3>
-                        <p class="text-gray-600">We use only Tier-1 components and adhere to the strictest safety and installation standards to ensure your system is built to last.</p>
-                    </div>
-                    <div class="bg-white p-8 project-card text-center">
-                        <div class="mx-auto bg-amber-100 text-solar-gold rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Customer Focus</h3>
-                        <p class="text-gray-600">Your satisfaction is our top priority. We provide transparent communication, fair pricing, and responsive after-sales service.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What Our Clients Say</h2>
-                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">We're proud to have helped hundreds of clients embrace solar energy.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-8 rounded-lg project-card">
-                        <p class="text-gray-600 italic">"Dakshayani Enterprises made the entire process of going solar so easy. From the initial survey to getting the subsidy, their team handled everything professionally. My electricity bill is now zero!"</p>
-                        <div class="flex items-center mt-6">
-                            <img class="w-12 h-12 rounded-full object-cover" src="images/cust1.jpg" alt="Avatar of A. Kumar">
-                            <div class="ml-4">
-                                <p class="font-bold text-gray-900">A. Kumar</p>
-                                <p class="text-sm text-gray-500">Residential Client, Kanke Road, Ranchi</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 p-8 rounded-lg project-card">
-                        <p class="text-gray-600 italic">"As a factory owner, our electricity costs were a major expense. The commercial solar plant installed by Dakshayani has significantly reduced our operating costs. Their engineering and execution were flawless."</p>
-                        <div class="flex items-center mt-6">
-                           <img class="w-12 h-12 rounded-full object-cover" src="images/cust2.jpg" alt="Avatar of R. Singh">
-                            <div class="ml-4">
-                                <p class="font-bold text-gray-900">R. Singh</p>
-                                <p class="text-sm text-gray-500">Industrial Client, Tupudana</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 p-8 rounded-lg project-card">
-                        <p class="text-gray-600 italic">"We needed a reliable power source for our petrol pump. The team at Dakshayani provided the perfect solution. Professional, on-time, and great service. Highly recommended for any business."</p>
-                        <div class="flex items-center mt-6">
-                           <img class="w-12 h-12 rounded-full object-cover" src="images/cust3.jpg" alt="Avatar of V. Prasad">
-                            <div class="ml-4">
-                                <p class="font-bold text-gray-900">V. Prasad</p>
-                                <p class="text-sm text-gray-500">Petrol Pump Owner, Ormanjhi</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div class="fixed-contact-buttons">
-        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
-            <i class="fas fa-phone"></i>
-        </a>
-        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
-            <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
-            <i class="fas fa-solar-panel"></i>
-        </a>
-    </div>
-
-    <footer class="header-bg text-white">
-        <div class="container mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <a href="index.html" class="flex items-center space-x-2 mb-4">
-                        <div class="flex items-center space-x-2 logo-container">
-                            <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-6 w-auto">
-                            <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
-                        </div>
-                    </a>
-                    <p class="text-gray-400">Your trusted partner for a sustainable future. Based in Ranchi, serving all of Jharkhand.</p>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a></li>
-                        <li><a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Our Work</a></li>
-                        <li><a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a></li>
-                        <li><a href="blog.html" class="hover:text-solar-gold transition-all-smooth">Blog</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
-                    <ul class="space-y-2">
-                        <li><a href="projects.html#residential" class="hover:text-solar-gold transition-all-smooth">Residential Solar</a></li>
-                        <li><a href="projects.html#commercial" class="hover:text-solar-gold transition-all-smooth">Commercial Solar</a></li>
-                        <li><a href="calculator.html" class="hover:text-solar-gold transition-all-smooth">Solar Calculator</a></li>
-                        <li><a href="financing.html" class="hover:text-solar-gold transition-all-smooth">Financing Options</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Policies</h4>
-                    <ul class="space-y-2">
-                        <li><a href="policies.html#privacy" class="hover:text-solar-gold transition-all-smooth">Privacy Policy</a></li>
-                        <li><a href="policies.html#terms" class="hover:text-solar-gold transition-all-smooth">Terms & Conditions</a></li>
-                        <li><a href="policies.html#warranty" class="hover:text-solar-gold transition-all-smooth">Warranty Information</a></li>
-                        <li><a href="policies.html#refund" class="hover:text-solar-gold transition-all-smooth">Return & Refund Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2025 Dakshayani Enterprises. All Rights Reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="https://facebook.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+      <div class="container grid cols-4">
+        <div class="card icon-only">
+          <div class="icon-large"><i class="fa-solid fa-star"></i></div>
+          <div class="title">Top Experts</div>
+          <div class="copy">Proven projects across Jharkhand with strong DISCOM coordination.</div>
         </div>
-    </footer>
 
+        <div class="card icon-only">
+          <div class="icon-large"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="title">Premium Components</div>
+          <div class="copy">Tier-1 panels & inverters, clean wiring, robust mounting.</div>
+        </div>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        <div class="card icon-only">
+          <div class="icon-large"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <div class="title">Transparent Pricing</div>
+          <div class="copy">Clear quotes, flexible finance, subsidy paperwork handled.</div>
+        </div>
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        <div class="card icon-only">
+          <div class="icon-large"><i class="fa-solid fa-headset"></i></div>
+          <div class="title">Lifetime Support</div>
+          <div class="copy">From net-metering to grievance redressal — we stay with you.</div>
+        </div>
+      </div>
+    </section>
 
-        // Add subtle scroll animations (Logic moved to .animate-fadeInUp class in style.css)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fadeInUp');
-                }
-            });
-        }, { threshold: 0.1 });
+    <!-- How We Work -->
+    <section class="section alt">
+      <div class="container split">
+        <div>
+          <img class="about-img" src="images/about-execution.jpg" alt="Neat installation and safety checks">
+        </div>
 
-        document.querySelectorAll('section > div').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+        <div>
+          <div class="card" style="padding:22px">
+            <div class="title">How We Work</div>
+            <div class="copy">
+              We plan strings for even production, route wiring discreetly, and ensure proper earthing and surge protection.
+              Every install ends with a quality checklist, walkthrough, and monitoring app handover.
+            </div>
+            <ul class="foot-list" style="margin-top:.75rem">
+              <li>• Site survey & load study</li>
+              <li>• Design & shadow analysis</li>
+              <li>• Subsidy/loan documentation</li>
+              <li>• Neat installation & safety audit</li>
+              <li>• App onboarding & training</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section">
+      <div class="head container">
+        <h2 class="title">Leadership & Team</h2>
+        <p class="sub">Real people behind every clean install.</p>
+      </div>
+
+      <div class="container grid cols-3">
+        <div class="card" style="text-align:center">
+          <img class="avatar" src="images/team-vishesh.jpg" alt="Vishesh Vardhan" style="margin:0 auto .75rem">
+          <div class="title">Vishesh Vardhan</div>
+          <div class="copy">Founder & EPC Lead</div>
+        </div>
+
+        <div class="card" style="text-align:center">
+          <img class="avatar" src="images/team-ops.jpg" alt="Operations Head" style="margin:0 auto .75rem">
+          <div class="title">Operations Head</div>
+          <div class="copy">Installations & Quality</div>
+        </div>
+
+        <div class="card" style="text-align:center">
+          <img class="avatar" src="images/team-support.jpg" alt="Customer Success" style="margin:0 auto .75rem">
+          <div class="title">Customer Success</div>
+          <div class="copy">After-sales & Monitoring</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Steps -->
+    <section class="section alt">
+      <div class="head container">
+        <h2 class="title">Go Solar in 4 Simple Steps</h2>
+        <p class="sub">We make your transition seamless and transparent.</p>
+      </div>
+
+      <div class="container steps">
+        <div class="step">
+          <div class="step-badge"><i class="fa-solid fa-clipboard-list"></i></div>
+          <h3 class="step-title">1. Consult &amp; Design</h3>
+          <p class="step-copy">Free site visit, load analysis, and custom design.</p>
+        </div>
+        <div class="step">
+          <div class="step-badge"><i class="fa-solid fa-wallet"></i></div>
+          <h3 class="step-title">2. Approve &amp; Finance</h3>
+          <p class="step-copy">Subsidy, loan, and paperwork via your bank/DISCOM.</p>
+        </div>
+        <div class="step">
+          <div class="step-badge"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+          <h3 class="step-title">3. Expert Installation</h3>
+          <p class="step-copy">Trained crew, neat wiring, proper earthing.</p>
+        </div>
+        <div class="step">
+          <div class="step-badge"><i class="fa-solid fa-bolt"></i></div>
+          <h3 class="step-title">4. Power On &amp; Save</h3>
+          <p class="step-copy">Go live — track savings in your solar app.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="section">
+      <div class="head container">
+        <h2 class="title">Certifications & Partners</h2>
+        <p class="sub">Trusted brands and compliant processes.</p>
+      </div>
+      <div class="container partners">
+        <img src="images/partner-tier1.png" alt="Tier-1 Panels">
+        <img src="images/partner-inverter.png" alt="Inverter Brand">
+        <img src="images/partner-discom.png" alt="DISCOM">
+        <img src="images/partner-app.png" alt="Monitoring App">
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer via partial -->
+  <footer class="site-footer"></footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
