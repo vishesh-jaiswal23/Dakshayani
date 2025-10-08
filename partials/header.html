@@ -1,20 +1,46 @@
-<div class="container">
-  <a href="index.html" class="brand">
+<div class="container transition-all-smooth">
+  <a href="index.html" class="brand transition-all-smooth">
     <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises" class="brand-logo-em" />
     <span class="brand-text">Dakshayani Enterprises</span>
   </a>
 
-  <nav class="nav">
+  <nav class="nav-desktop">
     <a href="index.html" data-nav>Home</a>
     <a href="about.html" data-nav>About Us</a>
     <a href="projects.html" data-nav>Solutions</a>
-    <a href="blog.html" data-nav>Blog</a>
+    
+    <div class="nav-more group">
+      <button class="nav-more-btn">
+        <span>More</span>
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+      </button>
+      <div class="nav-dropdown">
+        <a href="calculator.html" data-nav>Calculator</a>
+        <a href="financing.html" data-nav>Financing</a>
+        <a href="rewards.html" data-nav>Rewards</a>
+        <a href="ai-expert.html" data-nav>AI Expert</a>
+        <a href="blog.html" data-nav>Blog</a>
+      </div>
+    </div>
+    
     <a href="contact.html" data-nav>Contact</a>
+    <a href="login.html" class="btn btn-primary btn-sm">Login / Sign Up</a>
   </nav>
 
-  <button class="menu-btn" aria-label="Menu">
-    <span class="menu-bar"></span>
-    <span class="menu-bar"></span>
-    <span class="menu-bar"></span>
+  <button class="menu-btn" aria-label="Menu" id="mobile-menu-button">
+    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
   </button>
+</div>
+
+<div id="mobile-menu" class="nav-mobile">
+    <a href="index.html" data-nav>Home</a>
+    <a href="about.html" data-nav>About Us</a>
+    <a href="projects.html" data-nav>Solutions</a>
+    <a href="calculator.html" data-nav>Calculator</a>
+    <a href="financing.html" data-nav>Financing</a>
+    <a href="rewards.html" data-nav>Rewards</a>
+    <a href="ai-expert.html" data-nav>AI Expert</a>
+    <a href="blog.html" data-nav>Blog</a>
+    <a href="contact.html" data-nav>Contact</a>
+    <a href="login.html" class="btn btn-primary nav-mobile-cta">Login / Sign Up</a>
 </div>
