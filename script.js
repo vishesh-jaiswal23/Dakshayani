@@ -1,37 +1,41 @@
-<!-- place this as /script.js (root) -->
-<script>
-// Inject a partial into a target element
+// Function to inject a partial HTML file into a target element
 async function injectPartial(targetSelector, url) {
   const host = document.querySelector(targetSelector);
   if (!host) return;
 
   try {
-    const res = await fetch(url, { cache: "no-cache" });
-    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-    const html = await res.text();
+    const response = await fetch(url, { cache: "no-cache" });
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    const html = await response.text();
     host.innerHTML = html;
 
-    // After injection, wire up behaviors if header
+    // After injecting the header, add its specific behaviors
     if (targetSelector === "header.site-header") {
-      // Active nav highlight
-      const current = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-      document.querySelectorAll('header a[data-nav]').forEach(a => {
-        const href = (a.getAttribute("href") || "").toLowerCase();
-        if (href === current) a.classList.add("active");
+      // Highlight the active navigation link
+      const currentPage = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+      document.querySelectorAll('header a[data-nav]').forEach(link => {
+        const linkPage = (link.getAttribute("href") || "").toLowerCase();
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        }
       });
 
-      // Mobile menu toggle
-      const btn = document.querySelector(".menu-btn");
-      const nav = document.querySelector(".nav");
-      if (btn && nav) btn.addEventListener("click", () => nav.classList.toggle("show"));
+      // Mobile menu toggle functionality
+      const menuButton = document.querySelector(".menu-btn");
+      const navMenu = document.querySelector(".nav");
+      if (menuButton && navMenu) {
+        menuButton.addEventListener("click", () => {
+          navMenu.classList.toggle("show");
+        });
+      }
     }
-  } catch (err) {
-    console.error("Partial load failed:", url, err);
+  } catch (error) {
+    console.error(`Failed to load partial from ${url}:`, error);
   }
 }
 
+// When the page is loaded, inject the header and footer
 document.addEventListener("DOMContentLoaded", () => {
   injectPartial("header.site-header", "partials/header.html");
   injectPartial("footer.site-footer", "partials/footer.html");
 });
-</script>
