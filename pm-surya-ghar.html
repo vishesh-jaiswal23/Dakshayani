@@ -1,409 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Surya Ghar: Muft Bijli Yojana | Dakshayani Enterprises</title>
-    <meta name="description" content="Learn all about the PM Surya Ghar Muft Bijli Yojana. Get details on eligibility, subsidy, and how Dakshayani Enterprises can help you get free solar electricity in Ranchi.">
-    <meta name="keywords" content="pm surya ghar muft bijli yojana, free solar scheme india, solar subsidy jharkhand, dakshayani enterprises, rooftop solar yojana">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PM Surya Ghar Muft Bijli Yojana | Dakshayani Enterprises</title>
+  <meta name="description" content="Detailed guide on the PM Surya Ghar Muft Bijli Yojana, eligibility, subsidy process, and how Dakshayani Enterprises helps in Jharkhand."/>
 
-    <!-- Font Awesome for Icons (Social Media, etc.) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <!-- Custom Styles & Configuration -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .solar-gold { color: #FBBF24; }
-        .bg-solar-gold { background-color: #FBBF24; }
-        .border-solar-gold { border-color: #FBBF24; }
-        .hover\:bg-solar-gold-dark:hover { background-color: #F59E0B; }
-        .group:hover .group-hover\:text-solar-gold { color: #FBBF24; }
-        .transition-all-smooth { transition: all 0.3s ease-in-out; }
-        .page-header-bg {
-            background-color: #111827;
-            background-image: radial-gradient(circle at top right, rgba(251, 191, 36, 0.08), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.08), transparent 50%);
-        }
-        .section-bg-pattern {
-             background-color: #f9fafb;
-             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e5e7eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        /* Logo container styles for header */
-        .logo-container {
-            background-color: #FBBF24; /* Solar Gold background */
-            padding: 0.5rem 1rem; /* px-4 py-2 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
-        }
-        .logo-container:hover {
-            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Subtle dark shadow on hover */
-        }
-        /* Fixed Contact Buttons Container */
-        .fixed-contact-buttons {
-            position: fixed;
-            bottom: 1.5rem; /* Adjust as needed */
-            right: 1.5rem; /* Adjust as needed */
-            z-index: 100; /* Ensure it's above other content */
-            display: flex;
-            flex-direction: column; /* Stack buttons vertically */
-            gap: 0.75rem; /* Space between buttons */
-        }
-        .fixed-contact-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 3.5rem; /* Fixed width for circular button */
-            height: 3.5rem; /* Fixed height for circular button */
-            border-radius: 9999px; /* Make it circular */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: all 0.2s ease-in-out;
-            color: white; /* Default icon color */
-            font-size: 0.75rem; /* Smaller text for icon labels */
-            text-align: center;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-        .fixed-contact-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        /* Specific button colors */
-        .fixed-contact-button.call { background-color: #34D399; /* green-400 */ }
-        .fixed-contact-button.whatsapp { background-color: #25D366; /* WhatsApp green */ }
-        .fixed-contact-button.email { background-color: #EF4444; /* red-500 */ }
-        .fixed-contact-button.pmsgy { background-color: #6366F1; /* indigo-500 */ }
-
-        .fixed-contact-button i { /* Targeting Font Awesome icons */
-            font-size: 1.5rem; /* Icon size */
-        }
-
-        /* Responsive adjustments for fixed contact buttons */
-        @media (max-width: 768px) {
-            .fixed-contact-buttons {
-                bottom: 1rem;
-                right: 1rem;
-                flex-direction: row; /* Arrange horizontally on small screens */
-                flex-wrap: wrap; /* Allow wrapping if too many buttons */
-                justify-content: flex-end; /* Align to the right */
-                gap: 0.5rem;
-            }
-            .fixed-contact-button {
-                width: 3rem;
-                height: 3rem;
-            }
-        }
-    </style>
+  <style>
+    .pmsgy-hero {
+        background-image: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), url('images/pmsgy.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 5rem 1rem;
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-700">
+<body>
 
-    <!-- Header -->
-    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50" id="main-header">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center space-x-2">
-                <!-- Logo and company name wrapped in a gold pill background -->
-                <div class="flex items-center space-x-2 bg-solar-gold px-4 py-2 rounded-lg shadow-lg logo-container">
-                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
-                    <span class="text-2xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
-                </div>
-            </a>
+  <!-- HEADER injected via script.js -->
+  <header class="site-header"></header>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="hover:text-solar-gold transition-all-smooth">Home</a>
-                <a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a>
-                <a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Solutions</a>
-                
-                <div class="relative group">
-                    <button class="hover:text-solar-gold transition-all-smooth flex items-center">
-                        <span>More</span>
-                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-                    </button>
-                    <div class="absolute -left-8 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all-smooth">
-                        <a href="calculator.html" class="block px-4 py-2 hover:bg-gray-100 rounded-t-md">Calculator</a>
-                        <a href="financing.html" class="block px-4 py-2 hover:bg-gray-100">Financing</a>
-                        <a href="rewards.html" class="block px-4 py-2 hover:bg-gray-100">Rewards</a>
-                        <a href="ai-expert.html" class="block px-4 py-2 hover:bg-gray-100">AI Expert</a>
-                        <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100 rounded-b-md">Blog</a>
-                    </div>
-                </div>
-                
-                <a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a>
-                <a href="login.html" class="bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
-            </nav>
+  <main>
+    <!-- Page Header/Hero -->
+    <section class="pmsgy-hero">
+      <div class="container">
+        <h1 class="title" style="color:var(--surface);">PM Surya Ghar Muft Bijli Yojana</h1>
+        <p class="sub" style="color:rgba(255,255,255,.9); max-width: 800px; margin: 0 auto;">Get up to ₹78,000 subsidy on your residential solar installation. We manage the entire process for you.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top: 1.5rem;">Check Eligibility Now</a>
+      </div>
+    </section>
 
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
-             <a href="index.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Home</a>
-             <!-- ... other links ... -->
-            <a href="contact.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Contact</a>
-            <a href="login.html" class="block mt-2 mx-4 mb-4 text-center bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <!-- Page Header -->
-        <section class="page-header-bg text-white">
-            <div class="container mx-auto px-6 py-16 text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">PM Surya Ghar: Muft Bijli Yojana</h1>
-                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">Your complete guide to getting free electricity from the sun, powered by the Government of India.</p>
-            </div>
-        </section>
-
-        <!-- Key Highlights Section -->
-        <section class="py-16 md:py-24 section-bg-pattern">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Scheme Highlights</h2>
-                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">The key benefits that make this scheme a game-changer for homeowners.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <div class="mx-auto bg-green-100 text-green-600 rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900">Free Power, Every Month</h3>
-                        <p class="mt-2 text-gray-600">Generate 150 units of free electricity every month for every kilo-Watt of solar installed.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <div class="mx-auto bg-amber-100 text-solar-gold rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900">Substantial Subsidy</h3>
-                        <p class="mt-2 text-gray-600">Receive a direct subsidy of up to ₹78,000 from the central government, making your investment minimal.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <div class="mx-auto bg-blue-100 text-blue-600 rounded-full w-20 h-20 flex items-center justify-center mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900">Low-Interest Loans</h3>
-                        <p class="mt-2 text-gray-600">Access collateral-free loans at very low interest rates (around 6%) to cover the initial cost.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Eligibility and Subsidy Section -->
-        <section class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="grid lg:grid-cols-2 gap-12">
-                    <!-- Eligibility -->
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Are You Eligible?</h2>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                                <span>The applicant must be an Indian citizen.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                                <span>Must own a house with a suitable roof for installing solar panels.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                                <span>The household must have a valid electricity connection.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                                <span>The household should not have availed any other subsidy for solar panels previously.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Subsidy Structure -->
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-6">Subsidy Structure</h2>
-                        <div class="overflow-x-auto rounded-lg border">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">System Size</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subsidy Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium">For the first 2 kW</td>
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium">₹ 30,000 per kW</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium">For the next 1 kW (up to 3 kW)</td>
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium">₹ 18,000 per kW</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium">Total for systems 3 kW and above</td>
-                                        <td class="px-6 py-4 whitespace-nowrap font-medium">Capped at ₹ 78,000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- How We Help Section -->
-        <section class="py-16 md:py-24 section-bg-pattern">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Let Dakshayani Enterprises Be Your Guide</h2>
-                    <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Navigating government schemes can be complex. We make it simple.</p>
-                </div>
-                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-                        <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full h-12 w-12 flex items-center justify-center">1</div>
-                        <div>
-                            <h3 class="text-lg font-semibold">Eligibility Check & Consultation</h3>
-                            <p class="text-gray-600 mt-1">We provide a free consultation to assess your roof, understand your energy needs, and confirm your eligibility for the scheme.</p>
-                        </div>
-                    </div>
-                     <div class="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-                        <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full h-12 w-12 flex items-center justify-center">2</div>
-                        <div>
-                            <h3 class="text-lg font-semibold">Hassle-Free Paperwork</h3>
-                            <p class="text-gray-600 mt-1">Our team handles the entire application process on the national portal, ensuring all documents are submitted correctly for quick approval.</p>
-                        </div>
-                    </div>
-                     <div class="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-                        <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full h-12 w-12 flex items-center justify-center">3</div>
-                        <div>
-                            <h3 class="text-lg font-semibold">Quality Installation</h3>
-                            <p class="text-gray-600 mt-1">As a trusted vendor, we install high-quality, MNRE-approved solar panels and inverters according to the highest safety standards.</p>
-                        </div>
-                    </div>
-                     <div class="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-                        <div class="flex-shrink-0 bg-blue-100 text-blue-600 rounded-full h-12 w-12 flex items-center justify-center">4</div>
-                        <div>
-                            <h3 class="text-lg font-semibold">Net Metering & Subsidy Claim</h3>
-                            <p class="text-gray-600 mt-1">We coordinate with the DISCOM for net meter installation and manage the final subsidy claim process, ensuring the amount is credited to your account.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-16 md:py-24 bg-gray-800 text-white">
-            <div class="container mx-auto px-6 text-center">
-                <div class="max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold">Ready for Free Electricity?</h2>
-                    <p class="mt-4 text-lg text-gray-300">Take the first step towards energy independence. Our team is ready to help you navigate the PM Surya Ghar scheme and get your solar system installed seamlessly.</p>
-                    <div class="mt-8">
-                        <a href="contact.html" class="inline-block bg-solar-gold text-gray-900 px-10 py-4 rounded-lg font-bold text-lg hover:bg-solar-gold-dark transition-all-smooth shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Get a Free Consultation
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Fixed Contact Buttons -->
-    <div class="fixed-contact-buttons">
-        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
-            <i class="fas fa-phone"></i>
-        </a>
-        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
-            <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
-            <i class="fas fa-solar-panel"></i>
-        </a>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <a href="index.html" class="flex items-center space-x-2 mb-4">
-                        <!-- Logo and company name wrapped in a gold pill background in footer -->
-                        <div class="flex items-center space-x-2 bg-solar-gold px-3 py-1 rounded-lg shadow-md">
-                            <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-6 w-auto">
-                            <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
-                        </div>
-                    </a>
-                    <p class="text-gray-400">Your trusted partner for a sustainable future. Based in Ranchi, serving all of Jharkhand.</p>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a></li>
-                        <li><a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Our Work</a></li>
-                        <li><a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a></li>
-                        <li><a href="blog.html" class="hover:text-solar-gold transition-all-smooth">Blog</a></li>
-                    </ul>
-                </div>
-
-                <!-- Solutions -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
-                    <ul class="space-y-2">
-                        <li><a href="projects.html#residential" class="hover:text-solar-gold transition-all-smooth">Residential Solar</a></li>
-                        <li><a href="projects.html#commercial" class="hover:text-solar-gold transition-all-smooth">Commercial Solar</a></li>
-                        <li><a href="calculator.html" class="hover:text-solar-gold transition-all-smooth">Solar Calculator</a></li>
-                        <li><a href="financing.html" class="hover:text-solar-gold transition-all-smooth">Financing Options</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Policies</h4>
-                    <ul class="space-y-2">
-                        <li><a href="policies.html#privacy" class="hover:text-solar-gold transition-all-smooth">Privacy Policy</a></li>
-                        <li><a href="policies.html#terms" class="hover:text-solar-gold transition-all-smooth">Terms & Conditions</a></li>
-                        <li><a href="policies.html#warranty" class="hover:text-solar-gold transition-all-smooth">Warranty Information</a></li>
-                        <li><a href="policies.html#refund" class="hover:text-solar-gold transition-all-smooth">Return & Refund Policy</a></li>
+    <!-- Scheme Details -->
+    <section class="section">
+        <div class="container grid" style="grid-template-columns: 1fr 1.5fr; gap: 3rem;">
+            <div>
+                <h2 class="title">The Scheme at a Glance</h2>
+                <p class="copy">The Government of India's PM Surya Ghar Muft Bijli Yojana aims to promote rooftop solar installations nationwide by providing significant financial assistance, ensuring every household can benefit from free electricity and contribute to a greener India.</p>
+                <div style="margin-top: 2rem;">
+                    <div class="foot-title">Key Highlights</div>
+                    <ul class="foot-list" style="color:var(--base-700);">
+                        <li><i class="fa-solid fa-circle-check" style="color:var(--primary-500); margin-right: .5rem;"></i> Up to ₹78,000 subsidy for 3 kW systems.</li>
+                        <li><i class="fa-solid fa-circle-check" style="color:var(--primary-500); margin-right: .5rem;"></i> Access to low-interest bank loans.</li>
+                        <li><i class="fa-solid fa-circle-check" style="color:var(--primary-500); margin-right: .5rem;"></i> 25 years of assured savings.</li>
+                        <li><i class="fa-solid fa-circle-check" style="color:var(--primary-500); margin-right: .5rem;"></i> 300 units of free electricity per month for eligible users.</li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2025 Dakshayani Enterprises. All Rights Reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="https://facebook.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-instagram"></i></a>
+            <div style="padding: 1.5rem; background: var(--alt-surface); border-radius: 1rem;">
+                <h3 class="foot-title">Subsidy Structure (Jharkhand)</h3>
+                <div class="copy" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem;">
+                        <thead>
+                            <tr style="background: var(--base-300);">
+                                <th style="padding: .75rem; border: 1px solid var(--base-300); text-align: left;">System Size</th>
+                                <th style="padding: .75rem; border: 1px solid var(--base-300); text-align: left;">Approximate Subsidy</th>
+                                <th style="padding: .75rem; border: 1px solid var(--base-300); text-align: left;">Installation Cost Share</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">1 kW</td>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">₹30,000</td>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">~₹20,000 - ₹25,000</td>
+                            </tr>
+                            <tr style="background: var(--base-100);">
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">2 kW</td>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">₹60,000</td>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">~₹35,000 - ₹45,000</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">3 kW and above</td>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">₹78,000</td>
+                                <td style="padding: .75rem; border: 1px solid var(--base-200);">Varies by size</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="copy" style="font-size: 0.85rem; margin-top: 1rem;">*Figures are approximate and based on standard benchmark costs. Final pricing is confirmed in the proposal.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Support -->
+    <section class="section alt">
+        <div class="head container">
+            <h2 class="title">How Dakshayani Simplifies the Process</h2>
+            <p class="sub">We handle the paperwork, site registration, inspection, and everything else.</p>
+        </div>
+        <div class="container steps">
+            <div class="step">
+                <div class="step-badge"><i class="fa-solid fa-user-plus"></i></div>
+                <div class="step-content">
+                    <h3 class="step-title">1. Online Registration</h3>
+                    <p class="step-copy">We help register your application on the National Portal.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-badge"><i class="fa-solid fa-clipboard-check"></i></div>
+                <div class="step-content">
+                    <h3 class="step-title">2. DISCOM Approval</h3>
+                    <p class="step-copy">Coordination with JBVNL / DISCOM for technical feasibility approval.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-badge"><i class="fa-solid fa-house-chimney-crack"></i></div>
+                <div class="step-content">
+                    <h3 class="step-title">3. Installation & Inspection</h3>
+                    <p class="step-copy">Swift installation followed by the mandatory DISCOM inspection.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-badge"><i class="fa-solid fa-money-check-dollar"></i></div>
+                <div class="step-content">
+                    <h3 class="step-title">4. Net Metering & Subsidy</h3>
+                    <p class="step-copy">Net metering commissioning and direct subsidy disbursement to your account.</p>
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Mobile Menu Toggle ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-        });
-    </script>
+    <!-- CTA -->
+    <section class="section">
+        <div class="container head">
+            <h2 class="title">Ready to Save Big with Solar?</h2>
+            <p class="sub">Don't miss out on this central government scheme. Contact us to start your free consultation.</p>
+            <a href="contact.html" class="btn btn-primary" style="margin-top: 1rem;">Apply for Subsidy Assistance</a>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER injected via script.js -->
+  <footer class="site-footer"></footer>
+
+  <!-- Partials loader script -->
+  <script src="script.js" defer></script>
 </body>
 </html>

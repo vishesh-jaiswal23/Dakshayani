@@ -1,546 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login or Sign Up | Dakshayani Enterprises</title>
-    <meta name="description" content="Access your Dakshayani Enterprises account or sign up as a new customer, installer, or referrer.">
-    <meta name="keywords" content="dakshayani login, solar account, sign up solar, customer portal, installer login">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login / Sign Up | Dakshayani Enterprises</title>
+  <meta name="description" content="Log in to your Dakshayani Enterprises dashboard (Customer, Installer, or Referrer)."/>
 
-    <!-- Font Awesome for Icons (Social Media, etc.) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <!-- Custom Styles & Configuration -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .solar-gold { color: #FBBF24; }
-        .bg-solar-gold { background-color: #FBBF24; }
-        .border-solar-gold { border-color: #FBBF24; }
-        .hover\:bg-solar-gold-dark:hover { background-color: #F59E0B; }
-        .group:hover .group-hover\:text-solar-gold { color: #FBBF24; }
-        .transition-all-smooth { transition: all 0.3s ease-in-out; }
-        .page-header-bg {
-            background-color: #111827;
-            background-image: radial-gradient(circle at top right, rgba(251, 191, 36, 0.08), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.08), transparent 50%);
-        }
-        .tab-btn.active {
-            border-color: #FBBF24;
-            color: #FBBF24;
-            background-color: #fefce8;
-        }
-        /* Logo container styles for header */
-        .logo-container {
-            background-color: #FBBF24; /* Solar Gold background */
-            padding: 0.5rem 1rem; /* px-4 py-2 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
-        }
-        .logo-container:hover {
-            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Subtle dark shadow on hover */
-        }
-        /* Fixed Contact Buttons Container */
-        .fixed-contact-buttons {
-            position: fixed;
-            bottom: 1.5rem; /* Adjust as needed */
-            right: 1.5rem; /* Adjust as needed */
-            z-index: 100; /* Ensure it's above other content */
-            display: flex;
-            flex-direction: column; /* Stack buttons vertically */
-            gap: 0.75rem; /* Space between buttons */
-        }
-        .fixed-contact-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 3.5rem; /* Fixed width for circular button */
-            height: 3.5rem; /* Fixed height for circular button */
-            border-radius: 9999px; /* Make it circular */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: all 0.2s ease-in-out;
-            color: white; /* Default icon color */
-            font-size: 0.75rem; /* Smaller text for icon labels */
-            text-align: center;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-        .fixed-contact-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        /* Specific button colors */
-        .fixed-contact-button.call { background-color: #34D399; /* green-400 */ }
-        .fixed-contact-button.whatsapp { background-color: #25D366; /* WhatsApp green */ }
-        .fixed-contact-button.email { background-color: #EF4444; /* red-500 */ }
-        .fixed-contact-button.pmsgy { background-color: #6366F1; /* indigo-500 */ }
-
-        .fixed-contact-button i { /* Targeting Font Awesome icons */
-            font-size: 1.5rem; /* Icon size */
-        }
-
-        /* Responsive adjustments for fixed contact buttons */
-        @media (max-width: 768px) {
-            .fixed-contact-buttons {
-                bottom: 1rem;
-                right: 1rem;
-                flex-direction: row; /* Arrange horizontally on small screens */
-                flex-wrap: wrap; /* Allow wrapping if too many buttons */
-                justify-content: flex-end; /* Align to the right */
-                gap: 0.5rem;
-            }
-            .fixed-contact-button {
-                width: 3rem;
-                height: 3rem;
-            }
-        }
-    </style>
+  <style>
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 70px - 250px); /* viewport height minus header and footer approx */
+        padding: 2rem 1rem;
+    }
+    .login-card {
+        max-width: 450px;
+        width: 100%;
+        background: var(--surface);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        border: 1px solid var(--base-200);
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    .form-group label {
+        display: block;
+        text-align: left;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: var(--base-700);
+    }
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--base-300);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-700">
+<body>
 
-    <!-- Header -->
-    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50" id="main-header">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center">
-                <!-- Logo and company name wrapped in a gold pill background -->
-                <div class="flex items-center space-x-2 bg-solar-gold px-4 py-2 rounded-lg shadow-lg logo-container">
-                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
-                    <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
+  <!-- HEADER injected via script.js -->
+  <header class="site-header"></header>
+
+  <main>
+    <section class="login-container">
+        <div class="login-card">
+            <h1 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">Access Your Dashboard</h1>
+            <p class="sub" style="margin-bottom: 1.5rem;">Sign in to track your project, manage referrals, or view reports.</p>
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your registered email" required />
                 </div>
-            </a>
-
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="hover:text-solar-gold transition-all-smooth">Home</a>
-                <a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a>
-                <a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Solutions</a>
-                
-                <div class="relative group">
-                    <button class="hover:text-solar-gold transition-all-smooth flex items-center">
-                        <span>More</span>
-                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-                    </button>
-                    <div class="absolute -left-8 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all-smooth">
-                        <a href="calculator.html" class="block px-4 py-2 hover:bg-gray-100 rounded-t-md">Calculator</a>
-                        <a href="financing.html" class="block px-4 py-2 hover:bg-gray-100">Financing</a>
-                        <a href="rewards.html" class="block px-4 py-2 hover:bg-gray-100">Rewards</a>
-                        <a href="ai-expert.html" class="block px-4 py-2 hover:bg-gray-100">AI Expert</a>
-                        <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100">Blog</a>
-                    </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
                 </div>
                 
-                <a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a>
-                <a href="login.html" class="bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
-            </nav>
-
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
-             <a href="index.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Home</a>
-            <a href="about.html" class="block py-2 px-6 hover:bg-gray-800 rounded">About Us</a>
-            <a href="projects.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Solutions</a>
-            <a href="calculator.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Calculator</a>
-            <a href="financing.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Financing</a>
-            <a href="rewards.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Rewards</a>
-            <a href="ai-expert.html" class="block py-2 px-6 hover:bg-gray-800 rounded">AI Expert</a>
-            <a href="blog.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Blog</a>
-            <a href="contact.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Contact</a>
-            <a href="login.html" class="block mt-2 mx-4 mb-4 text-center bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex items-center justify-center min-h-screen bg-gray-100 py-12">
-        <div class="w-full max-w-md mx-auto">
-            <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
-                <!-- Tab Buttons -->
-                <div class="flex border-b">
-                    <button id="signin-tab-btn" class="tab-btn w-1/2 py-4 font-bold text-gray-500 border-b-4 transition-all-smooth active">Sign In</button>
-                    <button id="signup-tab-btn" class="tab-btn w-1/2 py-4 font-bold text-gray-500 border-b-4 border-transparent transition-all-smooth">Sign Up</button>
+                <div class="form-group" style="text-align: right; margin-bottom: 2rem;">
+                    <a href="#" style="color: var(--base-700); font-size: 0.9rem;">Forgot Password?</a>
                 </div>
 
-                <!-- Panels -->
-                <div class="p-8">
-                    <!-- Sign In Panel -->
-                    <div id="signin-panel">
-                        <h2 class="text-2xl font-bold text-gray-900 text-center mb-1">Welcome Back!</h2>
-                        <p class="text-gray-600 text-center mb-6">Sign in to access your dashboard.</p>
-                        <form action="#" method="POST" class="space-y-6">
-                            <div>
-                                <label for="signin-email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                                <input type="email" name="signin-email" id="signin-email" autocomplete="email" class="mt-1 block w-full py-3 px-4 border-gray-300 rounded-md shadow-sm focus:ring-solar-gold focus:border-solar-gold" required>
-                            </div>
-                            <div>
-                                <div class="flex justify-between items-center">
-                                    <label for="signin-password" class="block text-sm font-medium text-gray-700">Password</label>
-                                    <a href="#" class="text-sm text-solar-gold hover:underline">Forgot password?</a>
-                                </div>
-                                <input type="password" name="signin-password" id="signin-password" autocomplete="current-password" class="mt-1 block w-full py-3 px-4 border-gray-300 rounded-md shadow-sm focus:ring-solar-gold focus:border-solar-gold" required>
-                            </div>
-                            <div>
-                                <button type="submit" class="w-full bg-gray-800 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-900 transition-all-smooth">Sign In</button>
-                            </div>
-                        </form>
-                    </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
 
-                    <!-- Sign Up Panel -->
-                    <div id="signup-panel" class="hidden">
-                        <h2 class="text-2xl font-bold text-gray-900 text-center mb-1">Create an Account</h2>
-                        <p class="text-gray-600 text-center mb-6">Join us and start your solar journey.</p>
-                        <form action="#" method="POST" class="space-y-6">
-                            <div>
-                                <label for="signup-name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                                <input type="text" name="signup-name" id="signup-name" autocomplete="name" class="mt-1 block w-full py-3 px-4 border-gray-300 rounded-md shadow-sm focus:ring-solar-gold focus:border-solar-gold" required>
-                            </div>
-                             <div>
-                                <label for="signup-email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                                <input type="email" name="signup-email" id="signup-email" autocomplete="email" class="mt-1 block w-full py-3 px-4 border-gray-300 rounded-md shadow-sm focus:ring-solar-gold focus:border-solar-gold" required>
-                            </div>
-                            <div>
-                                <label for="signup-password" class="block text-sm font-medium text-gray-700">Password</label>
-                                <input type="password" name="signup-password" id="signup-password" autocomplete="new-password" class="mt-1 block w-full py-3 px-4 border-gray-300 rounded-md shadow-sm focus:ring-solar-gold focus:border-solar-gold" required>
-                            </div>
-                             <div>
-                                <label for="signup-role" class="block text-sm font-medium text-gray-700">I am a...</label>
-                                <select id="signup-role" name="signup-role" class="mt-1 block w-full py-3 px-4 border-gray-300 bg-white rounded-md shadow-sm focus:ring-solar-gold focus:border-solar-gold">
-                                    <option value="customer">Customer</option>
-                                    <option value="installer">Installer</option>
-                                    <option value="referrer">Referrer</option>
-                                    <option value="employee">Employee</option>
-                                    <option value="admin">Admin</option>
-                                </select>
-                            </div>
-                            <div id="approval-notice" class="hidden p-3 bg-amber-50 border-l-4 border-solar-gold text-amber-800 text-sm">
-                                <p>Please note: Accounts for Admin, Installers, Referrers, and Employees require admin approval before you can log in.</p>
-                            </div>
-                            <div>
-                                <button type="submit" class="w-full bg-solar-gold text-gray-900 px-8 py-3 rounded-lg font-bold text-lg hover:bg-solar-gold-dark transition-all-smooth">Create Account</button>
-                            </div>
-                        </form>
-                    </div>
+                <div style="margin-top: 1.5rem; font-size: 0.95rem;">
+                    Don't have an account? <a href="#" style="color: var(--primary-500); font-weight: 600;">Sign Up Here</a>
                 </div>
-            </div>
-            <p class="text-center text-gray-500 text-sm mt-6">
-                By continuing, you agree to our <a href="policies.html#terms" class="underline hover:text-solar-gold">Terms of Service</a> and <a href="policies.html#privacy" class="underline hover:text-solar-gold">Privacy Policy</a>.
-            </p>
+            </form>
         </div>
-    </main>
+    </section>
+  </main>
 
-    <!-- Fixed Contact Buttons -->
-    <div class="fixed-contact-buttons">
-        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
-            <i class="fas fa-phone"></i>
-        </a>
-        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
-            <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
-            <i class="fas fa-solar-panel"></i>
-        </a>
-    </div>
+  <!-- FOOTER injected via script.js -->
+  <footer class="site-footer"></footer>
 
-    <!-- Footer is omitted on login page for a cleaner look, but can be added back if needed -->
-
-    <!-- Firebase SDKs -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { 
-            getAuth, 
-            createUserWithEmailAndPassword, 
-            signInWithEmailAndPassword, 
-            onAuthStateChanged,
-            signOut 
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { 
-            getFirestore, 
-            doc, 
-            setDoc, 
-            getDoc 
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Your web app's Firebase configuration (provided by the user)
-        const firebaseConfig = {
-            apiKey: "AIzaSyAgYPNJNCte7vEjqlFdcoa62arKhEuCwXI",
-            authDomain: "dakshayani-enterprises.firebaseapp.com",
-            projectId: "dakshayani-enterprises",
-            storageBucket: "dakshayani-enterprises.appspot.com",
-            messagingSenderId: "129241224273",
-            appId: "1:129241224273:web:23b484f6645f4e27afd470",
-            measurementId: "G-VFEY23QHE8"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // Define appId for Firestore paths (consistent with login.html)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-        // Function to determine the user's data path in Firestore
-        // Private data: /artifacts/{appId}/users/{userId}/user_data/profile
-        const getUserProfileDocRef = (uid) => {
-            return doc(db, `artifacts/${appId}/users/${uid}/user_data`, 'profile');
-        };
-
-        // Function to redirect users based on their role and approval status
-        async function redirectToDashboard(user) {
-            if (!user) {
-                window.location.href = 'login.html'; 
-                return;
-            }
-
-            try {
-                const userDocRef = getUserProfileDocRef(user.uid);
-                const userDocSnap = await getDoc(userDocRef);
-
-                if (userDocSnap.exists()) {
-                    const userData = userDocSnap.data();
-                    const userRole = userData.role;
-                    const isApproved = userData.isApproved;
-
-                    console.log(`User ${user.email} logged in. Role: ${userRole}, Approved: ${isApproved}`);
-
-                    if (!isApproved && (userRole === 'installer' || userRole === 'referrer' || userRole === 'admin' || userRole === 'employee')) {
-                        displayMessage('info', 'Your account is pending approval. Please wait for an administrator to approve your account.', 'signin-panel');
-                        await signOut(auth); 
-                        return; 
-                    }
-
-                    switch (userRole) {
-                        case 'customer':
-                            window.location.href = 'customer-dashboard.html';
-                            break;
-                        case 'installer':
-                            window.location.href = 'installer-dashboard.html';
-                            break;
-                        case 'referrer':
-                            window.location.href = 'referrer-dashboard.html';
-                            break;
-                        case 'employee': // Redirect employee to their dashboard
-                            window.location.href = 'employee-dashboard.html';
-                            break;
-                        case 'admin':
-                            window.location.href = 'admin-dashboard.html';
-                            break;
-                        default:
-                            displayMessage('error', 'Your account role is not recognized. Please contact support.', 'signin-panel');
-                            await signOut(auth); 
-                            break;
-                    }
-                } else {
-                    console.warn(`User profile not found for UID: ${user.uid}. Redirecting to login.`);
-                    displayMessage('error', 'User profile not found. Please try signing up again or contact support.', 'signin-panel');
-                    await signOut(auth); 
-                }
-            } catch (error) {
-                console.error("Error fetching user role or redirecting:", error);
-                displayMessage('error', 'An error occurred. Please try again or contact support.', 'signin-panel');
-                await signOut(auth); 
-            }
-        }
-
-        // --- Modified onAuthStateChanged ---
-        // This listener will now handle redirection only if not explicitly logging out.
-        onAuthStateChanged(auth, async (user) => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const justLoggedOut = urlParams.has('loggedOut');
-
-            if (justLoggedOut) {
-                // If 'loggedOut' flag is present, clear it and do NOT redirect.
-                // This is the primary mechanism to keep the user on the login page after signOut.
-                console.log("Logged out flag detected. Staying on login page.");
-                history.replaceState({}, document.title, window.location.pathname); // Clear URL param
-                // No further action, let the user interact with the login form.
-            } else if (user) {
-                // If no 'loggedOut' flag AND a user is signed in, redirect them.
-                // This handles cases where they might type login.html directly while already authenticated.
-                console.log("User detected, not from logout. Redirecting to dashboard.");
-                await redirectToDashboard(user);
-            } else {
-                // No user and no logout flag. This is the normal state for someone who needs to log in.
-                console.log("No user logged in. Displaying login page.");
-            }
-        });
-
-        // Function to display messages to the user
-        function displayMessage(type, message, targetElementId) {
-            const targetElement = document.getElementById(targetElementId);
-            if (!targetElement) return;
-
-            // Remove any existing message first
-            const existingMessage = targetElement.querySelector('.user-message');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `user-message p-3 mt-4 rounded-md text-sm ${
-                type === 'success' ? 'bg-green-100 text-green-800' :
-                type === 'error' ? 'bg-red-100 text-red-800' :
-                'bg-blue-100 text-blue-800' // 'info'
-            }`;
-            messageDiv.innerHTML = message;
-
-            targetElement.prepend(messageDiv); 
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-
-            // Tab switching logic
-            const signinTabBtn = document.getElementById('signin-tab-btn');
-            const signupTabBtn = document.getElementById('signup-tab-btn');
-            const signinPanel = document.getElementById('signin-panel');
-            const signupPanel = document.getElementById('signup-panel');
-
-            function activateTab(tabBtn, panel) {
-                if (signinTabBtn) signinTabBtn.classList.remove('active');
-                if (signupTabBtn) signupTabBtn.classList.remove('active');
-                if (signinPanel) signinPanel.classList.add('hidden');
-                if (signupPanel) signupPanel.classList.add('hidden');
-
-                if (tabBtn) tabBtn.classList.add('active');
-                if (panel) panel.classList.remove('hidden');
-
-                // Clear any existing messages when switching tabs
-                if (panel) {
-                    const existingMessage = panel.querySelector('.user-message'); // Use .user-message class
-                    if (existingMessage) {
-                        existingMessage.remove();
-                    }
-                }
-            }
-
-            if (signinTabBtn) signinTabBtn.addEventListener('click', () => activateTab(signinTabBtn, signinPanel));
-            if (signupTabBtn) signupTabBtn.addEventListener('click', () => activateTab(signupTabBtn, signupPanel));
-
-            // Role selector logic for sign-up form
-            const roleSelector = document.getElementById('signup-role');
-            const approvalNotice = document.getElementById('approval-notice');
-
-            if (roleSelector && approvalNotice) { 
-                roleSelector.addEventListener('change', (e) => {
-                    const selectedRole = e.target.value;
-                    if (selectedRole === 'installer' || selectedRole === 'referrer' || selectedRole === 'admin' || selectedRole === 'employee') {
-                        approvalNotice.classList.remove('hidden');
-                    } else {
-                        approvalNotice.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Sign-up form submission
-            const signupForm = signupPanel ? signupPanel.querySelector('form') : null; 
-            if (signupForm) { 
-                signupForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('signup-name').value;
-                    const email = document.getElementById('signup-email').value;
-                    const password = document.getElementById('signup-password').value;
-                    const role = document.getElementById('signup-role').value;
-
-                    const isApproved = (role === 'customer');
-
-                    try {
-                        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                        const user = userCredential.user;
-
-                        const userDocRef = getUserProfileDocRef(user.uid);
-                        await setDoc(userDocRef, {
-                            name: name,
-                            email: email,
-                            role: role,
-                            isApproved: isApproved,
-                            createdAt: new Date()
-                        });
-
-                        if (isApproved) {
-                            displayMessage('success', 'Account created! Redirecting to your dashboard...', 'signup-panel');
-                            setTimeout(() => {
-                                redirectToDashboard(user); 
-                            }, 2000);
-                        } else {
-                            displayMessage('info', 'Account created! It is now pending admin approval. You will be notified once it is approved.', 'signup-panel');
-                            await signOut(auth); 
-                        }
-
-                        signupForm.reset(); 
-                    } catch (error) {
-                        console.error("Signup Error:", error);
-                        let errorMessage = 'An error occurred during signup. Please try again.';
-                        if (error.code === 'auth/email-already-in-use') {
-                            errorMessage = 'This email is already in use. Please try logging in or use a different email.';
-                        } else if (error.code === 'auth/weak-password') {
-                            errorMessage = 'Password is too weak. Please choose a stronger password.';
-                        } else if (error.code === 'auth/invalid-email') {
-                            errorMessage = 'Invalid email address.';
-                        }
-                        displayMessage('error', errorMessage, 'signup-panel');
-                    }
-                });
-            }
-
-            // Sign-in form submission
-            const signinForm = signinPanel ? signinPanel.querySelector('form') : null; 
-            if (signinForm) { 
-                signinForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const email = document.getElementById('signin-email').value;
-                    const password = document.getElementById('signin-password').value;
-
-                    try {
-                        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                        const user = userCredential.user;
-
-                        // Display success message immediately
-                        displayMessage('success', 'Login successful! Redirecting...', 'signin-panel');
-                        // Then, trigger the redirection. onAuthStateChanged will also fire, but this ensures a quick redirect.
-                        setTimeout(() => {
-                            redirectToDashboard(user);
-                        }, 500); // Small delay to allow message to show
-                    } catch (error) {
-                        console.error("Login Error:", error);
-                        let errorMessage = 'Invalid email or password. Please try again.';
-                        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
-                            errorMessage = 'Invalid email or password.';
-                        } else if (error.code === 'auth/invalid-email') {
-                            errorMessage = 'Invalid email address.';
-                        }
-                        displayMessage('error', errorMessage, 'signin-panel');
-                    }
-                });
-            }
-        });
-    </script>
+  <!-- Partials loader script -->
+  <script src="script.js" defer></script>
 </body>
 </html>

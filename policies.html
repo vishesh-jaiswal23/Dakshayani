@@ -1,416 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Policies | Dakshayani Enterprises</title>
-    <meta name="description" content="Read the official policies of Dakshayani Enterprises, including Terms and Conditions, Privacy Policy, Warranty Information, and more.">
-    <meta name="keywords" content="solar company policies, terms and conditions, privacy policy, solar warranty india, dakshayani enterprises">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Policies, Terms & Conditions | Dakshayani Enterprises</title>
+  <meta name="description" content="View the privacy policy, terms and conditions, warranty details, and refund policy for solar EPC services provided by Dakshayani Enterprises."/>
 
-    <!-- Font Awesome for Icons (Social Media, etc.) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <!-- Custom Styles & Configuration -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .solar-gold { color: #FBBF24; }
-        .bg-solar-gold { background-color: #FBBF24; }
-        .border-solar-gold { border-color: #FBBF24; }
-        .hover\:bg-solar-gold-dark:hover { background-color: #F59E0B; }
-        .group:hover .group-hover\:text-solar-gold { color: #FBBF24; }
-        .transition-all-smooth { transition: all 0.3s ease-in-out; }
-        .page-header-bg {
-            background-color: #111827;
-            background-image: radial-gradient(circle at top right, rgba(251, 191, 36, 0.08), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.08), transparent 50%);
-        }
-        .policy-tab-btn.active {
-            background-color: #FBBF24;
-            color: #1f2937;
-            font-weight: 600;
-        }
-        .prose h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-        .prose p, .prose li {
-            color: #4b5563;
-        }
-        .prose ul {
-            list-style-position: inside;
-        }
-        /* Logo container styles for header */
-        .logo-container {
-            background-color: #FBBF24; /* Solar Gold background */
-            padding: 0.5rem 1rem; /* px-4 py-2 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
-            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
-        }
-        .logo-container:hover {
-            transform: translateY(-2px) scale(1.02); /* Slight lift and scale */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Subtle dark shadow on hover */
-        }
-        /* Fixed Contact Buttons Container */
-        .fixed-contact-buttons {
-            position: fixed;
-            bottom: 1.5rem; /* Adjust as needed */
-            right: 1.5rem; /* Adjust as needed */
-            z-index: 100; /* Ensure it's above other content */
-            display: flex;
-            flex-direction: column; /* Stack buttons vertically */
-            gap: 0.75rem; /* Space between buttons */
-        }
-        .fixed-contact-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 3.5rem; /* Fixed width for circular button */
-            height: 3.5rem; /* Fixed height for circular button */
-            border-radius: 9999px; /* Make it circular */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: all 0.2s ease-in-out;
-            color: white; /* Default icon color */
-            font-size: 0.75rem; /* Smaller text for icon labels */
-            text-align: center;
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-        .fixed-contact-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        /* Specific button colors */
-        .fixed-contact-button.call { background-color: #34D399; /* green-400 */ }
-        .fixed-contact-button.whatsapp { background-color: #25D366; /* WhatsApp green */ }
-        .fixed-contact-button.email { background-color: #EF4444; /* red-500 */ }
-        .fixed-contact-button.pmsgy { background-color: #6366F1; /* indigo-500 */ }
-
-        .fixed-contact-button i { /* Targeting Font Awesome icons */
-            font-size: 1.5rem; /* Icon size */
-        }
-
-        /* Responsive adjustments for fixed contact buttons */
-        @media (max-width: 768px) {
-            .fixed-contact-buttons {
-                bottom: 1rem;
-                right: 1rem;
-                flex-direction: row; /* Arrange horizontally on small screens */
-                flex-wrap: wrap; /* Allow wrapping if too many buttons */
-                justify-content: flex-end; /* Align to the right */
-                gap: 0.5rem;
-            }
-            .fixed-contact-button {
-                width: 3rem;
-                height: 3rem;
-            }
-        }
-    </style>
+  <style>
+    .policies-hero {
+        background-color: var(--base-700);
+        color: white;
+        text-align: center;
+        padding: 4rem 1rem;
+    }
+    .policy-section {
+        margin-bottom: 3rem;
+        padding-top: 1rem;
+    }
+    .policy-section h3 {
+        color: var(--primary-500);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .policy-list {
+        list-style-type: disc;
+        margin-left: 1.5rem;
+        color: var(--base-600);
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-700">
+<body>
 
-    <!-- Header -->
-    <header class="bg-gray-900 text-white shadow-md sticky top-0 z-50" id="main-header">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center space-x-2">
-                <!-- Logo and company name wrapped in a gold pill background -->
-                <div class="flex items-center space-x-2 bg-solar-gold px-4 py-2 rounded-lg shadow-lg logo-container">
-                    <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-8 w-auto">
-                    <span class="text-2xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
-                </div>
-            </a>
+  <!-- HEADER injected via script.js -->
+  <header class="site-header"></header>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="hover:text-solar-gold transition-all-smooth">Home</a>
-                <a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a>
-                <a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Solutions</a>
-                
-                <div class="relative group">
-                    <button class="hover:text-solar-gold transition-all-smooth flex items-center">
-                        <span>More</span>
-                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
-                    </button>
-                    <div class="absolute -left-8 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all-smooth">
-                        <a href="calculator.html" class="block px-4 py-2 hover:bg-gray-100 rounded-t-md">Calculator</a>
-                        <a href="financing.html" class="block px-4 py-2 hover:bg-gray-100">Financing</a>
-                        <a href="rewards.html" class="block px-4 py-2 hover:bg-gray-100">Rewards</a>
-                        <a href="ai-expert.html" class="block px-4 py-2 hover:bg-gray-100">AI Expert</a>
-                        <a href="blog.html" class="block px-4 py-2 hover:bg-gray-100 rounded-b-md">Blog</a>
-                    </div>
-                </div>
-                
-                <a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a>
-                <a href="login.html" class="bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
-            </nav>
+  <main>
+    <!-- Page Header/Hero -->
+    <section class="policies-hero">
+      <div class="container">
+        <h1 class="title" style="color:var(--surface);">Our Company Policies</h1>
+        <p class="sub" style="color:rgba(255,255,255,.8); max-width: 800px; margin: 0 auto;">Transparency and trust are paramount. Find all legal and service terms here.</p>
+      </div>
+    </section>
 
-            <!-- Mobile Menu Button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                </button>
-            </div>
+    <!-- Policy Content -->
+    <section class="section">
+      <div class="container">
+        <div class="policy-section" id="privacy">
+          <h2 class="title">Privacy Policy</h2>
+          <p class="sub" style="margin-top: 0.5rem; font-size: 1.1rem;">Effective Date: October 8, 2025</p>
+          <p class="copy">We respect your privacy and are committed to protecting it. This policy outlines how we handle your personal data when you use our services or website.</p>
+          
+          <h3 style="margin-top: 2rem;">Information We Collect</h3>
+          <p class="copy">We collect information you provide directly to us, such as your name, phone number, email, and address when you request a quote or sign up for a service.</p>
+          
+          <h3 style="margin-top: 2rem;">How We Use Your Information</h3>
+          <ul class="policy-list">
+            <li>To process and fulfill your service requests (quote, installation).</li>
+            <li>For communication regarding project updates, billing, and technical support.</li>
+            <li>To comply with regulatory requirements, particularly for government subsidy schemes.</li>
+          </ul>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
-             <a href="index.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Home</a>
-             <!-- ... other links ... -->
-            <a href="contact.html" class="block py-2 px-6 hover:bg-gray-800 rounded">Contact</a>
-            <a href="login.html" class="block mt-2 mx-4 mb-4 text-center bg-solar-gold text-gray-900 px-4 py-2 rounded-md font-bold hover:bg-solar-gold-dark transition-all-smooth">Login / Sign Up</a>
+        <hr style="border-color: var(--base-200); margin: 3rem 0;">
+
+        <div class="policy-section" id="terms">
+          <h2 class="title">Terms & Conditions (T&C)</h2>
+          <p class="sub" style="margin-top: 0.5rem; font-size: 1.1rem;">Agreement for Solar EPC Services.</p>
+          <p class="copy">These terms govern the contractual relationship between Dakshayani Enterprises and the customer regarding the Engineering, Procurement, and Construction (EPC) of solar photovoltaic systems.</p>
+          
+          <h3 style="margin-top: 2rem;">Scope of Work</h3>
+          <p class="copy">The project scope will be explicitly defined in the Statement of Work (SOW) attached to the final agreement, including system capacity, component specifications, and installation timeline.</p>
+          
+          <h3 style="margin-top: 2rem;">Payment Terms</h3>
+          <p class="copy">Payment milestones are typically divided into three stages: Booking/Design (10%), Procurement/Start of Work (50%), and Commissioning/Handover (40%), unless otherwise specified in the financial agreement.</p>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Page Header -->
-        <section class="page-header-bg text-white">
-            <div class="container mx-auto px-6 py-16 text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Our Policies</h1>
-                <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">Our commitment to transparency, quality, and customer satisfaction.</p>
-            </div>
-        </section>
+        <hr style="border-color: var(--base-200); margin: 3rem 0;">
 
-        <!-- Policies Section -->
-        <section class="py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row gap-8 lg:gap-12">
-                    <!-- Vertical Tabs -->
-                    <div class="md:w-1/4">
-                        <div id="policy-tabs" class="flex flex-row md:flex-col gap-2 bg-gray-100 p-2 rounded-lg">
-                            <button class="policy-tab-btn w-full text-left px-4 py-3 rounded-md transition-all-smooth active" data-target="shipping">Shipping & Delivery</button>
-                            <button class="policy-tab-btn w-full text-left px-4 py-3 rounded-md transition-all-smooth" data-target="terms">Terms and Conditions</button>
-                            <button class="policy-tab-btn w-full text-left px-4 py-3 rounded-md transition-all-smooth" data-target="privacy">Privacy Policy</button>
-                            <button class="policy-tab-btn w-full text-left px-4 py-3 rounded-md transition-all-smooth" data-target="compliance">Compliance & Certifications</button>
-                            <button class="policy-tab-btn w-full text-left px-4 py-3 rounded-md transition-all-smooth" data-target="warranty">Warranty Information</button>
-                            <button class="policy-tab-btn w-full text-left px-4 py-3 rounded-md transition-all-smooth" data-target="refund">Return and Refund Policy</button>
-                        </div>
-                    </div>
+        <div class="policy-section" id="warranty">
+          <h2 class="title">Warranty Details</h2>
+          <p class="sub" style="margin-top: 0.5rem; font-size: 1.1rem;">Assurance on System Performance and Components.</p>
+          <p class="copy">We provide a comprehensive warranty package that includes two primary coverages:</p>
+          
+          <h3 style="margin-top: 2rem;">1. Performance Warranty</h3>
+          <p class="copy">A 25-year linear performance warranty is offered directly by the panel manufacturer, guaranteeing a minimum power output percentage over the period.</p>
 
-                    <!-- Tab Content -->
-                    <div class="md:w-3/4">
-                        <!-- Shipping & Delivery -->
-                        <div id="shipping-content" class="policy-content prose max-w-none">
-                            <h2>Shipping & Delivery Policy</h2>
-                            <p>This policy outlines the process for the shipping and delivery of components for your solar power system installation by Dakshayani Enterprises.</p>
-                            <h3>1. Scope</h3>
-                            <p>This policy applies to all solar components, including panels, inverters, mounting structures, and other materials required for projects contracted with Dakshayani Enterprises within the state of Jharkhand.</p>
-                            <h3>2. Delivery Process</h3>
-                            <p>Once your project is finalized and payment terms are met, our logistics team will schedule the delivery of all necessary components to your installation site. You will be notified at least 48 hours prior to the delivery date. Our team will coordinate with you to ensure a smooth offloading process.</p>
-                            <h3>3. Inspection on Delivery</h3>
-                            <p>It is the client's responsibility, or that of their designated representative, to be present at the time of delivery to inspect the components for any visible damage. Any discrepancies or damage must be reported to the Dakshayani Enterprises delivery coordinator immediately.</p>
-                        </div>
-
-                        <!-- Terms and Conditions -->
-                        <div id="terms-content" class="policy-content prose max-w-none hidden">
-                             <h2>Terms and Conditions</h2>
-                            <p>Welcome to the Dakshayani Enterprises website. By accessing and using this website, you agree to comply with and be bound by the following terms and conditions of use.</p>
-                            <h3>1. Use of Website</h3>
-                            <p>The content of the pages of this website is for your general information and use only. It is subject to change without notice. Unauthorized use of this website may give rise to a claim for damages and/or be a criminal offense.</p>
-                             <h3>2. Intellectual Property</h3>
-                            <p>This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance, and graphics. Reproduction is prohibited other than in accordance with the copyright notice.</p>
-                            <h3>3. Governing Law</h3>
-                            <p>Your use of this website and any dispute arising out of such use is subject to the laws of India. Any legal action or proceeding related to this website shall be brought exclusively in a court of competent jurisdiction in Ranchi, Jharkhand.</p>
-                        </div>
-                        
-                        <!-- Privacy Policy -->
-                        <div id="privacy-content" class="policy-content prose max-w-none hidden">
-                             <h2>Privacy Policy</h2>
-                            <p>Dakshayani Enterprises is committed to protecting your privacy. This policy outlines how we collect, use, and safeguard your personal information.</p>
-                             <h3>1. Information We Collect</h3>
-                            <p>We may collect personal information such as your name, email address, phone number, and address when you fill out a form on our website, as well as non-personal data like browser type and IP address for analytics purposes.</p>
-                             <h3>2. How We Use Your Information</h3>
-                            <p>Your information is used to provide you with quotes, process your requests, manage your account, and send you relevant updates about our services. We do not sell or rent your personal data to third parties.</p>
-                            <h3>3. Data Security</h3>
-                            <p>We implement a variety of security measures to maintain the safety of your personal information. All data is stored on secure servers and is accessible only by authorized personnel.</p>
-                        </div>
-                        
-                        <!-- Compliance & Certifications -->
-                        <div id="compliance-content" class="policy-content prose max-w-none hidden">
-                             <h2>Compliance and Certifications</h2>
-                            <p>Dakshayani Enterprises is committed to the highest standards of quality, safety, and regulatory compliance.</p>
-                            <h3>1. MNRE Compliance</h3>
-                            <p>We are a registered channel partner of the Ministry of New and Renewable Energy (MNRE), Government of India. All our projects and components comply with the standards and guidelines set forth by the MNRE.</p>
-                            <h3>2. ISO Certification</h3>
-                            <p>Our company is ISO 9001:2015 certified for quality management systems, ensuring that our processes from design to installation meet international standards.</p>
-                            <h3>3. Component Certification</h3>
-                            <p>All solar panels and inverters we use are certified by relevant national and international bodies such as IEC (International Electrotechnical Commission) and BIS (Bureau of Indian Standards).</p>
-                        </div>
-                        
-                        <!-- Warranty Information -->
-                        <div id="warranty-content" class="policy-content prose max-w-none hidden">
-                            <h2>Warranty Information</h2>
-                            <p>Your investment in a solar power system from Dakshayani Enterprises is protected by robust, multi-layered warranties.</p>
-                            <h3>1. Solar Panel Warranty</h3>
-                            <p>Our Tier-1 solar panels come with a 10-12 year product warranty and a 25-year linear performance warranty, ensuring they will produce at least 80% of their rated power after 25 years.</p>
-                            <h3>2. Inverter Warranty</h3>
-                            <p>The inverters we install are covered by a standard manufacturer's warranty of 5-10 years, depending on the brand and model.</p>
-                            <h3>3. Workmanship Warranty</h3>
-                            <p>Dakshayani Enterprises provides a comprehensive 5-year warranty on all installation workmanship. This covers any defects arising from the installation process, including wiring and mounting.</p>
-                        </div>
-                        
-                        <!-- Return and Refund Policy -->
-                        <div id="refund-content" class="policy-content prose max-w-none hidden">
-                            <h2>Return and Refund Policy</h2>
-                             <p>This policy details the terms related to returns and refunds for services and products provided by Dakshayani Enterprises.</p>
-                             <h3>1. Order Cancellation & Refund</h3>
-                            <p>A customer can cancel their order within 7 days of signing the agreement and paying the advance. A processing fee may be deducted from the refund amount. No refund is applicable after the components have been procured for the specific project.</p>
-                             <h3>2. Returns</h3>
-                            <p>As solar projects are custom-designed and installed, the return of installed components is not possible. In the case of a manufacturing defect discovered prior to installation, the specific component will be replaced as per the manufacturer's warranty policy.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Fixed Contact Buttons -->
-    <div class="fixed-contact-buttons">
-        <a href="tel:+917070278178" class="fixed-contact-button call" title="Call Us">
-            <i class="fas fa-phone"></i>
-        </a>
-        <a href="https://wa.me/917070278178" target="_blank" rel="noopener noreferrer" class="fixed-contact-button whatsapp" title="WhatsApp Us">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="mailto:d.entranchi@gmail.com" class="fixed-contact-button email" title="Email Us">
-            <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="fixed-contact-button pmsgy" title="Visit PM Surya Ghar Website">
-            <i class="fas fa-solar-panel"></i>
-        </a>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <a href="index.html" class="flex items-center space-x-2 mb-4">
-                        <!-- Logo and company name wrapped in a gold pill background in footer -->
-                        <div class="flex items-center space-x-2 bg-solar-gold px-3 py-1 rounded-lg shadow-md">
-                            <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises Logo" class="h-6 w-auto">
-                            <span class="text-xl font-extrabold tracking-tight text-gray-900">Dakshayani Enterprises</span>
-                        </div>
-                    </a>
-                    <p class="text-gray-400">Your trusted partner for a sustainable future. Based in Ranchi, serving all of Jharkhand.</p>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="hover:text-solar-gold transition-all-smooth">About Us</a></li>
-                        <li><a href="projects.html" class="hover:text-solar-gold transition-all-smooth">Our Work</a></li>
-                        <li><a href="contact.html" class="hover:text-solar-gold transition-all-smooth">Contact</a></li>
-                        <li><a href="blog.html" class="hover:text-solar-gold transition-all-smooth">Blog</a></li>
-                    </ul>
-                </div>
-
-                <!-- Solutions -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Solutions</h4>
-                    <ul class="space-y-2">
-                        <li><a href="projects.html#residential" class="hover:text-solar-gold transition-all-smooth">Residential Solar</a></li>
-                        <li><a href="projects.html#commercial" class="hover:text-solar-gold transition-all-smooth">Commercial Solar</a></li>
-                        <li><a href="calculator.html" class="hover:text-solar-gold transition-all-smooth">Solar Calculator</a></li>
-                        <li><a href="financing.html" class="hover:text-solar-gold transition-all-smooth">Financing Options</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Policies</h4>
-                    <ul class="space-y-2">
-                        <li><a href="policies.html#privacy" class="hover:text-solar-gold transition-all-smooth">Privacy Policy</a></li>
-                        <li><a href="policies.html#terms" class="hover:text-solar-gold transition-all-smooth">Terms & Conditions</a></li>
-                        <li><a href="policies.html#warranty" class="hover:text-solar-gold transition-all-smooth">Warranty Information</a></li>
-                        <li><a href="policies.html#refund" class="hover:text-solar-gold transition-all-smooth">Return & Refund Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2025 Dakshayani Enterprises. All Rights Reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="https://facebook.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/d.entranchi" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-solar-gold"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+          <h3 style="margin-top: 2rem;">2. Workmanship Warranty</h3>
+          <p class="copy">Dakshayani Enterprises provides a 5-year workmanship warranty covering the structural integrity of the mounting, wiring, and installation quality.</p>
         </div>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Mobile Menu Toggle ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
+      </div>
+    </section>
 
-            // --- Policy Tab Logic ---
-            const tabContainer = document.getElementById('policy-tabs');
-            const contentPanels = document.querySelectorAll('.policy-content');
+  </main>
 
-            if (tabContainer) {
-                tabContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('policy-tab-btn')) {
-                        // Deactivate current active tab
-                        const currentActiveTab = tabContainer.querySelector('.active');
-                        if (currentActiveTab) {
-                            currentActiveTab.classList.remove('active');
-                        }
-                        // Activate new tab
-                        e.target.classList.add('active');
+  <!-- FOOTER injected via script.js -->
+  <footer class="site-footer"></footer>
 
-                        const targetId = e.target.dataset.target;
-
-                        // Hide all content panels
-                        contentPanels.forEach(panel => {
-                            panel.classList.add('hidden');
-                        });
-
-                        // Show the target panel
-                        const targetPanel = document.getElementById(`${targetId}-content`);
-                        if (targetPanel) {
-                            targetPanel.classList.remove('hidden');
-                        }
-                    }
-                });
-            }
-            
-            // Logic to show content based on URL hash on initial load
-            // This ensures if a user comes from a link like policies.html#privacy, that tab is active
-            if (window.location.hash) {
-                const hash = window.location.hash.substring(1); // Remove the '#'
-                const targetButton = document.querySelector(`.policy-tab-btn[data-target="${hash}"]`);
-                if (targetButton) {
-                    // Simulate a click on the button to activate the tab
-                    targetButton.click();
-                } else {
-                    // If hash doesn't match any tab, ensure default tab is active
-                    document.querySelector('.policy-tab-btn[data-target="shipping"]').click();
-                }
-            } else {
-                // If no hash, ensure the default 'shipping' tab is active on load
-                document.querySelector('.policy-tab-btn[data-target="shipping"]').click();
-            }
-        });
-    </script>
+  <!-- Partials loader script -->
+  <script src="script.js" defer></script>
 </body>
 </html>

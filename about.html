@@ -4,207 +4,105 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Us | Dakshayani Enterprises</title>
+  <meta name="description" content="Learn about Dakshayani Enterprises, your dedicated solar EPC partner in Ranchi, Jharkhand. Our mission, vision, and team."/>
 
+  <link rel="icon" href="images/favicon.ico" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
   <style>
-    .avatar { width: 96px; height: 96px; border-radius: 999px; object-fit: cover; }
-    .about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: .75rem; }
-    .split { display: grid; gap: 20px; grid-template-columns: 1.2fr .8fr; }
-    @media (max-width: 920px){ .split { grid-template-columns: 1fr; } }
-    .partners { display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:center }
-    .partners img { height: 36px; width:auto; filter: grayscale(100%); opacity:.85 }
-    .partners img:hover { filter:none; opacity:1 }
+    .about-hero {
+        background-color: var(--base-900);
+        color: white;
+        text-align: center;
+        padding: 4rem 1rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Shared header via partial -->
+  <!-- HEADER injected via script.js -->
   <header class="site-header"></header>
 
   <main>
-    <!-- Hero -->
-    <section class="hero">
-      <img src="images/about-hero.jpg" alt="Team planning a rooftop solar layout">
-      <div class="overlay container">
-        <h1>Powering Jharkhand with Care & Craft</h1>
-        <p>We’re an EPC partner focused on neat execution, premium components, and lifetime support.</p>
-        <div style="margin-top:16px">
-          <a class="btn btn-primary" href="contact.html">Talk to an Expert</a>
-        </div>
+    <!-- Page Header/Hero -->
+    <section class="about-hero">
+      <div class="container">
+        <h1 class="title" style="color:var(--surface);">Our Journey & Mission</h1>
+        <p class="sub" style="color:rgba(255,255,255,.8); max-width: 800px; margin: 0 auto;">Dedicated to bringing reliable, affordable, and clean solar energy solutions to every home and business in Jharkhand.</p>
       </div>
     </section>
 
-    <!-- Our Story -->
-    <section class="section alt">
-      <div class="head container">
-        <h2 class="title">Our Story</h2>
-        <p class="sub">Born in Ranchi, built for Jharkhand — disciplined engineering and honest pricing.</p>
-      </div>
-
-      <div class="container split">
-        <div>
-          <div class="card" style="padding:22px">
-            <div class="title">From Survey to Savings</div>
-            <div class="copy">
-              We started with a simple promise: deliver solar the way we’d want it at our own homes and businesses —
-              tidy installs, Tier-1 components, and paperwork handled end-to-end. Today, our projects span residential rooftops,
-              petrol pumps, and commercial/industrial plants across the state.
-            </div>
-            <div class="copy" style="margin-top:.75rem">
-              Our team blends local know-how with strict safety practices: earthing checks, string planning, shadow analysis,
-              and app-enabled monitoring so you always see your savings.
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <img class="about-img" src="images/about-story.jpg" alt="On-site survey and design discussion">
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Choose Us (icon-only) -->
+    <!-- Company Vision -->
     <section class="section">
-      <div class="head container">
-        <h2 class="title">Why Choose Us</h2>
-        <p class="sub">Local expertise, premium components, and transparent pricing.</p>
-      </div>
-
-      <div class="container grid cols-4">
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-star"></i></div>
-          <div class="title">Top Experts</div>
-          <div class="copy">Proven projects across Jharkhand with strong DISCOM coordination.</div>
+      <div class="container grid" style="grid-template-columns: 1fr 2fr; align-items: center;">
+        <div>
+            <h2 class="title">Visionary Leadership in Solar EPC</h2>
+            <p class="sub">Dakshayani Enterprises was founded with the belief that reliable solar energy should be accessible to all. We specialize in end-to-end solar EPC (Engineering, Procurement, and Construction) services.</p>
+            <p class="copy" style="margin-top:1.5rem; color: var(--base-600);">We handle everything from initial site assessment and system design to final installation, net metering integration, and post-installation support. Our commitment to using Tier-1 components and meticulous execution ensures maximum power generation and longevity for your solar asset.</p>
         </div>
-
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-shield-halved"></i></div>
-          <div class="title">Premium Components</div>
-          <div class="copy">Tier-1 panels & inverters, clean wiring, robust mounting.</div>
-        </div>
-
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-indian-rupee-sign"></i></div>
-          <div class="title">Transparent Pricing</div>
-          <div class="copy">Clear quotes, flexible finance, subsidy paperwork handled.</div>
-        </div>
-
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-headset"></i></div>
-          <div class="title">Lifetime Support</div>
-          <div class="copy">From net-metering to grievance redressal — we stay with you.</div>
+        <div style="text-align: right;">
+            <img src="images/large solar.jpg" alt="Solar Panel Installation" class="rounded-xl shadow-2xl" style="width: 100%; max-height: 400px; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/700x400/374151/FFFFFF?text=Dakshayani+Solar';" />
         </div>
       </div>
     </section>
 
-    <!-- How We Work -->
+    <!-- Key Metrics / Stats -->
     <section class="section alt">
-      <div class="container split">
-        <div>
-          <img class="about-img" src="images/about-execution.jpg" alt="Neat installation and safety checks">
+        <div class="head container">
+            <h2 class="title">Our Impact in Numbers</h2>
+            <p class="sub">A testament to our dedication to quality and service.</p>
         </div>
-
-        <div>
-          <div class="card" style="padding:22px">
-            <div class="title">How We Work</div>
-            <div class="copy">
-              We plan strings for even production, route wiring discreetly, and ensure proper earthing and surge protection.
-              Every install ends with a quality checklist, walkthrough, and monitoring app handover.
+        <div class="container grid cols-4">
+            <div class="card icon-only" style="background: var(--surface); border-color: var(--primary-500); padding: 2rem;">
+                <div class="title" style="font-size: 2.5rem; color: var(--primary-500);">500+</div>
+                <div class="copy font-bold">Successful Installations</div>
             </div>
-            <ul class="foot-list" style="margin-top:.75rem">
-              <li>• Site survey & load study</li>
-              <li>• Design & shadow analysis</li>
-              <li>• Subsidy/loan documentation</li>
-              <li>• Neat installation & safety audit</li>
-              <li>• App onboarding & training</li>
-            </ul>
-          </div>
+            <div class="card icon-only" style="background: var(--surface); border-color: var(--primary-500); padding: 2rem;">
+                <div class="title" style="font-size: 2.5rem; color: var(--primary-500);">10+ MW</div>
+                <div class="copy font-bold">Total Capacity Installed</div>
+            </div>
+            <div class="card icon-only" style="background: var(--surface); border-color: var(--primary-500); padding: 2rem;">
+                <div class="title" style="font-size: 2.5rem; color: var(--primary-500);">98%</div>
+                <div class="copy font-bold">Customer Satisfaction</div>
+            </div>
+            <div class="card icon-only" style="background: var(--surface); border-color: var(--primary-500); padding: 2rem;">
+                <div class="title" style="font-size: 2.5rem; color: var(--primary-500);">10+ Yrs</div>
+                <div class="copy font-bold">Local Experience</div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Team -->
+    <!-- Our Values -->
     <section class="section">
-      <div class="head container">
-        <h2 class="title">Leadership & Team</h2>
-        <p class="sub">Real people behind every clean install.</p>
-      </div>
-
-      <div class="container grid cols-3">
-        <div class="card" style="text-align:center">
-          <img class="avatar" src="images/team-vishesh.jpg" alt="Vishesh Vardhan" style="margin:0 auto .75rem">
-          <div class="title">Vishesh Vardhan</div>
-          <div class="copy">Founder & EPC Lead</div>
+        <div class="head container">
+            <h2 class="title">Core Values</h2>
         </div>
-
-        <div class="card" style="text-align:center">
-          <img class="avatar" src="images/team-ops.jpg" alt="Operations Head" style="margin:0 auto .75rem">
-          <div class="title">Operations Head</div>
-          <div class="copy">Installations & Quality</div>
+        <div class="container grid cols-3">
+            <div class="card">
+                <div class="icon-large" style="margin-left: 0;"><i class="fa-solid fa-handshake-angle"></i></div>
+                <div class="title">Integrity & Trust</div>
+                <div class="copy">We believe in transparent dealings, clear contracts, and providing honest advice that benefits the customer first.</div>
+            </div>
+            <div class="card">
+                <div class="icon-large" style="margin-left: 0;"><i class="fa-solid fa-gem"></i></div>
+                <div class="title">Quality Execution</div>
+                <div class="copy">From design stability to installation finesse, we never compromise on the quality of work or components used.</div>
+            </div>
+            <div class="card">
+                <div class="icon-large" style="margin-left: 0;"><i class="fa-solid fa-earth-asia"></i></div>
+                <div class="title">Sustainability</div>
+                <div class="copy">Our work contributes directly to a greener planet, reducing carbon footprints for our clients and our community.</div>
+            </div>
         </div>
-
-        <div class="card" style="text-align:center">
-          <img class="avatar" src="images/team-support.jpg" alt="Customer Success" style="margin:0 auto .75rem">
-          <div class="title">Customer Success</div>
-          <div class="copy">After-sales & Monitoring</div>
-        </div>
-      </div>
     </section>
 
-    <!-- Steps -->
-    <section class="section alt">
-      <div class="head container">
-        <h2 class="title">Go Solar in 4 Simple Steps</h2>
-        <p class="sub">We make your transition seamless and transparent.</p>
-      </div>
-
-      <div class="container steps">
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-clipboard-list"></i></div>
-          <h3 class="step-title">1. Consult &amp; Design</h3>
-          <p class="step-copy">Free site visit, load analysis, and custom design.</p>
-        </div>
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-wallet"></i></div>
-          <h3 class="step-title">2. Approve &amp; Finance</h3>
-          <p class="step-copy">Subsidy, loan, and paperwork via your bank/DISCOM.</p>
-        </div>
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-          <h3 class="step-title">3. Expert Installation</h3>
-          <p class="step-copy">Trained crew, neat wiring, proper earthing.</p>
-        </div>
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-bolt"></i></div>
-          <h3 class="step-title">4. Power On &amp; Save</h3>
-          <p class="step-copy">Go live — track savings in your solar app.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Partners -->
-    <section class="section">
-      <div class="head container">
-        <h2 class="title">Certifications & Partners</h2>
-        <p class="sub">Trusted brands and compliant processes.</p>
-      </div>
-      <div class="container partners">
-        <img src="images/partner-tier1.png" alt="Tier-1 Panels">
-        <img src="images/partner-inverter.png" alt="Inverter Brand">
-        <img src="images/partner-discom.png" alt="DISCOM">
-        <img src="images/partner-app.png" alt="Monitoring App">
-      </div>
-    </section>
   </main>
 
-  <!-- Shared footer via partial -->
+  <!-- FOOTER injected via script.js -->
   <footer class="site-footer"></footer>
 
+  <!-- Partials loader script -->
   <script src="script.js" defer></script>
 </body>
 </html>

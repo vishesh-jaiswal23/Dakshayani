@@ -12,17 +12,18 @@ async function injectPartial(targetSelector, url) {
     // After injecting the header, add its specific behaviors
     if (targetSelector === "header.site-header") {
       // Highlight the active navigation link
-      const currentPage = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+      const currentPage = (location.pathname.split("/").pop() || "index.html").toLowerCase().replace(".html", "");
+      
       document.querySelectorAll('header a[data-nav]').forEach(link => {
-        const linkPage = (link.getAttribute("href") || "").toLowerCase();
+        const linkPage = (link.getAttribute("href") || "").toLowerCase().replace(".html", "");
         if (linkPage === currentPage) {
           link.classList.add("active");
         }
       });
 
       // Mobile menu toggle functionality
-      const menuButton = document.querySelector(".menu-btn");
-      const navMenu = document.querySelector(".nav");
+      const menuButton = document.getElementById("mobile-menu-button");
+      const navMenu = document.getElementById("mobile-menu");
       if (menuButton && navMenu) {
         menuButton.addEventListener("click", () => {
           navMenu.classList.toggle("show");

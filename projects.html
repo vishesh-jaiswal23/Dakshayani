@@ -4,228 +4,117 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Our Solutions & Projects | Dakshayani Enterprises</title>
-  <meta name="description" content="Explore our residential, commercial, industrial, petrol pump and institutional solar work across Jharkhand." />
+  <meta name="description" content="Explore our successful solar projects: residential rooftop, commercial installations (petrol pumps, schools), and industrial solutions."/>
 
+  <link rel="icon" href="images/favicon.ico" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+  <style>
+    .projects-hero {
+        background-color: var(--base-900);
+        color: white;
+        text-align: center;
+        padding: 4rem 1rem;
+    }
+    .project-card img {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+        border-radius: .75rem;
+        margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Shared header via partial -->
+  <!-- HEADER injected via script.js -->
   <header class="site-header"></header>
 
   <main>
-    <!-- Page Hero -->
-    <section class="hero">
-      <img src="images/projects-hero.jpg" alt="Solar project portfolio cover">
-      <div class="overlay container">
-        <h1>Our Solutions & Projects</h1>
-        <p>From homes to factories and fuel stations — neat, compliant installs that perform.</p>
-      </div>
-    </section>
-
-    <!-- Solutions (icon-only blocks for quick scan) -->
-    <section class="section alt" id="solutions">
-      <div class="head container">
-        <h2 class="title">What We Deliver</h2>
-        <p class="sub">High quality EPC with transparent documentation and support.</p>
-      </div>
-
-      <div class="container grid cols-3">
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-house-chimney"></i></div>
-          <div class="title">Residential Rooftop</div>
-          <div class="copy">Zero-bill homes under PMSGY with app monitoring and neat installation.</div>
-        </div>
-
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-industry"></i></div>
-          <div class="title">Commercial & Industrial</div>
-          <div class="copy">Optimized 10–500 kWp+ plants with clean O&amp;M and subsidy compliance.</div>
-        </div>
-
-        <div class="card icon-only">
-          <div class="icon-large"><i class="fa-solid fa-gas-pump"></i></div>
-          <div class="title">Solar for Petrol Pumps</div>
-          <div class="copy">Safe, stable power for forecourts and convenience areas — with quick payback.</div>
+    <!-- Page Header/Hero -->
+    <section class="projects-hero">
+      <div class="container">
+        <h1 class="title" style="color:var(--surface);">Our Successful Solar Solutions</h1>
+        <p class="sub" style="color:rgba(255,255,255,.8); max-width: 800px; margin: 0 auto;">Bringing light and savings to homes, businesses, and industries across Jharkhand.</p>
+        <div style="margin-top: 1.5rem;">
+            <a href="#residential" class="btn btn-primary">Residential Solar</a>
+            <a href="#commercial" class="btn btn-secondary" style="margin-left: 1rem;">Commercial & Industrial</a>
         </div>
       </div>
     </section>
 
-    <!-- Residential Projects -->
+    <!-- Residential Solar Projects -->
     <section class="section" id="residential">
       <div class="head container">
-        <h2 class="title">Residential Projects</h2>
-        <p class="sub">A few recent rooftops across Jharkhand.</p>
+        <h2 class="title">Residential Rooftop Solutions</h2>
+        <p class="sub">Empowering homeowners to eliminate electricity bills and earn from their unused rooftop space, especially under the PM Surya Ghar scheme.</p>
       </div>
-
-      <div class="container grid cols-3" id="res-grid">
-        <!-- Cards injected by inline script below -->
-      </div>
-
-      <div class="container" style="text-align:center; margin-top:16px;">
-        <button class="btn btn-primary" id="res-load">View More Residential Projects →</button>
+      <div class="container grid cols-3">
+        <!-- Residential Project Card 1 (using one of the provided images) -->
+        <div class="card project-card">
+            <img src="images/residential pics real/WhatsApp Image 2024-10-23 at 19.12.01_da2e8f71.jpg" alt="Residential Solar Installation 1" onerror="this.onerror=null; this.src='https://placehold.co/400x200/F59E0B/FFFFFF?text=Residential+Project';" />
+            <div class="title">Ranchi Home (5kW)</div>
+            <div class="copy">Grid-tied system maximizing consumption and utilizing the maximum subsidy under the scheme.</div>
+        </div>
+        <!-- Residential Project Card 2 -->
+        <div class="card project-card">
+            <img src="images/residential pics real/WhatsApp Image 2024-09-14 at 12.36.19_d18b6860.jpg" alt="Residential Solar Installation 2" onerror="this.onerror=null; this.src='https://placehold.co/400x200/F59E0B/FFFFFF?text=Residential+Project';" />
+            <div class="title">Bokaro Residence (3kW)</div>
+            <div class="copy">High-efficiency mono panels installed for maximum output in a shaded urban environment.</div>
+        </div>
+        <!-- Residential Project Card 3 -->
+        <div class="card project-card">
+            <img src="images/residential pics real/WhatsApp Image 2025-02-05 at 07.56.36_16866250.jpg" alt="Residential Solar Installation 3" onerror="this.onerror=null; this.src='https://placehold.co/400x200/F59E0B/FFFFFF?text=Residential+Project';" />
+            <div class="title">Flat Roof Mounting (7kW)</div>
+            <div class="copy">Custom structural mounting design to ensure optimal tilt angle and wind resistance.</div>
+        </div>
       </div>
     </section>
 
-    <!-- Commercial & Industrial -->
+    <!-- Commercial & Industrial Solar Projects -->
     <section class="section alt" id="commercial">
       <div class="head container">
-        <h2 class="title">Commercial & Industrial</h2>
-        <p class="sub">Robust rooftop and ground-mount systems for businesses.</p>
+        <h2 class="title">Commercial & Industrial EPC</h2>
+        <p class="sub">Reducing OPEX and ensuring power security for factories, educational institutions, and commercial establishments.</p>
       </div>
-
       <div class="container grid cols-3">
-        <div class="card">
-          <img src="images/ci-1.jpg" alt="Factory rooftop solar" />
-          <div class="title" style="margin-top:.6rem">Factory Rooftop</div>
-          <div class="copy">Reduced peak demand and improved reliability.</div>
+        <!-- Commercial Project Card 1 (Petroleum Pump) -->
+        <div class="card project-card">
+            <img src="images/pump.jpg" alt="Solar for Petrol Pump" onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/FFFFFF?text=Commercial+Project';" />
+            <div class="title">Petrol Pump (20kW)</div>
+            <div class="copy">Installed on a canopy, significantly reducing grid dependence and providing backup power.</div>
         </div>
-        <div class="card">
-          <img src="images/ci-2.jpg" alt="Office building solar" />
-          <div class="title" style="margin-top:.6rem">Office Building</div>
-          <div class="copy">Lowered operating expenses, greener brand.</div>
+        <!-- Commercial Project Card 2 (Factory) -->
+        <div class="card project-card">
+            <img src="images/commercial industrial pics real/IMG-20231121-WA0000.jpg" alt="Industrial Solar Installation" onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/FFFFFF?text=Industrial+Project';" />
+            <div class="title">Manufacturing Unit (100kW)</div>
+            <div class="copy">Large-scale industrial installation designed for maximum energy offset and quick ROI.</div>
         </div>
-        <div class="card">
-          <img src="images/ci-3.jpg" alt="Warehouse solar" />
-          <div class="title" style="margin-top:.6rem">Warehouse</div>
-          <div class="copy">Clean power for critical operations.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Petrol Pumps -->
-    <section class="section" id="pumps">
-      <div class="head container">
-        <h2 class="title">Petrol Pump Solar</h2>
-        <p class="sub">Canopy + convenience area systems with quick payback.</p>
-      </div>
-
-      <div class="container grid cols-3">
-        <div class="card">
-          <img src="images/pump-1.jpg" alt="Solar on petrol pump canopy" />
-          <div class="title" style="margin-top:.6rem">City Pump</div>
-          <div class="copy">Continuous operation with smaller bills.</div>
-        </div>
-        <div class="card">
-          <img src="images/pump-2.jpg" alt="Solar for highway fuel station" />
-          <div class="title" style="margin-top:.6rem">Highway Station</div>
-          <div class="copy">Stable power and improved lighting.</div>
-        </div>
-        <div class="card">
-          <img src="images/pump-3.jpg" alt="Convenience store solar" />
-          <div class="title" style="margin-top:.6rem">C-Store + Canopy</div>
-          <div class="copy">Keeps fridges and POS up reliably.</div>
+        <!-- Commercial Project Card 3 (School/Institute) -->
+        <div class="card project-card">
+            <img src="images/other pics.jpg" alt="Solar for Educational Institute" onerror="this.onerror=null; this.src='https://placehold.co/400x200/374151/FFFFFF?text=School+Project';" />
+            <div class="title">Educational Institute (50kW)</div>
+            <div class="copy">Zero-maintenance system providing reliable power for campus operations and air conditioning loads.</div>
         </div>
       </div>
     </section>
-
-    <!-- Steps (shared timeline) -->
-    <section class="section alt">
-      <div class="head container">
-        <h2 class="title">How We Work</h2>
-        <p class="sub">Clear process, clean execution, documented handover.</p>
-      </div>
-
-      <div class="container steps">
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-clipboard-list"></i></div>
-          <h3 class="step-title">1. Consult &amp; Design</h3>
-          <p class="step-copy">Survey, load study, and custom design.</p>
-        </div>
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-wallet"></i></div>
-          <h3 class="step-title">2. Approve &amp; Finance</h3>
-          <p class="step-copy">Subsidy and loan support.</p>
-        </div>
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-          <h3 class="step-title">3. Installation</h3>
-          <p class="step-copy">Neat wiring and safety checks.</p>
-        </div>
-        <div class="step">
-          <div class="step-badge"><i class="fa-solid fa-bolt"></i></div>
-          <h3 class="step-title">4. Power On</h3>
-          <p class="step-copy">App onboarding & monitoring.</p>
-        </div>
-      </div>
-    </section>
-
+    
     <!-- CTA -->
-    <section class="section" style="background:var(--primary-600);color:#fff;text-align:center;">
-      <div class="container">
-        <h2 class="title" style="color:#fff;">Ready to Start a Project?</h2>
-        <p class="sub" style="color:rgba(255,255,255,.85)">Get a free site visit and a clear, itemized quote.</p>
-        <a href="contact.html" class="btn btn-primary" style="background:#fff;color:var(--primary-600);margin-top:1rem;">Book a Consultation</a>
-      </div>
+    <section class="section">
+        <div class="container head">
+            <h2 class="title">Need a Custom Solar Solution?</h2>
+            <p class="sub">Talk to our experts about your unique power needs for your home or facility.</p>
+            <a href="contact.html" class="btn btn-primary" style="margin-top: 1rem;">Start Your Project Inquiry</a>
+        </div>
     </section>
+
   </main>
 
-  <!-- Shared footer via partial -->
+  <!-- FOOTER injected via script.js -->
   <footer class="site-footer"></footer>
 
-  <!-- Partials loader -->
+  <!-- Partials loader script -->
   <script src="script.js" defer></script>
-
-  <!-- Page-specific tiny script to populate Residential grid -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const imgs = [
-        '20220803_30500pm_ByGPSMapCamera.jpg',
-        '367d8409-af3b-4e4e-8d6f-13fd82f27a3e-1.jpg',
-        '4974f0c1-4e2e-476a-9669-8cb1d3f349ab-1.jpg',
-        '84d188e2-0d88-4b3a-8276-44a4108b2579-1.jpg',
-        'c306a1c5-9d9c-46aa-bd53-b2674130fe63-1.jpg',
-        'IMG-20221117-WA0020.jpg',
-        'IMG-20230407-WA0011.jpg',
-        'IMG-20230407-WA0030.jpg',
-        'IMG-20241001-WA0006.jpg',
-        'IMG-20241024-WA0010.jpg',
-        'IMG-20241028-WA0002.jpg',
-        'IMG_0501.JPG',
-        'IMG_0502.JPG',
-        'IMG_1417.JPG',
-        'WhatsApp Image 2024-08-16 at 14.40.37_737ede6f.jpg',
-        'WhatsApp Image 2024-09-13 at 19.41.12_13daf8c9.jpg',
-        'WhatsApp Image 2024-09-14 at 12.36.19_d18b6860.jpg',
-        'WhatsApp Image 2024-09-14 at 12.36.20_cdcf2b47.jpg',
-        'WhatsApp Image 2024-09-21 at 19.16.27_6602377f.jpg',
-        'WhatsApp Image 2024-09-21 at 19.16.28_ea531926.jpg',
-        'WhatsApp Image 2024-10-23 at 19.12.01_da2e8f71.jpg',
-        'WhatsApp Image 2024-10-24 at 15.30.05_d7b3b512.jpg',
-        'WhatsApp Image 2024-10-26 at 12.53.18_d88613d5.jpg',
-        'WhatsApp Image 2024-10-28 at 11.59.44_1684fc3e.jpg',
-        'WhatsApp Image 2024-11-11 at 13.14.03_b1b41844.jpg',
-        'WhatsApp Image 2025-01-03 at 10.52.26_686aa94a.jpg',
-        'WhatsApp Image 2025-02-05 at 07.56.36_16866250.jpg',
-        'WhatsApp Image 2025-02-10 at 17.44.29_6f1624c9.jpg',
-        'WhatsApp Image 2025-02-15 at 15.24.01_e0956398.jpg',
-        'WhatsApp Image 2025-03-02 at 15.29.50_a5ed769a.jpg'
-      ];
-      const grid = document.getElementById('res-grid');
-      const btn = document.getElementById('res-load');
-      const per = 6;
-      let idx = 0;
-
-      function addCards(n){
-        for(let i=0;i<n && idx<imgs.length;i++,idx++){
-          const div = document.createElement('div');
-          div.className = 'card';
-          div.innerHTML = `
-            <img src="images/residential pics real/${imgs[idx]}" alt="Residential Solar Project ${idx+1}">
-            <div class="title" style="margin-top:.6rem">Residential Project ${idx+1}</div>
-            <div class="copy">Location: Jharkhand • App monitoring enabled</div>
-          `;
-          grid.appendChild(div);
-        }
-        if(idx>=imgs.length && btn){ btn.style.display='none'; }
-      }
-      addCards(per);
-      if(btn){ btn.addEventListener('click', ()=>addCards(per)); }
-    });
-  </script>
 </body>
 </html>
