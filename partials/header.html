@@ -1,16 +1,20 @@
 <div class="container transition-all-smooth">
-  <a href="index.html" class="brand transition-all-smooth">
+  <!-- Brand Logo - No gold pill styling, cleaner look for white header -->
+  <a href="index.html" class="brand">
+    <!-- Assuming this image works well against a white background -->
     <img src="images/New dakshayani logo centered small.png" alt="Dakshayani Enterprises" class="brand-logo-em" />
     <span class="brand-text">Dakshayani Enterprises</span>
   </a>
 
+  <!-- Desktop Navigation -->
   <nav class="nav-desktop">
     <a href="index.html" data-nav>Home</a>
     <a href="about.html" data-nav>About Us</a>
     <a href="projects.html" data-nav>Solutions</a>
     
+    <!-- More Dropdown -->
     <div class="nav-more group">
-      <button class="nav-more-btn">
+      <button class="nav-more-btn" aria-expanded="false">
         <span>More</span>
         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
       </button>
@@ -24,14 +28,17 @@
     </div>
     
     <a href="contact.html" data-nav>Contact</a>
+    <!-- CTA is now a prominent gold button against the white header -->
     <a href="login.html" class="btn btn-primary btn-sm">Login / Sign Up</a>
   </nav>
 
+  <!-- Mobile Menu Button (Hamburger) -->
   <button class="menu-btn" aria-label="Menu" id="mobile-menu-button">
     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" /></svg>
   </button>
 </div>
 
+<!-- Mobile Menu (Kept dark for better contrast on mobile) -->
 <div id="mobile-menu" class="nav-mobile">
     <a href="index.html" data-nav>Home</a>
     <a href="about.html" data-nav>About Us</a>
