@@ -1,1 +1,863 @@
-calculator.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Advanced Solar Calculator & Finance | Dakshayani Enterprises</title>
+    <meta name="description" content="Calculate system size via units, bill, or load, get AI advisory, and estimate EMI for rooftop solar in Jharkhand."/>
+
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <style>
+        .calculator-hero {
+            background: linear-gradient(135deg, var(--base-900), var(--base-700));
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        .calculator-panel {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--base-700);
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--base-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-500);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.5);
+        }
+        .result-box {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background: var(--primary-50);
+            margin-top: 1rem;
+            border: 2px solid var(--primary-500);
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--base-900);
+            margin-bottom: 0.25rem;
+        }
+        .result-label {
+            color: var(--base-700);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .ai-output-box {
+            background: var(--alt-surface);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--base-200);
+            min-height: 100px;
+        }
+        .ai-output-box h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+        .ai-output-box ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            color: var(--base-600);
+        }
+        .ai-output-box ul li {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .loader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--base-600);
+        }
+        .tab-selector button {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--base-300);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            background: var(--alt-surface);
+            transition: all 0.2s ease;
+        }
+        .tab-selector button.active {
+            background: var(--primary-500);
+            color: var(--base-900);
+            border-color: var(--primary-600);
+        }
+        .tts-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #e0f2f7; /* Light Blue */
+            color: #0c4a6e; /* Dark Blue */
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .tts-button:hover {
+            background: #b3e6ff;
+        }
+
+        /* Message Box Styling */
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 300px;
+            text-align: center;
+            border: 2px solid var(--primary-500);
+            display: none; /* Hidden by default */
+        }
+        .message-box button {
+            margin-top: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Error/Message Box -->
+    <div id="message-modal" class="message-box">
+        <p id="message-text" style="color: var(--base-900); font-weight: 600;"></p>
+        <button class="btn btn-primary" onclick="document.getElementById('message-modal').style.display = 'none';">OK</button>
+    </div>
+
+    <!-- HEADER injected via script.js -->
+    <header class="site-header"></header>
+
+    <main>
+        <!-- Page Header/Hero -->
+        <section class="calculator-hero">
+            <div class="container">
+                <h1 class="title" style="color:var(--surface);">Advanced Solar Savings Calculator</h1>
+                <p class="sub" style="color:rgba(255,255,255,.9); max-width: 800px; margin: 0 auto;">Estimate your optimal system size and full financial outlook using Jharkhand's local solar efficiency (5 units/kWp/day).</p>
+            </div>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="section">
+            <div class="container grid" style="grid-template-columns: 1fr; gap: 3rem;">
+                
+                <!-- Input Panel -->
+                <div class="calculator-panel">
+                    <h2 class="title" style="margin-top: 0; font-size: 1.8rem;">1. Choose Your Input Method</h2>
+                    
+                    <!-- Input Method Selector Tabs -->
+                    <div class="tab-selector flex gap-2 mb-6">
+                        <button id="tab-units" class="active" onclick="showInputMethod('units')">Monthly Units</button>
+                        <button id="tab-bill" onclick="showInputMethod('bill')">Bill Amount & Rate</button>
+                        <button id="tab-load" onclick="showInputMethod('load')">Appliance Load</button>
+                    </div>
+
+                    <!-- Input Forms (Dynamic Content) -->
+                    <div id="input-forms-container">
+                        
+                        <!-- 1. Monthly Units Form (Default) -->
+                        <form id="form-units" class="active" onsubmit="calculateSolar(event, 'units')">
+                            <div class="form-group">
+                                <label for="input-units">Monthly Units Consumed (kWh)</label>
+                                <input type="number" id="input-units" placeholder="e.g., 450 units" required min="1" />
+                                <p style="font-size: 0.85rem; color: var(--base-500); margin-top: 0.25rem;">Found on your monthly electricity bill statement.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="units-rate">Average Unit Rate (₹/kWh)</label>
+                                <input type="number" step="0.01" id="units-rate" placeholder="e.g., 6.50" required min="0.01" />
+                                <div class="flex justify-between items-center mt-2">
+                                    <p style="font-size: 0.85rem; color: var(--base-500);">Used to calculate potential savings.</p>
+                                    <button type="button" class="tts-button" onclick="callTTSUnitRate()">
+                                        <i class="fa-solid fa-volume-up"></i> Explain Rate
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="units-type">System Type</label>
+                                <select id="units-type" required>
+                                    <option value="residential">Residential (PM Surya Ghar)</option>
+                                    <option value="commercial">Commercial / Industrial</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Calculate Potential</button>
+                        </form>
+
+                        <!-- 2. Bill Amount & Rate Form -->
+                        <form id="form-bill" class="hidden" onsubmit="calculateSolar(event, 'bill')">
+                            <div class="form-group">
+                                <label for="bill-amount">Monthly Electricity Bill Amount (₹)</label>
+                                <input type="number" step="1" id="bill-amount" placeholder="e.g., 3000" required min="1" />
+                            </div>
+                            <div class="form-group">
+                                <label for="bill-rate">Average Unit Rate (₹/kWh)</label>
+                                <input type="number" step="0.01" id="bill-rate" placeholder="e.g., 7.50" required min="0.01" />
+                                <div class="flex justify-between items-center mt-2">
+                                    <p style="font-size: 0.85rem; color: var(--base-500);">Used to determine consumption units.</p>
+                                    <button type="button" class="tts-button" onclick="callTTSUnitRate()">
+                                        <i class="fa-solid fa-volume-up"></i> Explain Rate
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bill-type">System Type</label>
+                                <select id="bill-type" required>
+                                    <option value="residential">Residential (PM Surya Ghar)</option>
+                                    <option value="commercial">Commercial / Industrial</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Calculate Potential</button>
+                        </form>
+
+                        <!-- 3. Appliance Load Form -->
+                        <form id="form-load" class="hidden" onsubmit="calculateSolar(event, 'load')">
+                            <div class="form-group">
+                                <label for="load-profile">Select Load Profile</label>
+                                <select id="load-profile" onchange="populateLoadTable(this.value)">
+                                    <option value="residential">Residential (Standard Home)</option>
+                                    <option value="commercial">Commercial (Office/Shop)</option>
+                                    <option value="industrial">Industrial (Small Factory)</option>
+                                    <option value="institutional">Institutional (School/Hospital)</option>
+                                </select>
+                            </div>
+
+                            <h4 class="font-semibold text-base mb-2">Adjust Appliance Usage (Total Watt-Hours/Day)</h4>
+                            <div id="load-table-container" class="border border-gray-200 p-3 rounded-lg overflow-x-auto bg-gray-50 max-h-60 mb-4">
+                                <table class="min-w-full text-sm">
+                                    <thead class="sticky top-0 bg-gray-100">
+                                        <tr>
+                                            <th class="px-2 py-1 text-left">Appliance</th>
+                                            <th class="px-2 py-1 text-center">Count</th>
+                                            <th class="px-2 py-1 text-center">Wattage (W)</th>
+                                            <th class="px-2 py-1 text-center">Hours/Day</th>
+                                            <th class="px-2 py-1 text-right">Wh/Day</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="load-table-body">
+                                        <!-- Dynamic rows inserted here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="load-rate">Average Unit Rate (₹/kWh)</label>
+                                <input type="number" step="0.01" id="load-rate" placeholder="e.g., 6.50" required min="0.01" value="6.50" />
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Calculate Potential</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Result Panel (Full Width) -->
+            <div id="results-panel" class="calculator-panel mt-6">
+                <h2 class="title" style="margin-top: 0; font-size: 1.8rem;">2. Your Solar & Financial Estimate</h2>
+                
+                <div id="loading-spinner" class="loader" style="padding: 2rem; display: none;">
+                    <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--primary-500);"></i>
+                    <p class="font-semibold">Calculating system size and generating AI advisory...</p>
+                </div>
+
+                <div id="initial-message-results">
+                    <p class="copy" style="text-align: center; color: var(--base-500);">Submit your details in the form above to see your customized results.</p>
+                </div>
+                
+                <div id="calculated-results" class="hidden">
+                    
+                    <!-- Main Results Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4" style="margin-bottom: 2rem;">
+                        <div class="md:col-span-1 result-box" style="background: #e0f7e9; border-color: #34d399;">
+                            <div class="result-label" style="color:#065f46;">Recommended System Size</div>
+                            <div class="result-value" id="system-size-output" style="color:#065f46;">0 kWp</div>
+                        </div>
+                        <div class="md:col-span-1 result-box">
+                            <div class="result-label">Est. Monthly Generation</div>
+                            <div class="result-value" id="monthly-gen-output">0 Units</div>
+                        </div>
+                        <div class="md:col-span-2 grid grid-cols-2 gap-4">
+                            <div class="result-box" style="padding: 1rem; background: var(--surface); border: 1px solid var(--base-200);">
+                                <div class="result-label" style="font-size: 0.8rem;">Est. Annual Savings</div>
+                                <div class="result-value" id="annual-savings-output" style="font-size: 1.4rem;">₹0</div>
+                            </div>
+                             <div class="result-box" style="padding: 1rem; background: var(--surface); border: 1px solid var(--base-200);">
+                                <div class="result-label" style="font-size: 0.8rem;">Required Rooftop Area</div>
+                                <div class="result-value" id="area-output" style="font-size: 1.4rem;">0 sq. ft.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Advisory & Financial Breakdown -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <!-- AI Advisory (Text Generation) -->
+                        <div class="lg:col-span-2 ai-output-box">
+                            <h3 class="flex items-center gap-2 text-blue-800"><i class="fa-solid fa-robot"></i> AI Solar Advisory (Viaan)</h3>
+                            <div id="ai-advisory-output">
+                                <p class="loader"><i class="fa-solid fa-spinner fa-spin"></i> Generating personalized advice...</p>
+                            </div>
+                        </div>
+
+                        <!-- Financial Summary (Structured Generation) -->
+                        <div class="lg:col-span-1 ai-output-box">
+                            <h3 class="flex items-center gap-2 text-green-700"><i class="fa-solid fa-indian-rupee-sign"></i> Financial Snapshot</h3>
+                            <div id="financial-summary-output">
+                                <p class="loader"><i class="fa-solid fa-spinner fa-spin"></i> Finalizing costs...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EMI Calculator -->
+                    <div class="calculator-panel mt-6" style="background: var(--base-100); border: 1px solid var(--base-300);">
+                        <h3 class="title" style="margin-top: 0; font-size: 1.5rem;">3. Financing & EMI Estimate</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                            <div class="form-group !mb-0">
+                                <label for="loan-amount">Net Loan Amount (₹)</label>
+                                <input type="number" id="loan-amount" required disabled />
+                                <p class="text-xs text-gray-500 mt-1">Gross Cost - Subsidy</p>
+                            </div>
+                            <div class="form-group !mb-0">
+                                <label for="interest-rate">Interest Rate (% p.a.)</label>
+                                <input type="number" step="0.1" id="interest-rate" value="6.0" required />
+                                <p class="text-xs text-gray-500 mt-1">Start at 6.0% for residential schemes</p>
+                            </div>
+                            <div class="form-group !mb-0">
+                                <label for="loan-tenure">Loan Tenure (Months)</label>
+                                <input type="number" step="1" id="loan-tenure" value="120" required min="12" max="180" />
+                                <p class="text-xs text-gray-500 mt-1">Max 15 years (180 months)</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" type="button" onclick="calculateEMI()" style="width: 100%; margin-top: 1rem; background: var(--base-900); color: var(--surface);">
+                            Calculate EMI
+                        </button>
+                        
+                        <div id="emi-output-container" class="hidden">
+                            <div class="result-box mt-4 bg-white" style="border-color: #2563eb; background: #eff6ff;">
+                                <div class="result-label" style="color: #1e40af;">Est. Monthly EMI (₹)</div>
+                                <div class="result-value" id="emi-monthly-output" style="font-size: 2.2rem; color: #1e40af;">₹0</div>
+                                <p class="text-xs text-gray-600 mt-1">Total interest over <span id="emi-tenure"></span> months: ₹<span id="total-interest"></span></p>
+                            </div>
+                            <p class="text-sm text-green-700 font-semibold text-center mt-3" id="saving-vs-emi-message">
+                                <!-- Dynamic message here -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="btn btn-primary mt-6" style="width: 100%; max-width: 400px; margin: 2rem auto 0 auto;">Get Final, Official Quote</a>
+            </div>
+        </section>
+
+        <!-- TTS Audio Player (Hidden) -->
+        <audio id="tts-audio-player" style="display: none;"></audio>
+
+    </main>
+
+    <!-- FOOTER injected via script.js -->
+    <footer class="site-footer"></footer>
+
+    <!-- Calculator Logic Script -->
+    <script>
+        // --- Utility Functions for AI/TTS ---
+        const API_KEY = ""; // Placeholder, key is provided by Canvas runtime
+        const API_URL_TEXT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+        const API_URL_TTS = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${API_KEY}`;
+        const MAX_RETRIES = 3;
+
+        // Custom message box utility (to replace alert())
+        function showMessage(text) {
+            document.getElementById('message-text').textContent = text;
+            document.getElementById('message-modal').style.display = 'block';
+        }
+
+        // --- Exponential Backoff Fetch Handler ---
+        async function handleFetchWithRetry(url, payload, retries = 0) {
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 429 && retries < MAX_RETRIES) {
+                        const delay = Math.pow(2, retries) * 1000 + Math.random() * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return handleFetchWithRetry(url, payload, retries + 1);
+                    }
+                    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            } catch (error) {
+                console.error("Fetch failed after all retries:", error);
+                throw error;
+            }
+        }
+
+        // --- Global State for Calculated Values ---
+        let currentSolarEstimate = {
+            requiredSize: 0, // kWp
+            monthlyConsumption: 0, // kWh
+            unitRate: 0, // ₹/kWh
+            grossCost: 0, // ₹
+            subsidy: 0, // ₹
+            netCost: 0, // ₹ (The Loan Amount)
+            systemType: 'residential'
+        };
+
+        // --- Calculation Logic Functions ---
+        const LOCAL_UNITS_PER_KW_PER_MONTH = 150; // 5 units/day * 30 days
+        const COST_PER_KW_RESIDENTIAL = 50000; // Average benchmark cost per kWp (approx)
+        const AREA_PER_KW = 100; // sq. ft. per kWp (approx)
+
+        function getSubsidy(size, type) {
+            if (type !== 'residential') return 0;
+            
+            // PM Surya Ghar Subsidy Structure (up to max ₹78,000 at 3kW+)
+            if (size <= 2) {
+                return size * 30000; // ₹30,000 per kW
+            } else if (size > 2 && size <= 3) {
+                // ₹60,000 for 2kW + ₹18,000 for 3rd kW
+                return 78000;
+            } else {
+                // Capped at ₹78,000 for systems > 3kW
+                return 78000;
+            }
+        }
+        
+        function calculateSolar(e, inputMethod) {
+            e.preventDefault();
+            
+            const initialMessage = document.getElementById('initial-message-results');
+            const resultsContainer = document.getElementById('calculated-results');
+            const loading = document.getElementById('loading-spinner');
+            
+            initialMessage.style.display = 'none';
+            resultsContainer.classList.add('hidden');
+            loading.style.display = 'flex';
+
+            let consumption = 0;
+            let rate = 0;
+            let type = 'residential';
+            let validationError = '';
+
+            // --- 1. Determine Consumption and Rate based on Input Method ---
+            if (inputMethod === 'units') {
+                consumption = parseFloat(document.getElementById('input-units').value);
+                rate = parseFloat(document.getElementById('units-rate').value);
+                type = document.getElementById('units-type').value;
+                if (isNaN(consumption) || consumption <= 0) validationError = 'Please enter a valid Monthly Units Consumed.';
+            } else if (inputMethod === 'bill') {
+                const billAmount = parseFloat(document.getElementById('bill-amount').value);
+                rate = parseFloat(document.getElementById('bill-rate').value);
+                type = document.getElementById('bill-type').value;
+
+                if (isNaN(billAmount) || billAmount <= 0) validationError = 'Please enter a valid Monthly Bill Amount.';
+                else if (isNaN(rate) || rate <= 0) validationError = 'Please enter a valid Average Unit Rate.';
+                else consumption = billAmount / rate;
+            } else if (inputMethod === 'load') {
+                const whPerDay = calculateLoadWhPerDay();
+                consumption = (whPerDay * 30) / 1000; // Convert Wh/Day to kWh/Month
+                rate = parseFloat(document.getElementById('load-rate').value);
+                type = 'residential'; // Load method defaults to residential unless complex industrial load chosen
+                if (whPerDay === 0) validationError = 'Please enter a valid appliance load (W/h).';
+            }
+
+            if (validationError) {
+                loading.style.display = 'none';
+                resultsContainer.classList.add('hidden');
+                initialMessage.style.display = 'block';
+                showMessage(validationError);
+                return;
+            }
+            if (isNaN(rate) || rate <= 0) rate = 6.50; // Default fallback if still invalid
+
+            // --- 2. Calculate Solar Size ---
+            let requiredSize = consumption / LOCAL_UNITS_PER_KW_PER_MONTH;
+            requiredSize = Math.ceil(requiredSize * 2) / 2; // Round up to the nearest 0.5 kW
+            if (requiredSize < 1) requiredSize = 1; // Minimum practical size
+            if (type === 'residential' && requiredSize > 10) requiredSize = 10; // Practical limit for residential
+
+            // --- 3. Calculate Financials ---
+            let grossCost = requiredSize * COST_PER_KW_RESIDENTIAL;
+            let subsidy = getSubsidy(requiredSize, type);
+            let netCost = Math.max(0, grossCost - subsidy);
+            let annualSavings = consumption * rate * 12;
+
+            // --- 4. Update Global State ---
+            currentSolarEstimate = {
+                requiredSize,
+                monthlyConsumption: consumption,
+                unitRate: rate,
+                grossCost,
+                subsidy,
+                netCost,
+                systemType: type
+            };
+
+            // --- 5. Display Base Results ---
+            document.getElementById('system-size-output').textContent = requiredSize.toFixed(1) + ' kWp';
+            document.getElementById('monthly-gen-output').textContent = (requiredSize * LOCAL_UNITS_PER_KW_PER_MONTH).toFixed(0) + ' Units';
+            document.getElementById('annual-savings-output').textContent = '₹' + annualSavings.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('area-output').textContent = (requiredSize * AREA_PER_KW).toFixed(0) + ' sq. ft.';
+            
+            // Update EMI inputs
+            document.getElementById('loan-amount').value = netCost.toFixed(0);
+            document.getElementById('emi-output-container').classList.add('hidden');
+
+            // --- 6. Call AI Services ---
+            document.getElementById('ai-advisory-output').innerHTML = '<p class="loader"><i class="fa-solid fa-spinner fa-spin"></i> Generating personalized advice...</p>';
+            document.getElementById('financial-summary-output').innerHTML = '<p class="loader"><i class="fa-solid fa-spinner fa-spin"></i> Finalizing costs...</p>';
+            
+            Promise.all([
+                callAIGuidance(requiredSize, netCost, annualSavings, type),
+                callAIFinancialSummary(requiredSize, grossCost, subsidy, netCost, annualSavings, type)
+            ]).finally(() => {
+                 loading.style.display = 'none';
+                 resultsContainer.classList.remove('hidden');
+            });
+        }
+        
+        // --- AI Text Generation (Advisory) ---
+        async function callAIGuidance(size, cost, savings, type) {
+            const prompt = `Act as Dakshayani Enterprises' lead solar advisor. Based on a customer's estimated requirement of a ${size.toFixed(1)} kWp ${type} solar system, which offers an estimated annual saving of ₹${savings.toLocaleString('en-IN', { maximumFractionDigits: 0 })} and a net investment of ₹${cost.toLocaleString('en-IN', { maximumFractionDigits: 0 })}, provide a concise, single-paragraph advisory. Focus on the core benefits (savings, PM Surya Ghar subsidy/finance, ROI) and the next necessary step (site survey).`;
+            const outputEl = document.getElementById('ai-advisory-output');
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: "You are a friendly and professional solar expert based in Jharkhand, India. Use encouraging and clear language. Your output must be a single HTML paragraph without headings or lists." }] }
+            };
+
+            try {
+                const result = await handleFetchWithRetry(API_URL_TEXT, payload);
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "Could not generate advisory. Please try again.";
+                outputEl.innerHTML = `<p class="copy" style="color: var(--base-700);">${text}</p>`;
+            } catch (error) {
+                outputEl.innerHTML = '<p class="text-red-500 text-sm">Failed to generate AI advisory due to a network error.</p>';
+            }
+        }
+        
+        // --- AI Structured Generation (Financial Summary) ---
+        async function callAIFinancialSummary(size, grossCost, subsidy, netCost, annualSavings, type) {
+            const prompt = `Generate a financial summary for a ${size.toFixed(1)} kWp solar system (Type: ${type}). Key figures are: Gross Cost: ₹${grossCost}, Subsidy: ₹${subsidy}, Net Investment: ₹${netCost}, Annual Savings: ₹${annualSavings}. The summary should be a concise list of 4 bullet points, in either Hindi or English, detailing the investment, subsidy amount, annual savings, and total project type.`;
+            const outputEl = document.getElementById('financial-summary-output');
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            language: { type: "STRING", enum: ["English", "Hindi"] },
+                            points: {
+                                type: "ARRAY",
+                                items: { type: "STRING" }
+                            }
+                        },
+                        propertyOrdering: ["language", "points"]
+                    }
+                }
+            };
+
+            try {
+                const result = await handleFetchWithRetry(API_URL_TEXT, payload);
+                const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                const parsedJson = JSON.parse(jsonText);
+                
+                let html = `<ul>`;
+                parsedJson.points.forEach(point => {
+                    html += `<li>${point}</li>`;
+                });
+                html += `</ul>`;
+                
+                outputEl.innerHTML = html;
+            } catch (error) {
+                outputEl.innerHTML = '<p class="text-red-500 text-sm">Failed to generate Financial Snapshot due to an error. Check console for details.</p>';
+                console.error("Structured JSON Error:", error);
+            }
+        }
+        
+        // --- TTS Audio Generation (Unit Rate Explanation) ---
+        function base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcm16, sampleRate = 24000) {
+            const numChannels = 1;
+            const bytesPerSample = 2; // 16-bit PCM
+            const byteRate = sampleRate * numChannels * bytesPerSample;
+            const blockAlign = numChannels * bytesPerSample;
+
+            const buffer = new ArrayBuffer(44 + pcm16.byteLength);
+            const view = new DataView(buffer);
+
+            // WAV header
+            view.setUint32(0, 0x52494646, false); // "RIFF"
+            view.setUint32(4, 36 + pcm16.byteLength, true); // size
+            view.setUint32(8, 0x57415645, false); // "WAVE"
+            view.setUint32(12, 0x666d7420, false); // "fmt "
+            view.setUint32(16, 16, true); // fmt chunk size
+            view.setUint16(20, 1, true); // PCM format
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, 16, true); // bits per sample
+            view.setUint32(36, 0x64617461, false); // "data"
+            view.setUint32(40, pcm16.byteLength, true);
+
+            // PCM data
+            const dataView = new Uint8Array(buffer, 44);
+            dataView.set(new Uint8Array(pcm16.buffer));
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+        
+        async function callTTSUnitRate() {
+            const button = document.querySelector('.tts-button');
+            const originalHtml = button.innerHTML;
+            const player = document.getElementById('tts-audio-player');
+            
+            button.disabled = true;
+            button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading Audio...';
+
+            const ttsText = "Average Unit Rate is calculated by dividing your total monthly bill amount by the total units of electricity consumed. This gives you the actual rupee cost per unit you pay, which is essential for accurate solar savings projections.";
+
+            const payload = {
+                contents: [{ parts: [{ text: ttsText }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } // Firm, clear voice
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            try {
+                const result = await handleFetchWithRetry(API_URL_TTS, payload);
+                const part = result.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const sampleRate = 24000; // Assumed default sample rate for Kore voice
+                    
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    player.src = audioUrl;
+                    player.play();
+                    
+                    button.innerHTML = '<i class="fa-solid fa-volume-up"></i> Playing...';
+                    
+                    player.onended = () => {
+                        button.innerHTML = originalHtml;
+                        button.disabled = false;
+                        URL.revokeObjectURL(audioUrl);
+                    };
+                } else {
+                    showMessage('Audio Error', 'Failed to decode audio data.');
+                    button.innerHTML = originalHtml;
+                    button.disabled = false;
+                }
+            } catch (error) {
+                showMessage('API Error', 'Failed to connect to TTS service.');
+                button.innerHTML = originalHtml;
+                button.disabled = false;
+            }
+        }
+
+        // --- EMI Calculation Logic ---
+        function calculateEMI() {
+            const P = currentSolarEstimate.netCost; // Principal (Net Cost)
+            const R_annual = parseFloat(document.getElementById('interest-rate').value);
+            const N = parseFloat(document.getElementById('loan-tenure').value);
+
+            if (P <= 0) {
+                showMessage('Financing Required', 'No loan is needed. Your subsidy covers the cost!');
+                document.getElementById('emi-output-container').classList.add('hidden');
+                return;
+            }
+            if (isNaN(R_annual) || R_annual < 0 || N <= 0 || N < 12 || N > 180) {
+                showMessage('Input Error', 'Please check interest rate and tenure.');
+                return;
+            }
+
+            const R_monthly = (R_annual / 100) / 12; // Monthly Interest Rate
+            
+            let emi = 0;
+            let totalInterest = 0;
+            
+            if (R_monthly === 0) {
+                 emi = P / N; // Simple division if 0% interest
+                 totalInterest = 0;
+            } else {
+                 emi = P * R_monthly * Math.pow(1 + R_monthly, N) / (Math.pow(1 + R_monthly, N) - 1);
+                 totalInterest = (emi * N) - P;
+            }
+
+            const monthlySavings = (currentSolarEstimate.monthlyConsumption * currentSolarEstimate.unitRate);
+            
+            // Display EMI Results
+            document.getElementById('emi-monthly-output').textContent = '₹' + emi.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('total-interest').textContent = totalInterest.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            document.getElementById('emi-tenure').textContent = N.toFixed(0);
+            
+            const messageEl = document.getElementById('saving-vs-emi-message');
+            if (monthlySavings > emi) {
+                const netCashflow = monthlySavings - emi;
+                messageEl.textContent = `Excellent! Your estimated monthly savings (₹${monthlySavings.toFixed(0)}) are higher than your EMI. You achieve immediate net savings of ₹${netCashflow.toFixed(0)}/month!`;
+                messageEl.style.color = '#16a34a'; // Green
+            } else {
+                 messageEl.textContent = `Your estimated monthly bill reduction (₹${monthlySavings.toFixed(0)}) helps offset most of your EMI. You are building an asset with low monthly outflow.`;
+                 messageEl.style.color = '#ca8a04'; // Amber
+            }
+            
+            document.getElementById('emi-output-container').classList.remove('hidden');
+        }
+
+        // --- UI/Input Management Functions ---
+        function showInputMethod(method) {
+            const allForms = document.querySelectorAll('#input-forms-container form');
+            const allTabs = document.querySelectorAll('.tab-selector button');
+
+            allForms.forEach(form => form.classList.add('hidden'));
+            allTabs.forEach(tab => tab.classList.remove('active'));
+
+            document.getElementById(`form-${method}`).classList.remove('hidden');
+            document.getElementById(`tab-${method}`).classList.add('active');
+        }
+
+        const APPLIANCE_LOADS = {
+            residential: [
+                { name: "LED Lights (10W)", wattage: 10, count: 10, hours: 6, inputId: "res-light" },
+                { name: "Ceiling Fan (75W)", wattage: 75, count: 4, hours: 10, inputId: "res-fan" },
+                { name: "Refrigerator (150W)", wattage: 150, count: 1, hours: 24, inputId: "res-fridge" },
+                { name: "AC (1.5 Ton, 1500W)", wattage: 1500, count: 1, hours: 4, inputId: "res-ac" }
+            ],
+            commercial: [
+                { name: "Desktops/Laptops (150W)", wattage: 150, count: 15, hours: 8, inputId: "comm-pc" },
+                { name: "Office Lighting (LED, 20W)", wattage: 20, count: 25, hours: 10, inputId: "comm-light" },
+                { name: "Central HVAC (5kW)", wattage: 5000, count: 1, hours: 8, inputId: "comm-hvac" },
+                { name: "Printers/Misc. (500W)", wattage: 500, count: 2, hours: 4, inputId: "comm-misc" }
+            ],
+             industrial: [
+                { name: "Motor (5 HP/3.73kW)", wattage: 3730, count: 2, hours: 10, inputId: "ind-motor" },
+                { name: "High Bay Lighting (200W)", wattage: 200, count: 10, hours: 12, inputId: "ind-light" },
+                { name: "Welding Equipment (5kW)", wattage: 5000, count: 1, hours: 2, inputId: "ind-weld" },
+                { name: "Office/Admin Load (1kW)", wattage: 1000, count: 1, hours: 8, inputId: "ind-admin" }
+            ],
+            institutional: [
+                { name: "Classroom Lighting (1kW)", wattage: 1000, count: 10, hours: 6, inputId: "inst-light" },
+                { name: "Computers Lab (150W)", wattage: 150, count: 30, hours: 4, inputId: "inst-pc" },
+                { name: "Elevator/Lift (3kW)", wattage: 3000, count: 1, hours: 4, inputId: "inst-lift" },
+                { name: "Water Coolers (500W)", wattage: 500, count: 3, hours: 8, inputId: "inst-cooler" }
+            ]
+        };
+        
+        function populateLoadTable(profile) {
+            const tableBody = document.getElementById('load-table-body');
+            tableBody.innerHTML = '';
+            const profileData = APPLIANCE_LOADS[profile];
+            
+            profileData.forEach((appliance, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                
+                const whPerDay = appliance.wattage * appliance.count * appliance.hours;
+
+                row.innerHTML = `
+                    <td class="px-2 py-1 font-semibold">${appliance.name}</td>
+                    <td class="px-2 py-1 text-center"><input type="number" data-wattage="${appliance.wattage}" data-hours="${appliance.hours}" data-type="count" class="w-12 text-center border-gray-300 rounded-md text-sm" value="${appliance.count}" min="0" oninput="updateLoadCalculation()"></td>
+                    <td class="px-2 py-1 text-center"><input type="number" data-count="${appliance.count}" data-hours="${appliance.hours}" data-type="wattage" class="w-16 text-center border-gray-300 rounded-md text-sm" value="${appliance.wattage}" min="0" oninput="updateLoadCalculation()"></td>
+                    <td class="px-2 py-1 text-center"><input type="number" data-wattage="${appliance.wattage}" data-count="${appliance.count}" data-type="hours" class="w-12 text-center border-gray-300 rounded-md text-sm" value="${appliance.hours}" min="0" max="24" oninput="updateLoadCalculation()"></td>
+                    <td class="px-2 py-1 text-right font-medium" data-wh-output>${whPerDay.toLocaleString()}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+             // Add a total row
+            const totalRow = document.createElement('tr');
+            totalRow.className = 'bg-primary-50 font-bold';
+            totalRow.innerHTML = `
+                <td class="px-2 py-2" colspan="4">Total Watt-Hours / Day</td>
+                <td class="px-2 py-2 text-right" id="total-wh-per-day">0</td>
+            `;
+            tableBody.appendChild(totalRow);
+
+            updateLoadCalculation(); // Initial calculation update
+        }
+
+        function calculateLoadWhPerDay() {
+            let totalWh = 0;
+            const rows = document.querySelectorAll('#load-table-body tr:not(:last-child)');
+            
+            rows.forEach(row => {
+                const countInput = row.querySelector('input[data-type="count"]');
+                const wattageInput = row.querySelector('input[data-type="wattage"]');
+                const hoursInput = row.querySelector('input[data-type="hours"]');
+                const outputCell = row.querySelector('[data-wh-output]');
+                
+                const count = parseFloat(countInput?.value) || 0;
+                const wattage = parseFloat(wattageInput?.value) || 0;
+                const hours = parseFloat(hoursInput?.value) || 0;
+
+                const rowWh = count * wattage * hours;
+                
+                if (outputCell) outputCell.textContent = rowWh.toLocaleString();
+                totalWh += rowWh;
+            });
+
+            document.getElementById('total-wh-per-day').textContent = totalWh.toLocaleString();
+            return totalWh;
+        }
+
+        function updateLoadCalculation() {
+             calculateLoadWhPerDay();
+        }
+
+        // Initialize the default load table on load
+        document.addEventListener('DOMContentLoaded', () => {
+            populateLoadTable('residential');
+            showInputMethod('units');
+        });
+    </script>
+    <!-- Partials loader script -->
+    <script src="script.js" defer></script>
+</body>
+</html>
