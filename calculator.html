@@ -155,7 +155,7 @@
         }
 
         /* Message Box Styling */
-        .message-box {
+        .message-box, #rate-update-modal {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -165,7 +165,8 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
-            max-width: 300px;
+            max-width: 90%;
+            width: 600px;
             text-align: center;
             border: 2px solid var(--primary-500);
             display: none; /* Hidden by default */
@@ -173,6 +174,32 @@
         .message-box button {
             margin-top: 15px;
             width: 100%;
+        }
+        #rate-update-modal h3 {
+            margin-top: 0;
+        }
+        .rate-table-container {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .rate-table {
+            width: 100%;
+            text-align: left;
+            margin-top: 1rem;
+            border-collapse: collapse;
+        }
+        .rate-table th, .rate-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .rate-table th {
+            background-color: #f2f2f2;
+        }
+        .rate-table input {
+            width: 100%;
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -183,6 +210,26 @@
         <p id="message-text" style="color: var(--base-900); font-weight: 600;"></p>
         <button class="btn btn-primary" onclick="document.getElementById('message-modal').style.display = 'none';">OK</button>
     </div>
+
+    <!-- Rate Update Modal -->
+    <div id="rate-update-modal">
+        <h3 class="title">Update System Costs (₹)</h3>
+        <div class="rate-table-container">
+            <h4 class="font-semibold text-lg mt-4">PM Surya Ghar Yojana (Residential)</h4>
+            <table id="pm-rates-table" class="rate-table">
+                <!-- PM rates will be populated here -->
+            </table>
+            <h4 class="font-semibold text-lg mt-4">Non-PM Surya Ghar (Commercial)</h4>
+            <table id="non-pm-rates-table" class="rate-table">
+                <!-- Non-PM rates will be populated here -->
+            </table>
+        </div>
+        <div class="flex gap-4 mt-6">
+            <button class="btn btn-secondary" onclick="closeRateModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="saveRates()">Save Changes</button>
+        </div>
+    </div>
+
 
     <!-- HEADER injected via script.js -->
     <header class="site-header"></header>
@@ -202,8 +249,11 @@
                 
                 <!-- Input Panel -->
                 <div class="calculator-panel">
-                    <h2 class="title" style="margin-top: 0; font-size: 1.8rem;">1. Choose Your Input Method</h2>
-                    
+                    <div class="flex justify-between items-start">
+                         <h2 class="title" style="margin-top: 0; font-size: 1.8rem;">1. Choose Your Input Method</h2>
+                         <button class="btn btn-secondary !py-2 !px-3 text-sm" onclick="openRateModal()"><i class="fa-solid fa-gear"></i> Update Costs</button>
+                    </div>
+                   
                     <!-- Input Method Selector Tabs -->
                     <div class="tab-selector flex gap-2 mb-6">
                         <button id="tab-units" class="active" onclick="showInputMethod('units')">Monthly Units</button>
@@ -441,6 +491,34 @@
         const API_URL_TTS = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${API_KEY}`;
         const MAX_RETRIES = 3;
 
+        // --- Rate Data ---
+        let pmSuryaGharRates = {
+            1: 68450, // Extrapolated from 2kWp rate
+            2: 136900,
+            3: 183900,
+            4: 248900,
+            5: 272900,
+            6: 341900,
+            7: 382900,
+            8: 424900,
+            9: 454900,
+            10: 483900
+        };
+
+        let nonPmSuryaGharRates = {
+            1: 54450, // Extrapolated from 2kWp rate
+            2: 108900,
+            3: 146900,
+            4: 210900,
+            5: 237900,
+            6: 314900,
+            7: 349900,
+            8: 388900,
+            9: 431900,
+            10: 456900
+        };
+
+
         // Custom message box utility (to replace alert())
         function showMessage(text) {
             document.getElementById('message-text').textContent = text;
@@ -484,8 +562,19 @@
 
         // --- Calculation Logic Functions ---
         const LOCAL_UNITS_PER_KW_PER_MONTH = 150; // 5 units/day * 30 days
-        const COST_PER_KW_RESIDENTIAL = 50000; // Average benchmark cost per kWp (approx)
         const AREA_PER_KW = 100; // sq. ft. per kWp (approx)
+
+        function getGrossCost(size, type) {
+            const rates = type === 'residential' ? pmSuryaGharRates : nonPmSuryaGharRates;
+            // Round up to the nearest integer kWp to match the pricing table structure
+            const lookupSize = Math.ceil(size);
+
+            if (lookupSize <= 1) return rates[1] || 0;
+            if (lookupSize >= 10) return rates[10] || 0;
+            
+            return rates[lookupSize] || 0;
+        }
+
 
         function getSubsidy(size, type) {
             if (type !== 'residential') return 0;
@@ -495,7 +584,7 @@
                 return size * 30000; // ₹30,000 per kW
             } else if (size > 2 && size <= 3) {
                 // ₹60,000 for 2kW + ₹18,000 for 3rd kW
-                return 78000;
+                return 60000 + (size - 2) * 18000;
             } else {
                 // Capped at ₹78,000 for systems > 3kW
                 return 78000;
@@ -536,7 +625,7 @@
                 const whPerDay = calculateLoadWhPerDay();
                 consumption = (whPerDay * 30) / 1000; // Convert Wh/Day to kWh/Month
                 rate = parseFloat(document.getElementById('load-rate').value);
-                type = 'residential'; // Load method defaults to residential unless complex industrial load chosen
+                type = document.getElementById('load-profile').value === 'residential' ? 'residential' : 'commercial';
                 if (whPerDay === 0) validationError = 'Please enter a valid appliance load (W/h).';
             }
 
@@ -556,7 +645,7 @@
             if (type === 'residential' && requiredSize > 10) requiredSize = 10; // Practical limit for residential
 
             // --- 3. Calculate Financials ---
-            let grossCost = requiredSize * COST_PER_KW_RESIDENTIAL;
+            let grossCost = getGrossCost(requiredSize, type);
             let subsidy = getSubsidy(requiredSize, type);
             let netCost = Math.max(0, grossCost - subsidy);
             let annualSavings = consumption * rate * 12;
@@ -979,6 +1068,46 @@
              calculateLoadWhPerDay();
         }
 
+        // --- Rate Update Modal Logic ---
+        function openRateModal() {
+            populateRateTable('pm-rates-table', pmSuryaGharRates);
+            populateRateTable('non-pm-rates-table', nonPmSuryaGharRates);
+            document.getElementById('rate-update-modal').style.display = 'block';
+        }
+
+        function closeRateModal() {
+            document.getElementById('rate-update-modal').style.display = 'none';
+        }
+
+        function populateRateTable(tableId, rates) {
+            const table = document.getElementById(tableId);
+            table.innerHTML = `<thead><tr><th>System Size (kWp)</th><th>Price (₹)</th></tr></thead><tbody>`;
+            for (const size in rates) {
+                const row = `<tr>
+                    <td>${size} kWp</td>
+                    <td><input type="number" id="rate-${tableId}-${size}" value="${rates[size]}"></td>
+                </tr>`;
+                table.innerHTML += row;
+            }
+            table.innerHTML += `</tbody>`;
+        }
+
+        function saveRates() {
+            const pmTable = document.getElementById('pm-rates-table');
+            const nonPmTable = document.getElementById('non-pm-rates-table');
+
+            for (const size in pmSuryaGharRates) {
+                pmSuryaGharRates[size] = parseInt(document.getElementById(`rate-pm-rates-table-${size}`).value) || 0;
+            }
+            for (const size in nonPmSuryaGharRates) {
+                nonPmSuryaGharRates[size] = parseInt(document.getElementById(`rate-non-pm-rates-table-${size}`).value) || 0;
+            }
+            
+            showMessage('Rates updated successfully for this session.');
+            closeRateModal();
+        }
+
+
         // Initialize the default form and load table on page load
         document.addEventListener('DOMContentLoaded', () => {
             // Must run populateLoadTable on load to ensure the table content is built
@@ -991,3 +1120,4 @@
     <script src="script.js" defer></script>
 </body>
 </html>
+
